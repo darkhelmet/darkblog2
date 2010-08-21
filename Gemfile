@@ -9,9 +9,11 @@ gem 'mongo_ext'
 gem 'bson_ext'
 gem 'hoptoad_notifier'
 gem 'memcached-northscale', '0.19.5.3', :require => 'memcached'
+gem 'RedCloth', '4.2.3'
 
 group :development, :test do
   gem 'ruby-debug'
   gem 'rspec-rails', '2.0.0.beta.19'
   gem 'factory_girl'
+  gem 'thin'
 end

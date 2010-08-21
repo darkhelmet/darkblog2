@@ -46,5 +46,8 @@ module Darkblog2
       g.template_engine :haml
       g.test_framework :rspec, :fixture_replacement => :factory_girl
     end
+
+    require 'rack/response_time_injector'
+    config.middleware.use Rack::ResponseTimeInjector
   end
 end

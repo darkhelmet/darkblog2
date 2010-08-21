@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:post] = '%d %b %Y %I:%M %p %Z'

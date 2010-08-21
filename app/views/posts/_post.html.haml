@@ -1,0 +1,8 @@
+%article
+  %h2= h(post.title)
+  .meta
+    %time{ :datetime => post.published_on.xmlschema }= post.published_on.to_s(:post)
+    &raquo;
+    Posted in
+    %span.category= h(post.category.capitalize)
+  .snippet!= truncate(strip_tags(post.body_html), :length => 450)
