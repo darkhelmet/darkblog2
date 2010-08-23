@@ -98,6 +98,54 @@ header {
     }
   }
 
+  #where, .rss {
+    img {
+      opacity: 0.65;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .rss {
+    position: absolute;
+    top: 20px;
+    right: 175px;
+
+    &:hover {
+      border: 0px
+    }
+  }
+
+  #where {
+    a {
+      &:hover {
+        border: 0px
+      }
+    }
+
+    position: absolute;
+    top: 21px;
+    right: 207px;
+  }
+
+  #search {
+    input[type=text] {
+      @include round-corners(10px);
+    }
+
+    input[type=image] {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+    }
+
+    position: absolute;
+    top: 20px;
+    right: 5px;
+  }
+
   padding: {
     top: 0px;
     bottom: 10px;
@@ -125,6 +173,10 @@ header {
 
     h2 {
       margin: 0px;
+    }
+
+    .archive_title {
+      display: inline;
     }
 
     .meta {
@@ -165,6 +217,10 @@ header {
         border: {
           bottom: 1px dotted;
         }
+
+        &:hover {
+          color: black;
+        }
       }
     }
 
@@ -185,7 +241,17 @@ header {
 }
 
 #sidebar {
+  section {
+    ul {
+      list-style-image: none;
+      list-style-position: outside;
+      list-style-type: none;
+    }
 
+    margin: {
+      bottom: 20px
+    }
+  }
 }
 
 footer {

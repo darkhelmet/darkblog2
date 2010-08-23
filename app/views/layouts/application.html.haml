@@ -5,7 +5,8 @@
     %header= render(:partial => 'layouts/header')
     .clear
     .row
-      #content.col.col_11= yield
-      %aside#sidebar.col.col_5= render(:partial => 'layouts/sidebar')
+      %section#content.col.col_11= yield
+      - cache do
+        %aside#sidebar.col.col_5= render(:partial => 'layouts/sidebar')
       .clear
       %footer.col.col_16= render(:partial => 'layouts/footer')

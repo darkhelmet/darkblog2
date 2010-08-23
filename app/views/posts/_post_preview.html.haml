@@ -4,6 +4,6 @@
     %time{ :datetime => post_preview.published_on.xmlschema }= post_preview.published_on.to_s(:post)
     &raquo;
     Posted in
-    %span.category= link_to(post_preview.category.capitalize, category_path(post_preview.category))
+    %span.category= category_link(post_preview.category)
   .snippet!= truncate(strip_tags(post_preview.body_html), :length => 450)
   = link_to('Keep Reading', post_permalink(post_preview), :class => 'read_more')

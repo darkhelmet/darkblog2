@@ -12,30 +12,24 @@ class PostsController < ApplicationController
   end
 
   def archive
+    render(:action => "archive_#{params[:archive]}")
+  end
+
+  def monthly
+    @posts = Post.find_by_month(params)
+    render(:action => 'main')
   end
 
   def index
     @posts = Post.all
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def show
     @post = Post.first(params[:id])
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
     @post = Post.new
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def edit
@@ -45,24 +39,20 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
-      else
-        format.html { render(:action => 'new') }
-      end
+    if @post.save
+      redirect_to(@post, :notice => 'Post was successfully created.')
+    else
+      render(:action => 'new')
     end
   end
 
   def update
     @post = Post.first(params[:id])
 
-    respond_to do |format|
-      if @post.update(params[:post])
-        format.html { redirect_to(@post, :notice => 'Post was successfully updated.') }
-      else
-        format.html { render(:action => 'edit') }
-      end
+    if @post.update(params[:post])
+      redirect_to(@post, :notice => 'Post was successfully updated.')
+    else
+      render(:action => 'edit')
     end
   end
 
@@ -70,8 +60,6 @@ class PostsController < ApplicationController
     @post = Post.first(params[:id])
     @post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(posts_url) }
-    end
+    redirect_to(posts_url)
   end
 end
