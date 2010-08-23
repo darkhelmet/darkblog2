@@ -1,6 +1,6 @@
 MongoMapper.connection = if Rails.env.production?
   ENV['MONGOHQ_URL'].tap do |url|
-    Mongo::Connection.from_uri()
+    Mongo::Connection.from_uri(url)
     MongoMapper.database = url.split('/').last
   end
 else
