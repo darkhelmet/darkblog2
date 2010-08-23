@@ -48,6 +48,9 @@ module Darkblog2
     end
 
     config.middleware.tap do |mw|
+      require 'rack/sinatra'
+      require 'bundles'
+      mw.use Rack::Sinatra, Bundles.new
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true)
     end
   end

@@ -1,7 +1,8 @@
 %title= yield_or_default(:title, 'Verbose Logging - software development with really amazing hair')
 = javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
-= javascript_include_tag('html5', 'rails', 'application')
-= stylesheet_link_tag('reset', 'grid', 'general', 'darkblog')
+= javascript_include_tag('bundles/all')
+= stylesheet_link_tag('bundles/all')
+= stylesheet_link_tag('darkblog')
 = stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans:regular,italic,bold,bolditalic')
 = stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans+Mono')
 %link{ :rel => 'icon', :type => 'image/png', :href => image_path('favicon.png') }
