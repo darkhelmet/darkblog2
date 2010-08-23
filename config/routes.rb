@@ -2,6 +2,13 @@ Darkblog2::Application.routes.draw do
   resources :posts
 
   root :to => 'posts#main'
+  match '/archive/:type' => 'posts#archive', :as => :archive
+  match '/category/:category' => 'posts#category', :as => :category
+  match '/:year/:month/:day/:slug' => 'posts#permalink', :as => :permalink, :constraints => {
+    :year => /\d{4}/,
+    :month => /\d{2}/,
+    :day => /\d{2}/
+  }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

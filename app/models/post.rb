@@ -2,7 +2,7 @@ class Post
   include MongoMapper::Document
   plugin Taggable
 
-  before_create :slug!
+  before_save :slug!
 
   key :title, String, :required => true
   key :category, String, :required => true
@@ -20,5 +20,12 @@ class Post
 
   def body_html
     RedCloth.new(body).to_html
+  end
+
+  class << self
+    def find_by_permalink_params(params)
+      time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      where(:published => true, :slug => params[:slug], :published_on.gte => time.beginning_of_day, :published_on.lte => time.end_of_day).first
+    end
   end
 end

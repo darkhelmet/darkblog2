@@ -1,3 +1,5 @@
+$grey: #525252;
+
 @mixin box-shadow($h, $v, $blur, $color) {
   box-shadow: $h $v $blur $color;
   -webkit-box-shadow: $h $v $blur $color;
@@ -20,8 +22,21 @@
   }
 }
 
+@mixin droid-mono {
+  font: {
+    family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
+  }
+}
+
 html, body {
   @include droid;
+  color: $grey;
+}
+
+body {
+  margin: {
+    top: 65px;
+  }
 }
 
 a, a:visited {
@@ -34,14 +49,29 @@ a:hover {
   border: {
     bottom: 1px dotted;
   }
+
   text: {
     decoration: none;
   }
 }
 
-body {
-  margin: {
-    top: 65px;
+code {
+  @include droid-mono;
+  display: inline;
+  padding: 0px;
+}
+
+pre {
+  @include droid-mono;
+}
+
+ul, ol {
+  margin: 0 0 1.52em;
+}
+
+.small, .footnote {
+  font: {
+    size: 0.8em;
   }
 }
 
@@ -87,6 +117,12 @@ header {
   article {
     @include round-corners;
 
+    .snippet {
+      margin: {
+        bottom: 10px;
+      }
+    }
+
     h2 {
       margin: 0px;
     }
@@ -114,6 +150,36 @@ header {
       $back: transparentize(black, 0.9);
       background: $back;
       @include box-shadow(0px, 0px, 5px, $back);
+    }
+  }
+
+  section {
+    .meta {
+      margin: {
+        bottom: 10px;
+      }
+    }
+
+    .content {
+      a, a:visited {
+        border: {
+          bottom: 1px dotted;
+        }
+      }
+    }
+
+    h1 {
+      margin: 0px;
+    }
+  }
+
+  #archives {
+    font: {
+      weight: bold;
+    }
+
+    text: {
+      align: center;
     }
   }
 }

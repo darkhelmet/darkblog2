@@ -1,5 +1,9 @@
 html, body {
-  font-family: 'Droid Sans', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif; }
+  font-family: 'Droid Sans', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+  color: #525252; }
+
+body {
+  margin-top: 65px; }
 
 a, a:visited {
   text-decoration: none; }
@@ -8,8 +12,19 @@ a:hover {
   border-bottom: 1px dotted;
   text-decoration: none; }
 
-body {
-  margin-top: 65px; }
+code {
+  font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
+  display: inline;
+  padding: 0px; }
+
+pre {
+  font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace; }
+
+ul, ol {
+  margin: 0 0 1.52em; }
+
+.small, .footnote {
+  font-size: 0.8em; }
 
 header {
   box-shadow: 0px 0px 5px black;
@@ -43,6 +58,8 @@ header {
   margin-bottom: 10px;
   padding: 5px;
   margin: 5px; }
+  #content article .snippet {
+    margin-bottom: 10px; }
   #content article h2 {
     margin: 0px; }
   #content article .meta {
@@ -54,6 +71,15 @@ header {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); }
+#content section .meta {
+  margin-bottom: 10px; }
+#content section .content a, #content section .content a:visited {
+  border-bottom: 1px dotted; }
+#content section h1 {
+  margin: 0px; }
+#content #archives {
+  font-weight: bold;
+  text-align: center; }
 
 footer {
   text-align: center;

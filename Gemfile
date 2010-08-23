@@ -10,6 +10,7 @@ gem 'bson_ext'
 gem 'hoptoad_notifier'
 gem 'memcached-northscale', '0.19.5.3', :require => 'memcached'
 gem 'RedCloth', '4.2.3'
+gem 'rack-gist', '1.0.6', :require => 'rack/gist'
 
 group :development, :test do
   gem 'ruby-debug'

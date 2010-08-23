@@ -1,0 +1,9 @@
+%section
+  %h1= link_to(@post.title, post_permalink(@post))
+  .meta
+    %time{ :datetime => @post.published_on.xmlschema }= @post.published_on.to_s(:post)
+    &raquo;
+    Posted in
+    %span.category= link_to(@post.category.capitalize, category_path(@post.category))
+  .content!= @post.body_html
+  = render(:partial => 'layouts/add_to_any')

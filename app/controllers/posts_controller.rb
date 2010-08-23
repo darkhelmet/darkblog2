@@ -1,6 +1,17 @@
 class PostsController < ApplicationController
   def main
-    @posts = Post.publish_order.all
+    @posts = Post.publish_order.limit(6)
+  end
+
+  def permalink
+    @post = Post.find_by_permalink_params(params)
+  end
+
+  def category
+    @posts = Post.publish_order.where(:category => params[:category])
+  end
+
+  def archive
   end
 
   def index
