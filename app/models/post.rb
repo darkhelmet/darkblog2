@@ -11,6 +11,9 @@ class Post
   key :published_on, Time, :default => lambda { Time.zone.now }
   key :slug, String
   key :description, String
+  key :announced, Boolean, :default => false
+
+  timestamps!
 
   scope(:publish_order, lambda {
     where(:published => true, :published_on.lte => Time.zone.now).sort(:published_on.desc)
