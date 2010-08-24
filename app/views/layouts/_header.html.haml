@@ -1,4 +1,4 @@
-%h1#title.left= link_to('Verbose Logging', '/')
+%h1#title.left= link_to(Darkblog2.config[:title], '/')
 %nav.right
   %ul
     %li= link_to('Home', '/')
@@ -17,4 +17,4 @@
     = text_field_tag('q', nil, :class => 'width_3')
     = image_submit_tag(image_path('magnifier.png'))
 .clear
-%em#tagline software development with some really amazing hair
+%em#tagline= Darkblog2.config[:tagline]

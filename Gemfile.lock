@@ -136,20 +136,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth (= 4.2.3)
+  RedCloth (~> 4.2.3)
   bson_ext
   factory_girl
-  haml (= 3.0.17)
+  haml (~> 3.0.17)
   hoptoad_notifier
-  memcached-northscale (= 0.19.5.3)
+  memcached-northscale (~> 0.19.5.3)
   mongo_ext
-  mongo_mapper (= 0.8.3)
-  rack-gist (= 1.0.6)
+  mongo_mapper (~> 0.8.3)
+  rack-gist (~> 1.0.6)
   rails (= 3.0.0.rc)
   rails3-generators
-  rest-client (= 1.6.0)
+  rest-client (~> 1.6.0)
   rspec-rails (= 2.0.0.beta.19)
   ruby-debug
-  sinatra-bundles (= 0.4.0)
+  sinatra-bundles (~> 0.4.0)
   thin
-  yajl-ruby (= 0.7.7)
+  yajl-ruby (~> 0.7.7)
