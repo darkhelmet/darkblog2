@@ -1,6 +1,5 @@
-%title= yield_or_default(:title, 'Verbose Logging - software development with really amazing hair')
+%title= yield_or_default(:title, "#{Darkblog2.config[:title]} - #{Darkblog2.config[:tagline]}")
 = javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
-!= Bundles.javascript_bundles[:all].to_html(:all)
 != Bundles.stylesheet_bundles[:all].to_html(:all)
 = stylesheet_link_tag('darkblog')
 = stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans:regular,italic,bold,bolditalic')

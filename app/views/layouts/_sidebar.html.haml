@@ -2,6 +2,23 @@
   = gravatar('darkhelmet@darkhelmetlive.com', 280)
   Daniel Huckstep is a software engineer (EIT) in
   = link_to('Edmonton, Alberta, Canada', "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Edmonton,+Alberta,+Canada&sll=53.543564,-113.490452&sspn=0.456975,1.234589&ie=UTF8&hq=&hnear=Edmonton,+Division+No.+11,+Alberta,+Canada&t=h&z=11")
+%section#postrank
+  .postrank-widget.theDarkSide
+    = javascript_include_tag('http://api.postrank.com/static/widget-v2.js')
+    :javascript
+      new PostRankWidget({
+        feed_hash: 'd97657ed1ad63565e413c2797a675064',
+      	num: 6, theme: 'theDarkSide', hasLink: true
+      });
+    .powered-by-postrank-wrapper
+      .powered-by-postrank
+        %p.poweredByPostRank
+          %a{ :href => 'http://www.postrank.com/?utm_source=topposts&utm_medium=widget&utm_content=topposts&utm_campaign=pr-1' }
+            %span Powered by Postrank
+      .pr_bottomCornerSet
+        .pr_clearBottomLeft
+        .pr_solidSpecialMiddle
+        .pr_clearBottomRight
 %section#categories
   %h3 Categories
   - Post.categories.each do |category|

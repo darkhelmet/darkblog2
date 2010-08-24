@@ -13,7 +13,7 @@ gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.0.6', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.4.0', :require => nil
 gem 'rest-client', '~> 1.6.0'
-# gem 'barista', '~> 0.5.0'
+gem 'barista', '~> 0.5.0'
 
 group :development, :test do
   gem 'ruby-debug'
