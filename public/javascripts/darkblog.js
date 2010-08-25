@@ -29,6 +29,9 @@
   ReaderBadge = function(json) {
     return $('#reader-badge').html(Jaml.render('reader-badge', json));
   };
+  $(document).ready(function() {
+    return $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+  });
   /*
   $(document).ready ->
   backgroundImagize: (e, i) ->
@@ -99,8 +102,6 @@
 
   $.githubBadge('darkhelmet')
   $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
-
-  $.getScript('http://tweetboard.com/darkhelmetlive/tb.js')
 
   if 0 < $('#commits').length
     $.getScript('http://github.com/api/v2/json/commits/list/darkhelmet/darkblog/master?callback=ShowCommits')

@@ -1,8 +1,8 @@
 %title= yield_or_default(:title, "#{Darkblog2.config[:title]} - #{Darkblog2.config[:tagline]}")
-= javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
-!= Bundles.stylesheet_bundles[:all].to_html(:all)
-= stylesheet_link_tag('darkblog')
-= stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans:regular,italic,bold,bolditalic')
-= stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans+Mono')
 = favicon_tag(image_path('favicon.png'))
 = csrf_meta_tag
+= javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+= stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans:regular,italic,bold,bolditalic')
+= stylesheet_link_tag('http://fonts.googleapis.com/css?family=Droid+Sans+Mono')
+!= Bundles.stylesheet_bundles[:all].to_html(:all)
+= stylesheet_link_tag('darkblog')

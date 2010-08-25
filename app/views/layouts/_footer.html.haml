@@ -1,27 +1,24 @@
-.spacer
-.center
-  %p
-    = link_to(image_tag('http://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png', :alt => 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', :no_escape => true, :rel => 'license')
-    %br
-    This work is licensed under a
-    = link_to('Creative Commons Licence', 'http://creativecommons.org/licenses/by-sa/2.5/ca/')
-    %br
-    = link_to('Home', '/')
-    |
-    = link_to('About', '/about')
-    |
-    = link_to('Talks', '/talks')
-    |
-    = link_to('Contact', '/contact')
-    |
-    = link_to('Disclaimer', '/disclaimer')
-    |
-    = link_to('Changelog', '/changelog')
-    |
-    = link_to('Sitemap', '/sitemap')
-    %br
-    Theme
-    %em darkhax2
-    by Daniel Huckstep
-.spacer
+%p
+  = link_to(image_tag('http://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png', :alt => 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', :no_escape => true, :rel => 'license')
+  %br
+  This work is licensed under a
+  = link_to('Creative Commons Licence', 'http://creativecommons.org/licenses/by-sa/2.5/ca/')
+  %br
+  = link_to('Home', '/')
+  |
+  = link_to('About', '/about')
+  |
+  = link_to('Talks', '/talks')
+  |
+  = link_to('Contact', '/contact')
+  |
+  = link_to('Disclaimer', '/disclaimer')
+  |
+  = link_to('Changelog', '/changelog')
+  |
+  = link_to('Sitemap', '/sitemap')
+  %br
+  Theme
+  %em darkhax2
+  by Daniel Huckstep
 != Bundles.javascript_bundles[:all].to_html(:all)
