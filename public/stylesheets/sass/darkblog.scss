@@ -75,6 +75,30 @@ ul, ol {
   }
 }
 
+.fleft {
+  float: left;
+}
+
+.fright {
+  float: right;
+}
+
+.bright {
+  margin-right: 10px;
+}
+
+.bbottom {
+  margin-bottom: 10px;
+}
+
+.bleft {
+  margin-left: 10px;
+}
+
+.btop {
+  margin-top: 10px;
+}
+
 header {
   @include box-shadow(0px, 0px, 5px, black);
 
@@ -185,18 +209,6 @@ header {
       display: inline;
     }
 
-    .meta {
-      time {
-        text: {
-          transform: uppercase;
-        }
-      }
-
-      margin: {
-        bottom: 10px;
-      }
-    }
-
     margin: {
       bottom: 10px;
     }
@@ -211,13 +223,7 @@ header {
     }
   }
 
-  section {
-    .meta {
-      margin: {
-        bottom: 10px;
-      }
-    }
-
+  .post {
     .content {
       a, a:visited {
         border: {
@@ -232,6 +238,18 @@ header {
 
     h1 {
       margin: 0px;
+    }
+  }
+
+  .meta {
+    time {
+      text: {
+        transform: uppercase;
+      }
+    }
+
+    margin: {
+      bottom: 10px;
     }
   }
 

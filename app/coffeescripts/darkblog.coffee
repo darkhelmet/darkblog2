@@ -20,6 +20,7 @@ ReaderBadge: (json) ->
 
 $(document).ready ->
   $.getScript('http://tweetboard.com/darkhelmetlive/tb.js')
+  $('.post a:regex(href, png|jpe?g|gif)').facebox()
 
 ###
 $(document).ready ->

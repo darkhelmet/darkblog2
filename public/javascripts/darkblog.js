@@ -30,7 +30,8 @@
     return $('#reader-badge').html(Jaml.render('reader-badge', json));
   };
   $(document).ready(function() {
-    return $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+    $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+    return $('.post a:regex(href, png|jpe?g|gif)').facebox();
   });
   /*
   $(document).ready ->
