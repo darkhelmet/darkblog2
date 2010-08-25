@@ -53,6 +53,7 @@ module Darkblog2
       require 'rack/insert'
       require 'rack/sinatra'
       require 'bundles'
+      require 'hassle'
 
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
       mw.use Rack::Sinatra, Bundles.new
