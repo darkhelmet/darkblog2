@@ -34,40 +34,6 @@
   });
   /*
   $(document).ready ->
-  backgroundImagize: (e, i) ->
-    $(e).css({
-      'background-image': 'url(' + i.attr('src') + ')',
-      'background-repeat': 'no-repeat',
-      height: i.height(),
-      width: i.width()
-    }).addClass('img').addClass(i.attr('class'))
-
-  backgroundizeImages: ->
-    images: $('.entry img')
-
-    if images.toArray().all((i) -> i.complete)
-      images.each(->
-        div: $('<div></div>')
-        backgroundImagize(div, $(this))
-        $(this).replaceWith(div))
-    else
-      setTimeout(backgroundizeImages, 100)
-
-  backgroundizeLinkImages: ->
-    links: $('.entry a:has(img)')
-
-    if links.toArray().all((l) -> $(l).find('img')[0].complete)
-      links.each(->
-        img: $(this).find('img')
-        backgroundImagize(this, $(img))
-        img.remove())
-      $('.entry a:regex(href, png|jpe?g|gif).img').facebox()
-      backgroundizeImages()
-    else
-      setTimeout(backgroundizeLinkImages, 100)
-
-  backgroundizeLinkImages()
-
   $('a.remote-inline').live('click', (->
     link: $(this)
     b: link.closest('.content').prev()

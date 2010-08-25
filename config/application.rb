@@ -49,10 +49,25 @@ module Darkblog2
     end
 
     config.middleware.tap do |mw|
+      require 'rack/insert'
       require 'rack/sinatra'
       require 'bundles'
       mw.use Rack::Sinatra, Bundles.new
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
+      mw.use Rack::Insert do
+        %Q{<link rel='stylesheet' type='text/css' media='screen' charset='utf-8' href='http://assets.skribit.com/stylesheets/SkribitSuggest.css' />
+      <style type='text/css' media='print' charset='utf-8'>a#sk_tab{display:none !important;}</style>
+      <script src='http://assets.skribit.com/javascripts/SkribitSuggest.js' type='text/javascript'></script>
+      <script type='text/javascript' charset='utf-8'>
+        SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
+          placement: 'right',
+          color: '#333333',
+          text_color: 'white',
+          distance_vert: '32%',
+          distance_horiz: ''
+        });
+      </script>}
+      end
     end
   end
 end
