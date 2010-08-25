@@ -1,5 +1,7 @@
 Darkblog2::Application.routes.draw do
-  resources :posts
+  namespace :admin do
+    resources :posts
+  end
 
   root :to => 'posts#main'
   match '/archive/:archive' => 'posts#archive', :as => :archive, :constraints => {

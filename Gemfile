@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0.rc2'
 gem 'rails3-generators'
 gem 'haml', '~> 3.0.17' # ERB sucks
-gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl' # JSON
+gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
 gem 'mongo_mapper', '~> 0.8.3'
 gem 'mongo_ext'
 gem 'bson_ext'

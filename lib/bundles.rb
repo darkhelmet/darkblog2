@@ -10,6 +10,6 @@ class Bundles < Sinatra::Base
 
   register Sinatra::Bundles
 
-  javascript_bundle(:all, %w(html5 rails application darkblog))
+  javascript_bundle(:all, %w(html5 rails application jquery.darkblog darkblog))
   stylesheet_bundle(:all, %w(reset grid general))
 end
