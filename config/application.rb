@@ -57,6 +57,7 @@ module Darkblog2
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
       mw.use Rack::Sinatra, Bundles.new
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
+
       mw.use Rack::Insert do
         %Q{<script type='text/javascript' src='http://www.google-analytics.com/ga.js'></script>
       <script type="text/javascript">
@@ -64,7 +65,8 @@ module Darkblog2
       var pageTracker = _gat._getTracker('#{Darkblog2.config[:ga_code]}');
       pageTracker._trackPageview();
       } catch(err) {}</script>}
-      end
+      end if Rails.env.production?
+
       mw.use Rack::Insert do
         %Q{<link rel='stylesheet' type='text/css' media='screen' charset='utf-8' href='http://assets.skribit.com/stylesheets/SkribitSuggest.css' />
       <style type='text/css' media='print' charset='utf-8'>a#sk_tab{display:none !important;}</style>
