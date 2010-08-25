@@ -55,6 +55,7 @@ module Darkblog2
       require 'bundles'
 
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
+      mw.insert_before(Rack::Sendfile, Rack::ETag)
       mw.use Rack::Sinatra, Bundles.new
 
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
