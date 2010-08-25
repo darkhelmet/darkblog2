@@ -56,6 +56,8 @@ module Darkblog2
 
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
       mw.use Rack::Sinatra, Bundles.new
+      mw.use Hassle if Rails.env.production?
+
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
 
       mw.use Rack::Insert do
