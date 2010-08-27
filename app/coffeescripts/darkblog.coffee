@@ -21,6 +21,10 @@ ReaderBadge: (json) ->
 $(document).ready ->
   $.getScript('http://tweetboard.com/darkhelmetlive/tb.js')
   $('.post a:regex(href, png|jpe?g|gif)').facebox()
+  query: $.map($('a[href$=#disqus_thread]'), ((a, index) ->
+    'url' + index + '=' + encodeURIComponent(a.href)
+  )).join('&')
+  $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
 
 ###
 $(document).ready ->
@@ -39,11 +43,6 @@ $(document).ready ->
   $('.swfembed').each ->
     t: $(this)
     t.swfembed(t.attr('movie'), parseInt(t.attr('mwidth')), parseInt(t.attr('mheight')))
-
-  query: $.map($('a[href$=#disqus_thread]'), ((a, index) ->
-    'url' + index + '=' + encodeURIComponent(a.href)
-  )).join('&')
-  $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
 
   $('#posts-container a').each ->
     re: /http:\/\/twitter\.com\/\w+\/status\/(\d+)/

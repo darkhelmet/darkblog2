@@ -6,4 +6,6 @@
     Posted in
     %span.category= category_link(post_preview.category)
   .snippet!= truncate(strip_tags(post_preview.body_html), :length => 450)
-  = link_to('Keep Reading', post_permalink(post_preview), :class => 'read_more')
+  .extra_links
+    = link_to('Keep Reading', post_permalink(post_preview), :class => 'read_more fleft')
+    = link_to('Comments', post_permalink(post_preview, :anchor => 'disqus_thread'), :class => 'fright')

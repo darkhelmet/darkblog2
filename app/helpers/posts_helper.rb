@@ -8,9 +8,9 @@ module PostsHelper
     link_to(str, monthly_path(year, month))
   end
 
-  def post_permalink(post)
+  def post_permalink(post, *args)
     year, month, day = post.published_on.strftime('%Y-%m-%d').split('-')
-    permalink_url(year, month, day, post.slug)
+    permalink_url(year, month, day, post.slug, *args)
   end
 
   def title_for(post)

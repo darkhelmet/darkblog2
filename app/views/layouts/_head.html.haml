@@ -12,5 +12,10 @@
 = font_tag('Droid+Sans+Mono')
 != Bundles.stylesheet_bundles[:all].to_html(:all)
 = stylesheet_link_tag('darkblog')
+
 :javascript
   if (top.location != self.location) { top.location = self.location.href; }
+
+- if Rails.env.development?
+  :javascript
+    var disqus_developer = 1;
