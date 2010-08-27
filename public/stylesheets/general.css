@@ -57,7 +57,7 @@ p {margin:0 0 1.52em;}
 form fieldset {-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius:5px; padding-top:5px; padding-left:5px; border:1px solid #ccc; }
 form fieldset legend {font-size:1.4em; padding:0 5px;}
 form textarea {-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius:4px; margin-bottom:5px; border:1px solid #ccc; padding:4px 0 1px 5px;}
-form input[type=text], form input[type=email], form input[type=url] {-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius:4px; height:20px; margin-bottom:5px; border:1px solid #ccc; padding:4px 0 1px 5px;}
+form input[type=text], form input[type=email], form input[type=url], form input[type=password] {-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius:4px; height:20px; margin-bottom:5px; border:1px solid #ccc; padding:4px 0 1px 5px;}
 form label {display:block; height:20px; font-size:1.2em;}
 
 
