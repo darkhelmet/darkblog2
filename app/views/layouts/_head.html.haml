@@ -1,9 +1,9 @@
-%title= yield_or_default(:title, Darkblog2.config[:title])
-= favicon_tag(image_path('favicon.png'))
+= content_type_tag
 = csrf_meta_tag
-= jquery_tag('1.4.2')
+= title_tag
+= description_tag
+= favicon_tag(image_path('favicon.png'))
 = font_tag('Droid+Sans:regular,italic,bold,bolditalic')
 = font_tag('Droid+Sans+Mono')
 != Bundles.stylesheet_bundles[:all].to_html(:all)
 = stylesheet_link_tag('darkblog')
-= description_tag

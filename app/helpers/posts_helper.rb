@@ -12,4 +12,8 @@ module PostsHelper
     year, month, day = post.published_on.strftime('%Y-%m-%d').split('-')
     permalink_path(year, month, day, post.slug)
   end
+
+  def title_for(post)
+    "#{post.title} | #{Darkblog2.config[:title]}"
+  end
 end

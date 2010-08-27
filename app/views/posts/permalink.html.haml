@@ -1,3 +1,4 @@
+- content_for(:title, title_for(@post))
 - content_for(:description, @post.description)
 .post
   %h1= link_to(@post.title, post_permalink(@post))

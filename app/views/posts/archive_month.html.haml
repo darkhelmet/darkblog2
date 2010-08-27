@@ -1,4 +1,5 @@
 - content_for(:description, 'Archives by month')
+- content_for(:title, title_text("Monthly archives"))
 - Post.group_by_month.each do |month, posts|
   %section
     %h1= monthly_archive_link(month)

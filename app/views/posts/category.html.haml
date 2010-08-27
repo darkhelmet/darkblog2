@@ -1,2 +1,3 @@
 - content_for(:description, "Articles in the #{params[:category]} category")
+- content_for(:title, title_text("#{params[:category].capitalize} articles"))
 = render(:partial => 'post_preview', :collection => @posts)

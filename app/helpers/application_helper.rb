@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def content_type_tag
+    tag(:meta, 'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8')
+  end
+
   def jquery_tag(version)
     javascript_include_tag("http://ajax.googleapis.com/ajax/libs/jquery/#{version}/jquery.min.js")
   end
@@ -21,5 +25,13 @@ module ApplicationHelper
 
   def description_tag
     tag(:meta, :name => 'description', :content => yield_or_default(:description, Darkblog2.config[:tagline]))
+  end
+
+  def title_tag
+    content_tag(:title, yield_or_default(:title, Darkblog2.config[:title]))
+  end
+
+  def title_text(text)
+    "#{text} | #{Darkblog2.config[:title]}"
   end
 end
