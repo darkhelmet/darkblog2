@@ -54,4 +54,8 @@ module ApplicationHelper
   def rss_tag
     auto_discovery_link_tag(:rss, feed_url, :title => "#{Darkblog2.config[:title]} RSS Feed")
   end
+
+  def index_tag
+    tag(:link, :rel => 'index', :title => Darkblog2.config[:title], :href => root_url)
+  end
 end
