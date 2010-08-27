@@ -1,0 +1,1 @@
+Darkblog2::Application.config.middleware.insert_after(ActionDispatch::Static, Rack::CanonicalHost, Darkblog2.config[:host])

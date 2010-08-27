@@ -1,6 +1,9 @@
 # Be sure to restart your server when you modify this file.
 
-Darkblog2::Application.config.session_store :cookie_store, :key => '_darkblog2_session'
+{ :key => '_darkblog2_session' }.tap do |options|
+  options[:secret] = ENV['SESSION_SECRET'] if ENV['SESSION_SECRET']
+  Darkblog2::Application.config.session_store(:cookie_store, options)
+end
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
