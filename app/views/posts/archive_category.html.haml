@@ -1,3 +1,4 @@
+- content_for(:description, 'Archives by category')
 - Post.group_by_category.each do |category, posts|
   %section
     %h1= category_link(category)
