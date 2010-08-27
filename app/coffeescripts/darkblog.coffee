@@ -1,9 +1,6 @@
 String::empty: -> '' ==  this
 Array::all: (f) -> -1 == this.map(f).indexOf(false)
 
-ShowCommits: (json) ->
-  $('#commits').html(Jaml.render('commit', json.commits))
-
 GithubBadge: (json) ->
   if json
     badge: {
@@ -57,9 +54,6 @@ $(document).ready ->
 
   $.githubBadge('darkhelmet')
   $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
-
-  if 0 < $('#commits').length
-    $.getScript('http://github.com/api/v2/json/commits/list/darkhelmet/darkblog/master?callback=ShowCommits')
 
   true
 ###

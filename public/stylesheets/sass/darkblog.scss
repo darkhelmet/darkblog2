@@ -245,6 +245,18 @@ header {
     }
   }
 
+  .page {
+    a, a:visited {
+      border: {
+        bottom: 1px dotted;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
   .meta {
     time {
       text: {

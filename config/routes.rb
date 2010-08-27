@@ -23,4 +23,5 @@ Darkblog2::Application.routes.draw do
     :month => /\d{2}/,
     :day => /\d{2}/
   }
+  get '/*page' => 'static#page', :as => :path
 end
