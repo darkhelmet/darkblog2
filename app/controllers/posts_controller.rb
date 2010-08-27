@@ -28,4 +28,8 @@ class PostsController < CachedController
   def sitemap
     @posts = Post.publish_order.all
   end
+
+  def search
+    # TODO: Write this
+  end
 end

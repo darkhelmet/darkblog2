@@ -40,4 +40,12 @@ module ApplicationHelper
       tag(:link, :rel => 'canonical', :href => content_for(:canonical))
     end
   end
+
+  def opensearch_tag
+    tag(:link, :rel => 'search', :type => 'application/opensearchdescription+xml', :href => opensearch_url, :title => Darkblog2.config[:title])
+  end
+
+  def sitemap_tag
+    tag(:link, :rel => 'sitemap', :type => 'application/xml', :title => 'Sitemap', :href => sitemap_url)
+  end
 end
