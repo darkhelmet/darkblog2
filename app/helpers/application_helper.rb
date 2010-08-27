@@ -34,4 +34,10 @@ module ApplicationHelper
   def title_text(text)
     "#{text} | #{Darkblog2.config[:title]}"
   end
+
+  def canonical_tag
+    if content_for?(:canonical)
+      tag(:link, :rel => 'canonical', :href => content_for(:canonical))
+    end
+  end
 end
