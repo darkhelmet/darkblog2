@@ -4,8 +4,9 @@ Darkblog2::Application.routes.draw do
   end
 
   root :to => 'posts#main'
-  get '/opensearch.:format' => 'application#opensearch', :as => :opensearch, :format => 'xml'
+  get '/opensearch.xml' => 'application#opensearch', :as => :opensearch, :format => 'xml'
   get '/search' => 'posts#search', :as => :search
+  get '/feed' => 'posts#feed', :as => :feed, :format => 'xml'
   get '/sitemap.:format' => 'posts#sitemap', :as => :sitemap, :format => 'xml', :constraints => {
     :format => /xml(\.gz)?/
   }

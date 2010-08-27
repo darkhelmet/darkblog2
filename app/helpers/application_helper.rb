@@ -15,12 +15,12 @@ module ApplicationHelper
     content_for?(key) ? content_for(key) : default
   end
 
-  def favicon_tag(path)
-    tag(:link, :rel => 'icon', :type => 'image/png', :href => path)
+  def favicon_tag
+    favicon_link_tag('favicon.png', :type => 'image/png')
   end
 
-  def gravatar(email, size = 120)
-    image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}.png?s=#{size}", :alt => 'Gravatar for Daniel Huckstep')
+  def gravatar(size = 120)
+    image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}", :alt => "Gravatar for #{Darkblog2.config[:author]}")
   end
 
   def description_tag
@@ -36,9 +36,7 @@ module ApplicationHelper
   end
 
   def canonical_tag
-    if content_for?(:canonical)
-      tag(:link, :rel => 'canonical', :href => content_for(:canonical))
-    end
+    tag(:link, :rel => 'canonical', :href => content_for(:canonical)) if content_for?(:canonical)
   end
 
   def opensearch_tag
@@ -47,5 +45,13 @@ module ApplicationHelper
 
   def sitemap_tag
     tag(:link, :rel => 'sitemap', :type => 'application/xml', :title => 'Sitemap', :href => sitemap_url)
+  end
+
+  def managing_editor
+    "#{Darkblog2.config[:email]} (#{Darkblog2.config[:author]})"
+  end
+
+  def rss_tag
+    auto_discovery_link_tag(:rss, feed_url, :title => "#{Darkblog2.config[:title]} RSS Feed")
   end
 end

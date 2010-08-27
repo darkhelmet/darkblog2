@@ -32,4 +32,21 @@ class PostsController < CachedController
   def search
     # TODO: Write this
   end
+
+  def feed
+    expires_now
+    redirect_to(feedburner_url, :status => :moved_permanently) unless Rails.env.development? || user_agent?(/feedburner/i)
+    request.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
+    @posts = Post.publish_order.limit(10)
+  end
+
+private
+
+  def user_agent?(ua)
+    request.user_agent.match(ua)
+  end
+
+  def feedburner_url
+    "http://feeds.feedburner.com/#{Darkblog2.config[:feedburner]}"
+  end
 end

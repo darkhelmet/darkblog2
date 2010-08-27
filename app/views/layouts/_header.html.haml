@@ -11,7 +11,7 @@
   = link_to(image_tag('icons/linkedin.png', :alt => 'Linkedin Icon'), 'http://ca.linkedin.com/in/darkhelmetlive', :title => 'Connect with me on Linkedin')
   = link_to(image_tag('icons/skype.png', :alt => 'Skype Icon'), 'skype:darkhelmetlive?call', :title => 'Call on me! Call me! Call on me! Call me...on Skype')
   = link_to(image_tag('icons/flickr.png', :alt => 'Flickr Icon'), 'http://www.flickr.com/photos/darkhelmetlive/', :title => 'My pictures on Flickr')
-= link_to(image_tag('rss.png', :alt => 'RSS'), '/FIXME', :class => 'rss', :title => 'Get new articles in your RSS reader.')
+= link_to(image_tag('rss.png', :alt => 'RSS'), feed_path, :class => 'rss', :title => 'Get new articles in your RSS reader.')
 #search
   = form_tag('/search', :method => :get) do
     = text_field_tag('q', nil, :class => 'width_3')
