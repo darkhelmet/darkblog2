@@ -4,8 +4,6 @@
   %tr
     %th Title
     %th Published
-    %th Tags
-    %th Description
     %th
     %th
     %th
@@ -14,8 +12,6 @@
     %tr
       %td= post.title
       %td= post.published
-      %td= post.tags.to_a.join(', ')
-      %td= post.description
       %td= link_to 'Show', admin_post_path(post)
       %td= link_to 'Edit', edit_admin_post_path(post)
       %td= link_to 'Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete
