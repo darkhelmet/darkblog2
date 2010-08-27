@@ -1,4 +1,4 @@
-= form_for @post, :url => admin_post_path(@post) do |f|
+= form_for ['admin', @post] do |f|
   -if @post.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
@@ -8,27 +8,30 @@
 
   .field
     = f.label :title
-    = f.text_field :title
+    %br
+    = f.text_field :title, :class => 'width_10'
   .field
     = f.label :category
-    = f.text_field :category
+    %br
+    = f.text_field :category, :class => 'width_10'
   .field
     = f.label :body
-    = f.text_area :body
+    %br
+    = f.text_area :body, :class => 'width_10'
   .field
     = f.label :published
     = f.check_box :published
   .field
     = f.label :published_on
-    = f.datetime_select :published_on
+    %br
+    = f.text_field :published_on
   .field
-    = f.label :tags
-    = f.text_field :tags
-  .field
-    = f.label :slug
-    = f.text_field :slug
+    = f.label :tag_string
+    %br
+    = f.text_field :tag_string, :class => 'width_10'
   .field
     = f.label :description
-    = f.text_field :description
+    %br
+    = f.text_field :description, :class => 'width_10'
   .actions
     = f.submit 'Save'

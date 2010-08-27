@@ -10,4 +10,4 @@
     %span.category= category_link(@post.category)
   .content!= @post.body_html
   = render(:partial => 'layouts/add_to_any')
-  = render(:partial => 'disqus_single')
+  = render(:partial => 'posts/disqus_single')

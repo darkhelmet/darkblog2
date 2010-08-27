@@ -2,8 +2,8 @@
   %b Title:
   = @post.title
 %p
-  %b String:
-  = @post.string
+  %b Category:
+  = @post.category
 %p
   %b Body:
   = @post.body
@@ -12,17 +12,14 @@
   = @post.published
 %p
   %b Published on:
-  = @post.published_on
+  = @post.published_on.to_s(:post)
 %p
   %b Tags:
-  = @post.tags
-%p
-  %b Slug:
-  = @post.slug
+  = @post.tag_string
 %p
   %b Description:
   = @post.description
 
-= link_to 'Edit', edit_post_path(@post)
+= link_to 'Edit', edit_admin_post_path(@post)
 \|
-= link_to 'Back', posts_path
+= link_to 'Back', admin_posts_path

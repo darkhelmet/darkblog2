@@ -27,6 +27,14 @@ class Post
     RedCloth.new(body).to_html
   end
 
+  def tag_string
+    tags.to_a.join(', ')
+  end
+
+  def tag_string=(tags)
+    self.tags = tags.split(',').map(&:strip).map(&:parameterize)
+  end
+
   class << self
     def find_by_permalink_params(params)
       # FIXME: Index on publish info and slug

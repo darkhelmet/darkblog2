@@ -1,5 +1,7 @@
 %h1 Listing posts
 
+= link_to 'New post', new_admin_post_path
+
 %table
   %tr
     %th Title
@@ -15,7 +17,3 @@
       %td= link_to 'Show', admin_post_path(post)
       %td= link_to 'Edit', edit_admin_post_path(post)
       %td= link_to 'Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New post', new_admin_post_path
