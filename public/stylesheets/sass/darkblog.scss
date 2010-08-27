@@ -99,6 +99,14 @@ ul, ol {
   margin-top: 10px;
 }
 
+.mcenter {
+  display: block;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
 header {
   @include box-shadow(0px, 0px, 5px, black);
 

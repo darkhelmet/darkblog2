@@ -23,5 +23,14 @@ Darkblog2::Application.routes.draw do
     :month => /\d{2}/,
     :day => /\d{2}/
   }
-  get '/*page' => 'static#page', :as => :path
+
+  Dir[Rails.root.join('app', 'views', 'pages', '*')].map do |path|
+    path.split('/').last.split('.').first
+  end.join('|').tap do |pages|
+    get '/:page' => 'static#page', :as => :path, :constraints => {
+      :page => Regexp.new(pages)
+    }
+  end
+
+  get '/*not_found' => 'application#render_404'
 end

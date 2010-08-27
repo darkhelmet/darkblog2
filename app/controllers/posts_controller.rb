@@ -10,6 +10,7 @@ class PostsController < CachedController
 
   def permalink
     @post = Post.find_by_permalink_params(params)
+    render_404 and return if @post.nil?
   end
 
   def category
