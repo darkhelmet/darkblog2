@@ -33,12 +33,16 @@ GEM
       activesupport (>= 3.0.0.beta)
     barista (0.5.0)
       open4
-    bson (1.0.4)
-    bson_ext (1.0.4)
+    bcrypt-ruby (2.1.2)
+    bson (1.0.5)
+    bson_ext (1.0.5)
     builder (2.1.2)
     columnize (0.3.1)
     configuration (1.1.0)
     daemons (1.1.0)
+    devise (1.1.2)
+      bcrypt-ruby (~> 2.1.2)
+      warden (~> 0.10.7)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -65,18 +69,20 @@ GEM
       treetop (>= 1.4.5)
     memcached-northscale (0.19.5.3)
     mime-types (1.16)
-    mongo (1.0.7)
-      bson (>= 1.0.4)
+    mongo (1.0.8)
+      bson (>= 1.0.5)
     mongo_ext (0.19.3)
     mongo_mapper (0.8.3)
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.3)
+    mysql2 (0.2.3)
     nokogiri (1.4.3.1)
     open4 (1.0.1)
     oyster (0.9.4)
     packr (3.1.0)
       oyster
+    pg (0.9.0)
     plucky (0.3.4)
       mongo (~> 1.0.7)
     polyglot (0.3.1)
@@ -96,7 +102,6 @@ GEM
       activesupport (= 3.0.0.rc2)
       bundler (>= 1.0.0.rc.6)
       railties (= 3.0.0.rc2)
-    rails3-generators (0.12.1)
     railties (3.0.0.rc2)
       actionpack (= 3.0.0.rc2)
       activesupport (= 3.0.0.rc2)
@@ -137,6 +142,8 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    warden (0.10.7)
+      rack (>= 1.0.0)
     webrat (0.7.2.beta.1)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -150,6 +157,7 @@ DEPENDENCIES
   RedCloth (~> 4.2.3)
   barista (~> 0.5.0)
   bson_ext
+  devise (~> 1.1.2)
   factory_girl
   haml (~> 3.0.17)
   heroku
@@ -157,9 +165,10 @@ DEPENDENCIES
   memcached-northscale (~> 0.19.5.3)
   mongo_ext
   mongo_mapper (~> 0.8.3)
+  mysql2
+  pg
   rack-gist (~> 1.0.6)
   rails (= 3.0.0.rc2)
-  rails3-generators
   rest-client (~> 1.6.0)
   rspec-rails (= 2.0.0.beta.19)
   ruby-debug

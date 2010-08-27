@@ -1,6 +1,10 @@
 Darkblog2::Application.routes.draw do
-  namespace :admin do
-    resources :posts
+  devise_for :admins
+
+  authenticate :admin do
+    namespace :admin do
+      resources :posts
+    end
   end
 
   root :to => 'posts#main'
