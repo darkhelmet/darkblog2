@@ -4,6 +4,9 @@ Darkblog2::Application.routes.draw do
   end
 
   root :to => 'posts#main'
+  match '/sitemap.:format' => 'posts#sitemap', :as => :sitemap, :constraints => {
+    :format => /xml(\.gz)?/
+  }
   match '/archive/:archive' => 'posts#archive', :as => :archive, :constraints => {
     :archive => /full|category|month/
   }

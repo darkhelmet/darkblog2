@@ -24,4 +24,8 @@ class PostsController < CachedController
     @posts = Post.find_by_month(params)
     render(:action => 'main')
   end
+
+  def sitemap
+    @posts = Post.publish_order.all
+  end
 end
