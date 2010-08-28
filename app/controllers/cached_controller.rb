@@ -6,7 +6,7 @@ class CachedController < ApplicationController
         controller.response.cache_control[:extras] = ['must-revalidate']
         controller.response.headers['Vary'] = 'Accept-Encoding'
 
-        expires_now if controller.request.user_agent =~ /google/i
+        expires_now if admin_signed_in? || controller.request.user_agent =~ /google/i
       end
     end
   end
