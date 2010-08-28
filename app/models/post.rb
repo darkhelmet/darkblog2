@@ -1,9 +1,12 @@
 class Post
+  Index = IndexTank::HerokuClient.new.get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}")
+
   include Mongoid::Document
   include Mongoid::Timestamps
   include Taggable
 
   before_save :slug!
+  after_save :update_search_index
 
   field :title, :type => String
   field :category, :type => String
@@ -72,5 +75,19 @@ class Post
     def find_by_tag(tag)
       by_tag(tag).publish_order.all
     end
+
+    def search(query)
+      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
+    end
+  end
+
+private
+
+  def update_search_index
+    Index.add_document(id, {
+      :text => Sanitize.clean(body_html),
+      :title => title,
+      :timestamp => published_on.to_i.to_s
+    }) if published
   end
 end

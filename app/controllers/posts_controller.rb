@@ -31,7 +31,7 @@ class PostsController < CachedController
   end
 
   def search
-    # TODO: Write this
+    @posts = Post.search(params['q'])
   end
 
   def feed

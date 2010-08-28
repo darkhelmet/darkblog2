@@ -1,0 +1,6 @@
+- title = "Search results for '#{params[:q]}'"
+- content_for(:description, title)
+- content_for(:title, title_text(title))
+- content_for(:canonical, search_url(params[:q]))
+%h1= title
+= render(:partial => 'post_preview', :collection => @posts)

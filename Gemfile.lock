@@ -130,6 +130,8 @@ GEM
       ruby-debug-base (~> 0.10.3.0)
     ruby-debug-base (0.10.3)
       linecache (>= 0.3)
+    sanitize (1.2.1)
+      nokogiri (~> 1.4.1)
     sinatra (1.0)
       rack (>= 1.0)
     sinatra-bundles (0.4.0)
@@ -176,6 +178,7 @@ DEPENDENCIES
   rest-client (~> 1.6.0)
   rspec-rails (= 2.0.0.beta.19)
   ruby-debug
+  sanitize (~> 1.2.1)
   sinatra-bundles (~> 0.4.0)
   thin
   yajl-ruby (~> 0.7.7)

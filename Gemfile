@@ -16,6 +16,7 @@ gem 'sinatra-bundles', '~> 0.4.0', :require => nil
 gem 'rest-client', '~> 1.6.0'
 gem 'barista', '~> 0.5.0'
 gem 'devise', '~> 1.1.2'
+gem 'sanitize', '~> 1.2.1'
 
 group :development, :test do
   gem 'ruby-debug'
