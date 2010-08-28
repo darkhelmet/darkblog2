@@ -22,6 +22,10 @@ $(document).ready ->
     'url' + index + '=' + encodeURIComponent(a.href)
   )).join('&')
   $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
+  $('.post a').embedly({
+    maxWidth: 640,
+    embedly_wmode: 'opaque'
+  })
 
 ###
 $(document).ready ->

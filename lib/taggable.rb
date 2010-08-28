@@ -13,7 +13,7 @@ module Taggable
     klass.field :tags, :type => Set, :default => Set.new
     klass.instance_eval do
       scope(:by_tag, lambda { |tag|
-        any_in(:tags => [tag])
+        where(:tags.in => [tag])
       })
     end
     klass.send(:include, InstanceMethods)

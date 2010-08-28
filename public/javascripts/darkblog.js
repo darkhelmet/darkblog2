@@ -33,40 +33,44 @@
     query = $.map($('a[href$=#disqus_thread]'), (function(a, index) {
       return 'url' + index + '=' + encodeURIComponent(a.href);
     })).join('&');
-    return $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
-    /*
-    $(document).ready ->
-    $('a.remote-inline').live('click', (->
-      link: $(this)
-      b: link.closest('.content').prev()
-      r: link.parent()
-      link.replaceWith('Loading...')
-      $.get(this.href + '?t=' + (new Date()).getTime(),
-            ((data) ->
-              r.remove()
-              b.before($(data).addClass('new-elem').css('display', 'none'))
-              $('.new-elem').slideDown('slow', (-> $(this).removeClass('new-elem')))))
-      false))
-
-    $('.swfembed').each ->
-      t: $(this)
-      t.swfembed(t.attr('movie'), parseInt(t.attr('mwidth')), parseInt(t.attr('mheight')))
-
-    $('#posts-container a').each ->
-      re: /http:\/\/twitter\.com\/\w+\/status\/(\d+)/
-      matches: re.exec($(this).attr('href'))
-      if null != matches && 1 < matches.length
-        id: matches[1]
-        link: this
-        $.get('/twitter/' + id, null, ((data) ->
-          $(link).attr('title', data)
-          $(link).tooltip() unless $.browser.msie
-        ), 'text');
-
-    $.githubBadge('darkhelmet')
-    $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
-
-    true
-    */
+    $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
+    return $('.post a').embedly({
+      maxWidth: 640,
+      embedly_wmode: 'opaque'
+    });
   });
+  /*
+  $(document).ready ->
+  $('a.remote-inline').live('click', (->
+    link: $(this)
+    b: link.closest('.content').prev()
+    r: link.parent()
+    link.replaceWith('Loading...')
+    $.get(this.href + '?t=' + (new Date()).getTime(),
+          ((data) ->
+            r.remove()
+            b.before($(data).addClass('new-elem').css('display', 'none'))
+            $('.new-elem').slideDown('slow', (-> $(this).removeClass('new-elem')))))
+    false))
+
+  $('.swfembed').each ->
+    t: $(this)
+    t.swfembed(t.attr('movie'), parseInt(t.attr('mwidth')), parseInt(t.attr('mheight')))
+
+  $('#posts-container a').each ->
+    re: /http:\/\/twitter\.com\/\w+\/status\/(\d+)/
+    matches: re.exec($(this).attr('href'))
+    if null != matches && 1 < matches.length
+      id: matches[1]
+      link: this
+      $.get('/twitter/' + id, null, ((data) ->
+        $(link).attr('title', data)
+        $(link).tooltip() unless $.browser.msie
+      ), 'text');
+
+  $.githubBadge('darkhelmet')
+  $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
+
+  true
+  */
 })();

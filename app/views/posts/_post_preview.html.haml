@@ -1,6 +1,9 @@
 %article
   %h2= link_to(post_preview.title, post_permalink(post_preview))
   .meta
+    - if admin_signed_in?
+      = link_to('Edit', edit_admin_post_path(post_preview))
+      &raquo;
     %time{ :datetime => post_preview.published_on.xmlschema }= post_preview.published_on.to_s(:post)
     &raquo;
     Posted in
