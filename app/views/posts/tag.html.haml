@@ -1,0 +1,4 @@
+- content_for(:description, "Articles tagged with '#{params[:tag]}'")
+- content_for(:title, title_text("#{params[:tag].capitalize} articles"))
+- content_for(:canonical, tag_url(params[:tag]))
+= render(:partial => 'post_preview', :collection => @posts)

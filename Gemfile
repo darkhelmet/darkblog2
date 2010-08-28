@@ -5,9 +5,9 @@ gem 'pg'
 # gem 'rails3-generators'
 gem 'haml', '~> 3.0.17' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
-gem 'mongo_mapper', '~> 0.8.3'
-gem 'mongo_ext'
-gem 'bson_ext'
+gem 'bson_ext', '1.0.4'
+gem 'mongo'
+gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', :ref => 'f38e3ef'
 gem 'hoptoad_notifier'
 gem 'memcached-northscale', '~> 0.19.5.3', :require => 'memcached'
 gem 'RedCloth', '~> 4.2.3'

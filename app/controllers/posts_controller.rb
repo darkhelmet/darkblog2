@@ -41,6 +41,10 @@ class PostsController < CachedController
     @posts = Post.publish_order.limit(10)
   end
 
+  def tag
+    @posts = Post.find_by_tag(params[:tag])
+  end
+
 private
 
   def user_agent?(ua)

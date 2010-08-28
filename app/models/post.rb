@@ -1,22 +1,23 @@
 class Post
-  include MongoMapper::Document
-  plugin Taggable
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Taggable
 
   before_save :slug!
 
-  key :title, String, :required => true
-  key :category, String, :required => true
-  key :body, String
-  key :published, Boolean, :default => false
-  key :published_on, Time, :default => lambda { Time.zone.now }
-  key :slug, String
-  key :description, String
-  key :announced, Boolean, :default => false
+  field :title, :type => String
+  field :category, :type => String
+  field :body, :type => String
+  field :published, :type => Boolean, :default => false
+  field :published_on, :type => Time, :default => lambda { Time.zone.now }
+  field :slug, :type => String
+  field :description, :type => String
+  field :announced, :type => Boolean, :default => false
 
-  timestamps!
+  validates_presence_of :title, :category
 
   scope(:publish_order, lambda {
-    where(:published => true, :published_on.lte => Time.zone.now).sort(:published_on.desc)
+    where(:published => true, :published_on.lte => Time.zone.now).order_by(:published_on.desc)
   })
 
   def slug!
@@ -25,14 +26,6 @@ class Post
 
   def body_html
     RedCloth.new(body).to_html
-  end
-
-  def tag_string
-    tags.to_a.join(', ')
-  end
-
-  def tag_string=(tags)
-    self.tags = tags.split(',').map(&:strip).map(&:parameterize)
   end
 
   class << self
@@ -66,6 +59,18 @@ class Post
     def group_by_month
       # FIXME: Index on basic publish info
       publish_order.group_by { |post| post.published_on.strftime('%B %Y') }
+    end
+
+    def admin_index
+      order_by(:published_on.desc)
+    end
+
+    def find_by_id(id)
+      find(id)
+    end
+
+    def find_by_tag(tag)
+      by_tag(tag).publish_order.all
     end
   end
 end

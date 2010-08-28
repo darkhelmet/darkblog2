@@ -27,6 +27,7 @@ Darkblog2::Application.routes.draw do
     :month => /\d{2}/,
     :day => /\d{2}/
   }
+  get '/tag/:tag' => 'posts#tag', :as => :tag
 
   Dir[Rails.root.join('app', 'views', 'pages', '*')].map do |path|
     path.split('/').last.split('.').first

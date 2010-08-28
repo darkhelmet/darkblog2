@@ -2,11 +2,11 @@ class Admin::PostsController < ApplicationController
   # layout 'scaffold'
 
   def index
-    @posts = Post.sort(:published_on.desc).all
+    @posts = Post.admin_index
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
     render(:template => 'posts/permalink')
   end
 
@@ -15,7 +15,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
   end
 
   def create
@@ -29,7 +29,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
 
     if @post.update_attributes(params[:post])
       redirect_to(admin_post_url(@post), :notice => 'Post was successfully updated.')
@@ -39,7 +39,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
     @post.destroy
 
     redirect_to(admin_posts_url)
