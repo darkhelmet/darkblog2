@@ -54,7 +54,7 @@ module Darkblog2
       require 'rack/sinatra'
       require 'bundles'
 
-      mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
+      mw.insert_after(Rack::Lock, Rack::RemoveSlash)
       mw.insert_before(Rack::Sendfile, Rack::ETag)
       mw.use Rack::Sinatra, Bundles.new
 
