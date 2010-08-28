@@ -41,7 +41,7 @@ class Post
     def find_by_month(params)
       # FIXME: Index on basic publish info
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      publish_order.where(:published_on.gte => time.beginning_of_month, :published_on.lte => time.end_of_month)
+      publish_order.where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc)
     end
 
     def categories
