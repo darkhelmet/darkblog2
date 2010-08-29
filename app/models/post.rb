@@ -31,6 +31,10 @@ class Post
     RedCloth.new(body).to_html
   end
 
+  def published_on
+    Time.zone.at(super)
+  end
+
   class << self
     def find_by_permalink_params(params)
       # FIXME: Index on publish info and slug
