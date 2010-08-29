@@ -27,7 +27,10 @@ module Darkblog2
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Mountain Time (US & Canada)'
+    'Mountain Time (US & Canada)'.tap do |tz|
+      ENV['TZ'] = tz
+      config.time_zone = tz
+    end
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
