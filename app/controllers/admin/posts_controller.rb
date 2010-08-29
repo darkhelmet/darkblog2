@@ -1,8 +1,8 @@
 class Admin::PostsController < ApplicationController
-  # layout 'scaffold'
+  respond_to :html, :json
 
   def index
-    @posts = Post.admin_index
+    respond_with(@posts = Post.admin_index)
   end
 
   def show
