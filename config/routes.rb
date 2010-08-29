@@ -9,7 +9,7 @@ Darkblog2::Application.routes.draw do
 
   root :to => 'posts#main'
   get '/opensearch.xml' => 'application#opensearch', :as => :opensearch, :format => 'xml'
-  get '/search' => 'posts#search', :as => :search
+  get '/search(.:format)' => 'posts#search', :as => :search
   get '/feed' => 'posts#feed', :as => :feed, :format => 'xml'
   get '/sitemap.:format' => 'posts#sitemap', :as => :sitemap, :format => 'xml', :constraints => {
     :format => /xml(\.gz)?/
@@ -17,17 +17,17 @@ Darkblog2::Application.routes.draw do
   get '/archive/:archive' => 'posts#archive', :as => :archive, :constraints => {
     :archive => /full|category|month/
   }
-  get '/:year/:month' => 'posts#monthly', :as => :monthly, :constraints => {
+  get '/:year/:month(.:format)' => 'posts#monthly', :as => :monthly, :constraints => {
     :year => /\d{4}/,
     :month => /\d{2}/
   }
-  get '/category/:category' => 'posts#category', :as => :category
-  get '/:year/:month/:day/:slug' => 'posts#permalink', :as => :permalink, :constraints => {
+  get '/category/:category(.:format)' => 'posts#category', :as => :category
+  get '/:year/:month/:day/:slug(.:format)' => 'posts#permalink', :as => :permalink, :constraints => {
     :year => /\d{4}/,
     :month => /\d{2}/,
     :day => /\d{2}/
   }
-  get '/tag/:tag' => 'posts#tag', :as => :tag
+  get '/tag/:tag(.:format)' => 'posts#tag', :as => :tag
 
   Dir[Rails.root.join('app', 'views', 'pages', '*')].map do |path|
     path.split('/').last.split('.').first

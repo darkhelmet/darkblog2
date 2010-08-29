@@ -1,20 +1,19 @@
 class PostsController < CachedController
+  respond_to :html, :json
+
   def main
     # TODO: Future post
-    # TODO: Set canonical url
-    # TODO: Set name
-    # TODO: Set description
     # TODO: Caching
-    @posts = Post.publish_order.limit(6)
+    respond_with(@posts = Post.publish_order.limit(6))
   end
 
   def permalink
-    @post = Post.find_by_permalink_params(params)
+    respond_with(@post = Post.find_by_permalink_params(params))
     render_404 and return if @post.nil?
   end
 
   def category
-    @posts = Post.publish_order.where(:category => params[:category])
+    respond_with(@posts = Post.publish_order.where(:category => params[:category]))
   end
 
   def archive
@@ -22,7 +21,7 @@ class PostsController < CachedController
   end
 
   def monthly
-    @posts = Post.find_by_month(params)
+    respond_with(@posts = Post.find_by_month(params))
     render(:action => 'main')
   end
 
@@ -31,7 +30,7 @@ class PostsController < CachedController
   end
 
   def search
-    @posts = Post.search(params['q'])
+    respond_with(@posts = Post.search(params['q']))
   end
 
   def feed
@@ -42,7 +41,7 @@ class PostsController < CachedController
   end
 
   def tag
-    @posts = Post.find_by_tag(params[:tag])
+    respond_with(@posts = Post.find_by_tag(params[:tag]))
   end
 
 private
