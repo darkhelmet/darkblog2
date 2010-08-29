@@ -83,6 +83,11 @@ module Darkblog2
         });
       </script>}
       end
+
+      if Rails.env.development?
+        require 'rack/showexceptions'
+        mw.swap(ActionDispatch::ShowExceptions, Rack::ShowExceptions)
+      end
     end
   end
 end
