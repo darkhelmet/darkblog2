@@ -22,9 +22,13 @@ $(document).ready ->
     'url' + index + '=' + encodeURIComponent(a.href)
   )).join('&')
   $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
-  $('.post a').embedly({
+  ((options) ->
+    $('.post a').embedly($.merge({}, options, { urlRe: /^(?!twitter\.com)$/ }))
+    $('.post a.twitter').embedly(options);
+  )({
+    urlRe: /^(?!twitter\.com)$/,
     maxWidth: 640,
-    embedly_wmode: 'opaque'
+    wmode: 'opaque'
   })
 
 ###
