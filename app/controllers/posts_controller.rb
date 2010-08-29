@@ -5,7 +5,6 @@ class PostsController < CachedController
     # TODO: Set name
     # TODO: Set description
     # TODO: Caching
-    vomit
     @posts = Post.publish_order.limit(6)
   end
 
