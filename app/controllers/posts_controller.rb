@@ -4,7 +4,7 @@ class PostsController < CachedController
   def main
     # TODO: Future post
     # TODO: Caching
-    respond_with(@posts = Post.publish_order.limit(6))
+    @posts = Post.publish_order.limit(6)
   end
 
   def permalink
