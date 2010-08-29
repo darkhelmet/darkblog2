@@ -32,7 +32,7 @@ class Post
   end
 
   def published_on
-    Time.zone.at(super)
+    super.in_time_zone
   end
 
   class << self
