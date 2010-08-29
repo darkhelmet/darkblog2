@@ -30,7 +30,7 @@ class PostsController < CachedController
   end
 
   def search
-    respond_with(@posts = Post.search(params['q']))
+    respond_with(@posts = Post.search(params[:query]))
   end
 
   def feed

@@ -14,7 +14,7 @@
 = link_to(image_tag('rss.png', :alt => 'RSS'), feed_path, :class => 'rss', :title => 'Get new articles in your RSS reader.')
 #search
   = form_tag('/search', :method => :get) do
-    = text_field_tag('q', nil, :class => 'width_3')
+    = text_field_tag('query', nil, :class => 'width_3')
     = image_submit_tag(image_path('magnifier.png'))
 .clear
 %em#tagline= Darkblog2.config[:tagline]
