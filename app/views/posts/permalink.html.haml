@@ -14,5 +14,6 @@
       - @post.tags.each do |tag|
         = link_to(tag, tag_path(tag))
   .content!= @post.body_html
+  .clear
   = render(:partial => 'layouts/add_to_any')
   = render(:partial => 'posts/disqus_single')
