@@ -19,6 +19,7 @@ gem 'devise', '~> 1.1.2'
 gem 'sanitize', '~> 1.2.1'
 
 group :development, :test do
+  gem 'aws-s3', :require => nil
   gem 'ruby-debug'
   gem 'rspec-rails', '2.0.0.beta.19'
   gem 'factory_girl'
