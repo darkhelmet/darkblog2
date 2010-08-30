@@ -39,7 +39,9 @@ class PostsController < CachedController
 
   def feed
     expires_now
-    redirect_to(feedburner_url, :status => :moved_permanently) unless Rails.env.development? || user_agent?(/feedburner/i)
+    unless Rails.env.development? || user_agent?(/feedburner/i) || params[:no_fb]
+      redirect_to(feedburner_url, :status => :moved_permanently) and return
+    end
     request.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
     @posts = Post.publish_order.limit(10)
   end
