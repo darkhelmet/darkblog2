@@ -1,6 +1,7 @@
-- content_for(:title, title_for(@post))
-- content_for(:description, @post.description)
-- content_for(:canonical, post_permalink(@post))
+- unless request.xhr?
+  - content_for(:title, title_for(@post))
+  - content_for(:description, @post.description)
+  - content_for(:canonical, post_permalink(@post))
 .post
   %h1= link_to(@post.title, post_permalink(@post))
   .meta
@@ -15,5 +16,6 @@
         = link_to(tag, tag_path(tag))
   .content!= @post.body_html
   .clear
-  = render(:partial => 'layouts/add_to_any')
-  = render(:partial => 'posts/disqus_single')
+  - unless request.xhr?
+    = render(:partial => 'layouts/add_to_any')
+    = render(:partial => 'posts/disqus_single')

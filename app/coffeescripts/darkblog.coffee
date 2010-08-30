@@ -31,36 +31,23 @@ $(document).ready ->
   });
 
   $('.content a.twitter').embedly({
+    urlRe: /http:\/\/(twitter\.com\/.*\/status\/.*|twitter\.com\/.*\/statuses\/.*)/i
     maxWidth: 640
   });
 
+  $('a.remote-inline').live 'click', ->
+    href = this.href
+    p = $(this).parent()
+    $(this).replaceWith('Loading...');
+    $.ajax({
+      url: href
+      dataType: 'script'
+      success: ->
+        $(p).remove()
+    })
+    false
+
 ###
-$(document).ready ->
-  $('a.remote-inline').live('click', (->
-    link: $(this)
-    b: link.closest('.content').prev()
-    r: link.parent()
-    link.replaceWith('Loading...')
-    $.get(this.href + '?t=' + (new Date()).getTime(),
-          ((data) ->
-            r.remove()
-            b.before($(data).addClass('new-elem').css('display', 'none'))
-            $('.new-elem').slideDown('slow', (-> $(this).removeClass('new-elem')))))
-    false))
-
-  $('#posts-container a').each ->
-    re: /http:\/\/twitter\.com\/\w+\/status\/(\d+)/
-    matches: re.exec($(this).attr('href'))
-    if null != matches && 1 < matches.length
-      id: matches[1]
-      link: this
-      $.get('/twitter/' + id, null, ((data) ->
-        $(link).attr('title', data)
-        $(link).tooltip() unless $.browser.msie
-      ), 'text');
-
   $.githubBadge('darkhelmet')
   $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
-
-  true
 ###

@@ -1,5 +1,5 @@
 class PostsController < CachedController
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   def main
     # TODO: Future post
@@ -8,12 +8,15 @@ class PostsController < CachedController
   end
 
   def permalink
-    respond_with(@post = Post.find_by_permalink_params(params))
+    @post = Post.find_by_permalink_params(params)
     render_404 and return if @post.nil?
+    respond_with(@post)
   end
 
   def category
-    respond_with(@posts = Post.publish_order.where(:category => params[:category]))
+    @posts = Post.publish_order.where(:category => params[:category])
+    render_404 and return if @posts.empty?
+    respond_with(@posts)
   end
 
   def archive
@@ -21,7 +24,9 @@ class PostsController < CachedController
   end
 
   def monthly
-    respond_with(@posts = Post.find_by_month(params))
+    @posts = Post.find_by_month(params)
+    render_404 and return if @posts.empty?
+    respond_with(@posts)
     render(:action => 'main')
   end
 
