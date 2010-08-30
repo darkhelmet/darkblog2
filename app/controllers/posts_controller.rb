@@ -51,7 +51,7 @@ class PostsController < CachedController
 private
 
   def user_agent?(ua)
-    request.user_agent.match(ua)
+    request.user_agent.to_s.match(ua)
   end
 
   def feedburner_url
