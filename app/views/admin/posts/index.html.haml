@@ -1,3 +1,17 @@
+:css
+  td {
+    padding: 5px;
+  }
+
+  table tr:nth-child(2n) {
+    background: grey;
+    color: white;
+  }
+
+  table tr:nth-child(2n) a {
+    color: white;
+  }
+
 %h1 Listing posts
 
 = link_to 'New post', new_admin_post_path
