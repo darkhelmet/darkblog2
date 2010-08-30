@@ -6,7 +6,7 @@
     .clear
     .row
       %section#content.col.col_11= yield
-      - cache do
+      - cache('sidebar') do
         %aside#sidebar.col.col_5= render(:partial => 'layouts/sidebar')
       .clear
       %footer.col.col_16= render(:partial => 'layouts/footer')
