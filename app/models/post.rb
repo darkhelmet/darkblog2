@@ -81,7 +81,7 @@ class Post
     end
 
     def search(query)
-      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
+      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] }) rescue []
     end
   end
 
