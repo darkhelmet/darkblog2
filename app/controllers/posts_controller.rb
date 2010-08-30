@@ -26,9 +26,7 @@ class PostsController < CachedController
   def monthly
     @posts = Post.find_by_month(params)
     render_404 and return if @posts.empty?
-    respond_with(@posts) do |format|
-      format.html { render(:action => 'main') }
-    end
+    respond_with(@posts)
   end
 
   def sitemap

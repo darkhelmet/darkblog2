@@ -1,0 +1,6 @@
+- title = "Archives for #{Date.new(params[:year].to_i, params[:month].to_i).strftime('%B %Y')}"
+- content_for(:canonical, monthly_url(params[:year], params[:month]))
+- content_for(:description, title)
+- content_for(:title, title_text(title))
+= render(:partial => 'post_preview', :collection => @posts)
+= render(:partial => 'layouts/archive_links')
