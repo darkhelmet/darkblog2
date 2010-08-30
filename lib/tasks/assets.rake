@@ -5,11 +5,11 @@ begin
   BUCKET = 'static.verboselogging.com'
 
   desc 'Upload images and swf to S3'
-  task :upload_assets => :env do
+  task :upload_assets => :environment do
     path = File.expand_path(File.join('~', '.s3', 'auth.yml'))
     if File.exists?(path)
       AWS::S3::Base.establish_connection!(YAML.load_file(path))
-      public_dir = File.join(File.dirname(__FILE__), 'public')
+      public_dir = Rails.root.join('public').to_s
       Find.find(public_dir) do |path|
         if path.match(/\.(swf|png|gif|jpg)$/)
           key = path.gsub("#{public_dir}/", '')
