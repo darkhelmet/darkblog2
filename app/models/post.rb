@@ -35,6 +35,14 @@ class Post
     super.in_time_zone
   end
 
+  def announce!
+    collection.update({ '_id' => id }, {
+      '$set' => {
+        :announced => true
+      }
+    })
+  end
+
   class << self
     def find_by_permalink_params(params)
       # FIXME: Index on publish info and slug

@@ -5,6 +5,8 @@ Darkblog2::Application.routes.draw do
     namespace :admin do
       resources :posts
     end
+
+    post '/announce' => 'application#announce', :as => :announce
   end
 
   root :to => 'posts#main'
