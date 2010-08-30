@@ -55,6 +55,14 @@ a:hover {
   }
 }
 
+ol {
+  li {
+    margin: {
+      left: 25px
+    }
+  }
+}
+
 code {
   @include droid-mono;
   display: inline;
