@@ -4,7 +4,7 @@ namespace :db do
     task :start do
       unless File.exists?(pidfile)
         log = Rails.root.join('log', 'mongodb.log')
-        system('mongod', '--logpath', log, '--dbpath', Rails.root.join('db', 'mongodb'), '--bind_ip', '127.0.0.1', '--fork')
+        system('mongod', '--logpath', log, '--dbpath', Rails.root.join('db', 'mongodb'), '--bind_ip', '127.0.0.1', '--fork', '--notablescan')
         sleep(1) # Let mongo start
         pid = File.read(log).split("\n").first.match(/pid=(\d+)/)[1]
         File.open(pidfile, 'w') { |f| f.write(pid) }
