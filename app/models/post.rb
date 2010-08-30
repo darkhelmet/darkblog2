@@ -17,6 +17,33 @@ class Post
   field :description, :type => String
   field :announced, :type => Boolean, :default => false
 
+  # Basic publish info
+  index([
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING]
+  ], :background => true)
+
+  # Publish info with category
+  index([
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING],
+    [:category, Mongo::ASCENDING]
+  ], :background => true)
+
+  # Publish info with slug
+  index([
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING],
+    [:slug, Mongo::ASCENDING]
+  ], :background => true)
+
+  # Publish info with tags
+  index([
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING],
+    [:tags, Mongo::ASCENDING]
+  ], :background => true)
+
   validates_presence_of :title, :category
 
   scope(:publish_order, lambda {
@@ -45,19 +72,16 @@ class Post
 
   class << self
     def find_by_permalink_params(params)
-      # FIXME: Index on publish info and slug
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      where(:published => true, :slug => params[:slug], :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc).first
+      where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
     end
 
     def find_by_month(params)
-      # FIXME: Index on basic publish info
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
       publish_order.where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc)
     end
 
     def categories
-      # FIXME: Index on basic publish info and category
       collection.distinct('category', {
         :published => true,
         :published_on => {
@@ -67,12 +91,10 @@ class Post
     end
 
     def group_by_category
-      # FIXME: Index on basic publish info
       publish_order.group_by(&:category).sort_by(&:first)
     end
 
     def group_by_month
-      # FIXME: Index on basic publish info
       publish_order.group_by { |post| post.published_on.strftime('%B %Y') }
     end
 
@@ -85,7 +107,7 @@ class Post
     end
 
     def find_by_tag(tag)
-      by_tag(tag).publish_order.all
+      publish_order.by_tag(tag).all
     end
 
     def search(query)
