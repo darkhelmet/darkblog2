@@ -17,12 +17,6 @@ class Post
   field :description, :type => String
   field :announced, :type => Boolean, :default => false
 
-  # Basic publish info
-  index([
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], :background => true)
-
   # Publish info with category
   index([
     [:published, Mongo::ASCENDING],
