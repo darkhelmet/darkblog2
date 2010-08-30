@@ -2,7 +2,8 @@
 %html
   %head= render(:partial => 'layouts/head')
   %body
-    %header= render(:partial => 'layouts/header')
+    - cache('header') do
+      %header= render(:partial => 'layouts/header')
     .clear
     .row
       %section#content.col.col_11= yield
