@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
         announce_new_posts
       end
     end
+    head(:ok)
   end
 
 private
