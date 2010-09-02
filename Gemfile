@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.rc2'
-gem 'pg'
+gem 'rails', '~> 3.0.0'
 # gem 'rails3-generators'
 gem 'haml', '~> 3.0.17' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
@@ -25,5 +24,4 @@ group :development, :test do
   gem 'factory_girl'
   gem 'thin'
   gem 'heroku', :require => nil
-  gem 'mysql2'
 end

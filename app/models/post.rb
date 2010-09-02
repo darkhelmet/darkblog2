@@ -1,5 +1,5 @@
 class Post
-  Index = IndexTank::HerokuClient.new.get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}")
+  Index = IndexTank::HerokuClient.new.get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}") rescue nil
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -105,17 +105,22 @@ class Post
     end
 
     def search(query)
-      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] }) rescue []
+      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
+    rescue Exception => boom
+      HoptoadNotifier.notify(boom)
+      []
     end
   end
 
 private
 
   def update_search_index
-    Index.add_document(id, {
-      :text => Sanitize.clean(body_html),
-      :title => title,
-      :timestamp => published_on.to_i.to_s
-    }) if published
+    unless Index.nil?
+      Index.add_document(id, {
+        :text => Sanitize.clean(body_html),
+        :title => title,
+        :timestamp => published_on.to_i.to_s
+      }) if published
+    end
   end
 end
