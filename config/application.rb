@@ -71,9 +71,9 @@ module Darkblog2
 
       mw.use Rack::Insert do
         %Q{<link rel='stylesheet' type='text/css' media='screen' charset='utf-8' href='http://assets.skribit.com/stylesheets/SkribitSuggest.css' />
-      <style type='text/css' media='print' charset='utf-8'>a#sk_tab{display:none !important;}</style>
+      <style type='text/css' media='print'>a#sk_tab{display:none !important;}</style>
       <script src='http://assets.skribit.com/javascripts/SkribitSuggest.js' type='text/javascript'></script>
-      <script type='text/javascript' charset='utf-8'>
+      <script type='text/javascript'>
         SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
           placement: 'right',
           color: '#333333',
