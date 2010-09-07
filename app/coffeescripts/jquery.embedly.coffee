@@ -45,8 +45,8 @@
             title = oembed.title or ''
             style = []
             if settings.addImageStyles
-              style.push('max-width: #{settings.maxWidth}') if settings.maxWidth
-              style.push('max-height: #{settings.maxHeight}') if settings.maxHeight
+              style.push("max-width: #{settings.maxWidth}") if settings.maxWidth
+              style.push("max-height: #{settings.maxHeight}") if settings.maxHeight
 
             style = style.join(';')
             code = $("<a href='#{dict.url}' target='_blank'><img style='#{style}' src='#{oembed.url}' alt='#{title}' /></a>")

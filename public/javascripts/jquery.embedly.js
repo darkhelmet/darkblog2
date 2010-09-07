@@ -57,10 +57,10 @@
             style = [];
             if (settings.addImageStyles) {
               if (settings.maxWidth) {
-                style.push('max-width: #{settings.maxWidth}');
+                style.push("max-width: " + (settings.maxWidth));
               }
               if (settings.maxHeight) {
-                style.push('max-height: #{settings.maxHeight}');
+                style.push("max-height: " + (settings.maxHeight));
               }
             }
             style = style.join(';');

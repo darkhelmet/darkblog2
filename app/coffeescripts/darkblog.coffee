@@ -1,8 +1,3 @@
-###
-ReaderBadge: (json) ->
-  $('#reader-badge').html(Jaml.render('reader-badge', json))
-###
-
 $(document).ready ->
   $.getScript('http://tweetboard.com/darkhelmetlive/tb.js')
 
@@ -46,8 +41,3 @@ $(document).ready ->
         $(p).remove()
     })
     false
-
-###
-  $.githubBadge('darkhelmet')
-  $.getScript("http://www.google.com/reader/public/javascript/user/13098793136980097600/state/com.google/broadcast?n=12&callback=ReaderBadge")
-###
