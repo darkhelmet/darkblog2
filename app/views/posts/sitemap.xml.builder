@@ -5,14 +5,14 @@ xml.urlset('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance', 'xsi:sche
     xml.loc(root_url)
     xml.lastmod(@posts.first.published_on.xmlschema)
     xml.changefreq('daily')
-    xml.priority(1.0)
+    xml.priority(0.5)
   end
   @posts.each do |post|
     xml.url do
       xml.loc(post_permalink(post))
       xml.lastmod(post.updated_at.xmlschema)
       xml.changefreq('monthly')
-      xml.priority(0.2)
+      xml.priority(1.0)
     end
   end
 end
