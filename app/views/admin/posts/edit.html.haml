@@ -1,3 +1,13 @@
+- content_for(:footer) do
+  = javascript_include_tag('jquery.dnd-file-upload')
+  = javascript_include_tag('jquery.client')
+  :javascript
+    $(document).ready(function() {
+      $('#file_upload').dropzone({
+        url: '#{admin_uploads_url}'
+      });
+    });
+
 %h1 Editing post
 
 = render 'form'
@@ -5,3 +15,9 @@
 = link_to 'Show', admin_post_path(@post)
 \|
 = link_to 'Back', admin_posts_path
+
+%br
+= render(:partial => 'pic', :collection => @post.pics, :spacer_template => 'slash')
+%br
+#file_upload
+  %h1 Upload files

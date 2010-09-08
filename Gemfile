@@ -16,6 +16,9 @@ gem 'rest-client', '~> 1.6.0'
 gem 'barista', '~> 0.5.0'
 gem 'devise', '~> 1.1.2'
 gem 'sanitize', '~> 1.2.1'
+gem 'carrierwave', '~> 0.5.0.beta2'
+gem 'rmagick', '~> 2.13.1'
+gem 'aws', '~> 2.3.20'
 
 group :development, :test do
   gem 'aws-s3', :require => nil

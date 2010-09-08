@@ -5,6 +5,8 @@ class Post
   include Mongoid::Timestamps
   include Taggable
 
+  embeds_many :pics
+
   before_save :slug!
   after_save :update_search_index
 
@@ -49,7 +51,12 @@ class Post
   end
 
   def body_html
-    RedCloth.new(body).to_html
+    processed_body = body.gsub(/\{\{(\d+)(?::(.+))?\}\}/) do |sub|
+      index, version = $1.to_i, $2
+      image = pics[index].image
+      version.nil? ? image.url : image.url(version.to_sym)
+    end
+    RedCloth.new(processed_body).to_html
   end
 
   def published_on

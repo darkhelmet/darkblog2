@@ -43,7 +43,7 @@ module Darkblog2
     config.filter_parameters += [:password]
 
     config.generators do |g|
-      g.orm :mongo_mapper
+      g.orm :mongoid
       g.template_engine :haml
       g.test_framework :rspec, :fixture_replacement => :factory_girl
     end

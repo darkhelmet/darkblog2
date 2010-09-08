@@ -4,6 +4,7 @@ Darkblog2::Application.routes.draw do
   authenticate :admin do
     namespace :admin do
       resources :posts
+      resources :uploads, :only => [:create,:destroy]
     end
 
     post '/announce' => 'application#announce', :as => :announce

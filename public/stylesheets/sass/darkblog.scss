@@ -324,3 +324,18 @@ footer {
     bottom: 10px;
   }
 }
+
+#file_upload {
+  @include round-corners;
+
+  text: {
+    align: center;
+  }
+
+  padding: {
+    top: 36px;
+  }
+
+  height: 75px;
+  border: black 2px solid;
+}
