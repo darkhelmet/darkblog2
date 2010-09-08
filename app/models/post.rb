@@ -51,7 +51,7 @@ class Post
   end
 
   def body_html
-    processed_body = body.gsub(/\{\{(\d+)(?::(.+))?\}\}/) do |sub|
+    processed_body = body.gsub(/\{\{(\d+)(?::(\w+))?\}\}/) do |sub|
       index, version = $1.to_i, $2
       image = pics[index].image
       version.nil? ? image.url : image.url(version.to_sym)
