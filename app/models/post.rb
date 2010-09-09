@@ -112,10 +112,7 @@ class Post
     end
 
     def search(query)
-      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
-    rescue Exception => boom
-      HoptoadNotifier.notify(boom)
-      []
+      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] }) rescue []
     end
   end
 
