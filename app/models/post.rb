@@ -83,12 +83,11 @@ class Post
     end
 
     def categories
-      collection.distinct('category', {
-        :published => true,
-        :published_on => {
-          '$lte' => Time.zone.now.utc
-        }
-      }).sort
+      collection.distinct('category')
+    end
+
+    def tags
+      collection.distinct('tags')
     end
 
     def group_by_category
