@@ -21,10 +21,9 @@ gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.20'
 
 group :development, :test do
-  gem 'aws-s3', :require => nil
-  gem 'ruby-debug'
-  gem 'rspec-rails', '2.0.0.beta.19'
-  gem 'factory_girl'
-  gem 'thin'
+  gem 'ruby-debug', :require => nil
+  gem 'rspec-rails', '2.0.0.beta.19', :require => nil
+  gem 'factory_girl', :require => nil
+  gem 'thin', :require => nil
   gem 'heroku', :require => nil
 end

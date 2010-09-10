@@ -1,26 +1,30 @@
 begin
-  require 'aws/s3'
+  require 'aws'
   require 'find'
   require 'mime/types'
-  BUCKET = 'static.verboselogging.com'
 
   desc 'Upload images and swf to S3'
   task :upload_assets => :environment do
     path = File.expand_path(File.join('~', '.s3', 'auth.yml'))
     if File.exists?(path)
-      AWS::S3::Base.establish_connection!(YAML.load_file(path))
-      public_dir = Rails.root.join('public').to_s
-      Find.find(public_dir) do |path|
-        if path.match(/\.(swf|png|gif|jpg|xap)$/)
-          key = path.gsub("#{public_dir}/", '')
-          print "Uploading #{path}..."
-          File.open(path, 'rb') do |f|
-            AWS::S3::S3Object.store(key, f, BUCKET,
-                                    :content_type => MIME::Types.type_for(path).first.to_s,
-                                    :access => :public_read,
-                                    'Cache-control' => "public, must-revalidate, max-age=#{6.months}")
+      creds = YAML.load_file(path)
+      Aws::S3.new(creds[:access_key_id], creds[:secret_access_key]).tap do |s3|
+        s3.bucket('static.verboselogging.com').tap do |bucket|
+          public_dir = Rails.root.join('public').to_s
+          Find.find(public_dir) do |path|
+            if path.match(/\.(swf|png|gif|jpg|xap)$/)
+              key = path.gsub("#{public_dir}/", '')
+              print "Uploading #{path}..."
+              mime = MIME::Types.type_for(path).first.to_s.tap do |m|
+                m << 'application/octet-stream' if m.blank?
+              end
+              bucket.put(key, File.read(path), {}, 'public-read', {
+                'Cache-control' => "public, must-revalidate, max-age=#{6.months}",
+                'Content-Type' => mime
+              })
+              print "done\n"
+            end
           end
-          print "done\n"
         end
       end
     else
