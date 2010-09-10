@@ -3,7 +3,11 @@ Darkblog2::Application.routes.draw do
 
   authenticate :admin do
     namespace :admin do
-      resources :posts
+      resources :posts do
+        member do
+          get :pics
+        end
+      end
       resources :uploads, :only => [:create,:destroy]
     end
 

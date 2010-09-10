@@ -1,16 +1,18 @@
 class Admin::UploadsController < ApplicationController
   def create
-    path = Rails.root.join('tmp', filename)
-    File.open(path, 'w') { |f| f.write(request.body.read) }
-    post.pics.create(:image => File.open(path))
-    head(:ok)
+    post.pics.create(:image => params[:file]) if params[:file]
   ensure
-    File.delete(path) rescue nil
+    head(:ok)
   end
 
   def destroy
     post.pics.find(params[:id]).destroy
-    redirect_to(edit_admin_post_path(@post))
+    respond_to do |format|
+      format.html { redirect_to(edit_admin_post_path(@post)) }
+      format.js do
+        render(:js => %Q{$('.pics li[pic_id="#{params[:id]}"]').fadeOut(function() { $(this).remove(); });})
+      end
+    end
   end
 
 private
@@ -20,14 +22,6 @@ private
   end
 
   def post_id
-    @post_id ||= request.referrer.split('/').tap { |parts| parts.pop }.last
-  end
-
-  def filename
-    request.headers['X-File-Name']
-  end
-
-  def filesize
-    request.headers['X-File-Size'].to_i
+    @post_id ||= params[:post_id]
   end
 end

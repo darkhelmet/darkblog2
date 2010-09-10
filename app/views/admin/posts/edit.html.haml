@@ -1,10 +1,21 @@
+- content_for(:head) do
+  = stylesheet_link_tag('plupload.queue')
+
 - content_for(:footer) do
-  = javascript_include_tag('jquery.dnd-file-upload')
-  = javascript_include_tag('jquery.client')
+  = javascript_include_tag('plupload.full.min', 'jquery.plupload.queue.min')
   :javascript
     $(document).ready(function() {
-      $('#file_upload').dropzone({
-        url: '#{admin_uploads_url}'
+      $('.pics li a:first').facebox();
+      $('#file_upload').pluploadQueue({
+        runtimes: 'html5',
+        url: '#{admin_uploads_url}',
+        filters: [
+          { title: 'Images', extensions: 'jpg,gif,png' }
+        ],
+        multipart_params: {
+          authenticity_token: $('meta[name="csrf-token"]').attr('content'),
+          post_id: '#{@post.id}'
+        }
       });
     });
 
@@ -12,12 +23,15 @@
 
 = render 'form'
 
-= link_to 'Show', admin_post_path(@post)
+= link_to('Show', admin_post_path(@post))
 \|
-= link_to 'Back', admin_posts_path
+= link_to('Back', admin_posts_path)
+\|
+= link_to('Update Pics', pics_admin_post_path(@post), :remote => true)
 
 %br
-= render(:partial => 'pic', :collection => @post.pics, :spacer_template => 'slash')
+%br
+%ul.pics= render(:partial => 'pic', :collection => @post.pics)
 %br
 #file_upload
   %h1 Upload files

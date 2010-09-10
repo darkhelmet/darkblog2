@@ -1,0 +1,5 @@
+escape_javascript(render(:partial => 'pic', :collection => @post.pics)).tap do |partial|
+  page << %Q{
+    $('ul.pics').html("#{partial}");
+  }
+end
