@@ -179,6 +179,7 @@ header {
   #search {
     input[type=text] {
       @include round-corners(10px);
+      background: white;
     }
 
     input[type=image] {
