@@ -1,0 +1,17 @@
+- if Rails.env.production?
+  = javascript_include_tag('http://www.google-analytics.com/ga.js')
+  :javascript
+    try {
+      var pageTracker = _gat._getTracker('#{Darkblog2.config[:ga_code]}');
+      pageTracker._trackPageview();
+    } catch(err) {}
+
+= javascript_include_tag('http://assets.skribit.com/javascripts/SkribitSuggest.js')
+:javascript
+  SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
+    placement: 'right',
+    color: '#333333',
+    text_color: 'white',
+    distance_vert: '32%',
+    distance_horiz: ''
+  });

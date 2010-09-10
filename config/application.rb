@@ -50,7 +50,6 @@ module Darkblog2
 
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
-      require 'rack/insert'
       require 'rack/sinatra'
       require 'bundles'
 
@@ -59,30 +58,6 @@ module Darkblog2
       mw.use Rack::Sinatra, Bundles.new
 
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
-
-      mw.use Rack::Insert do
-        %Q{<script type='text/javascript' src='http://www.google-analytics.com/ga.js'></script>
-      <script type="text/javascript">
-      try {
-      var pageTracker = _gat._getTracker('#{Darkblog2.config[:ga_code]}');
-      pageTracker._trackPageview();
-      } catch(err) {}</script>}
-      end if Rails.env.production?
-
-      mw.use Rack::Insert do
-        %Q{<link rel='stylesheet' type='text/css' media='screen' charset='utf-8' href='http://assets.skribit.com/stylesheets/SkribitSuggest.css' />
-      <style type='text/css' media='print'>a#sk_tab{display:none !important;}</style>
-      <script src='http://assets.skribit.com/javascripts/SkribitSuggest.js' type='text/javascript'></script>
-      <script type='text/javascript'>
-        SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
-          placement: 'right',
-          color: '#333333',
-          text_color: 'white',
-          distance_vert: '32%',
-          distance_horiz: ''
-        });
-      </script>}
-      end
 
       if Rails.env.development?
         require 'rack/showexceptions'

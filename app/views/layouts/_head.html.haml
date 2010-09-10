@@ -22,4 +22,9 @@
   :javascript
     var disqus_developer = 1;
 
+= stylesheet_link_tag('http://assets.skribit.com/stylesheets/SkribitSuggest.css')
+%style{ :media => 'print' }
+  :plain
+    a#sk_tab{display:none !important;}
+
 = content_for(:head)
