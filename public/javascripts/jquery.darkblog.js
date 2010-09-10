@@ -10,10 +10,4 @@
     var regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
     return regex.test(jQuery(elem)[attr.method](attr.property));
   };
-
-  $.extend(jQuery, {
-    githubBadge: function(username) {
-      $.getScript('http://github.com/api/v1/json/' + username + '?callback=GithubBadge');
-    }
-  });
 })(jQuery);

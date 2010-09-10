@@ -3,6 +3,7 @@
 
 - content_for(:footer) do
   = javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js')
+  = javascript_include_tag('jquery.pulse')
   :javascript
     $(document).ready(function() {
       $('#post_category').autocomplete({
@@ -43,7 +44,7 @@
       })(#{Post.tags.to_json});
     });
 
-= form_for ['admin', @post] do |f|
+= form_for(['admin', @post], :remote => true) do |f|
   -if @post.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"

@@ -30,11 +30,28 @@ class Admin::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
-    if @post.update_attributes(params[:post])
-      redirect_to(admin_post_url(@post), :notice => 'Post was successfully updated.')
-    else
-      render(:action => 'edit')
+    @post.update_attributes(params[:post])
+    respond_with(@post) do |format|
+      format.html do
+        if @post.valid?
+          redirect_to(admin_post_url(@post), :notice => 'Post was successfully updated.')
+        else
+          render(:action => 'edit')
+        end
+      end
+      format.js do
+        if @post.valid?
+          render(:js => %Q{$('#title').pulse({
+            opacity: [0,1]
+          }, {
+            times: 3,
+            easing: 'linear',
+            duration: 'slow'
+          });})
+        else
+          render(:js => %Q{alert(#{@post.errors.full_messages.join('. ').to_json})})
+        end
+      end
     end
   end
 
