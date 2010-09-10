@@ -51,6 +51,7 @@ module Darkblog2
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
       require 'rack/sinatra'
+      # require 'rack/inline_compress'
       require 'bundles'
 
       mw.insert_after(Rack::Lock, Rack::RemoveSlash)
@@ -58,6 +59,8 @@ module Darkblog2
       mw.use Rack::Sinatra, Bundles.new
 
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
+
+      # mw.use Rack::InlineCompress
 
       if Rails.env.development?
         require 'rack/showexceptions'

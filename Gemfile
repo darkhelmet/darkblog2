@@ -19,6 +19,9 @@ gem 'sanitize', '~> 1.2.1'
 gem 'carrierwave', '~> 0.5.0.beta2'
 gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.20'
+# gem 'packr', '~> 3.1.0'
+# gem 'rainpress', '~> 1.0'
+# gem 'nokogiri', '~> 1.4.3.1'
 
 group :development, :test do
   gem 'ruby-debug', :require => nil

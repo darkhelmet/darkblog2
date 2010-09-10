@@ -19,7 +19,7 @@ module Rack
     end
 
     def html?(headers)
-      headers['Content-Type'].try(:match, /html/)
+      headers['Content-Type'].to_s.match(/html/)
     end
 
     def path
