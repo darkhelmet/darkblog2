@@ -11,7 +11,7 @@ begin
       AWS::S3::Base.establish_connection!(YAML.load_file(path))
       public_dir = Rails.root.join('public').to_s
       Find.find(public_dir) do |path|
-        if path.match(/\.(swf|png|gif|jpg)$/)
+        if path.match(/\.(swf|png|gif|jpg|xap)$/)
           key = path.gsub("#{public_dir}/", '')
           print "Uploading #{path}..."
           File.open(path, 'rb') do |f|
