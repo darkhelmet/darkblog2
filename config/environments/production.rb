@@ -49,5 +49,5 @@ Darkblog2::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.cache_store = ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true)
+  config.cache_store = ActiveSupport::Cache::MemCacheStore.new(Dalli::Client.new, :compress => true)
 end

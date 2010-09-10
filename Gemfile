@@ -8,7 +8,7 @@ gem 'bson_ext', '1.0.4'
 gem 'mongo'
 gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', :ref => 'f38e3ef'
 gem 'hoptoad_notifier'
-gem 'memcached-northscale', '~> 0.19.5.3', :require => 'memcached'
+gem 'dalli', '~> 0.9.4'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.0', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.4.0', :require => nil

@@ -58,7 +58,7 @@ module Darkblog2
       mw.insert_before(Rack::Sendfile, Rack::ETag)
       mw.use Rack::Sinatra, Bundles.new
 
-      mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Memcached::Rails.new, :compress => true), :jquery => false
+      mw.use Rack::Gist, :cache => ActiveSupport::Cache::MemCacheStore.new(Dalli::Client.new, :compress => true), :jquery => false
 
       # mw.use Rack::InlineCompress
 

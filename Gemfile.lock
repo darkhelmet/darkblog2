@@ -58,6 +58,7 @@ GEM
     columnize (0.3.1)
     configuration (1.1.0)
     daemons (1.1.0)
+    dalli (0.9.4)
     devise (1.1.2)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 0.10.7)
@@ -84,7 +85,6 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
-    memcached-northscale (0.19.5.4)
     mime-types (1.16)
     mongo (1.0.7)
       bson (>= 1.0.4)
@@ -173,12 +173,12 @@ DEPENDENCIES
   barista (~> 0.5.0)
   bson_ext (= 1.0.4)
   carrierwave (~> 0.5.0.beta2)
+  dalli (~> 0.9.4)
   devise (~> 1.1.2)
   factory_girl
   haml (~> 3.0.17)
   heroku
   hoptoad_notifier
-  memcached-northscale (~> 0.19.5.3)
   mongo
   mongoid (= 2.0.0.beta.16)!
   rack-gist (~> 1.1.0)
