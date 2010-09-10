@@ -18,7 +18,7 @@ module Rack
 
     def url(env)
       server = env['SERVER_NAME']
-      return if server.match(/localhost|127\.0\.0\.1/) || server == @host
+      return if Rails.env.development? || server.match(/localhost|127\.0\.0\.1/) || server == @host
       URI(Rack::Request.new(env).url).tap do |uri|
         uri.host = @host
         uri.port = @port
