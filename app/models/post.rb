@@ -118,10 +118,14 @@ class Post
 
 private
 
+  def body_for_index
+    [title, Sanitize.clean(body_html), tag_string].join("\n")
+  end
+
   def update_search_index
     unless Index.nil?
       Index.add_document(id, {
-        :text => Sanitize.clean(body_html),
+        :text => body_for_index,
         :title => title,
         :timestamp => published_on.to_i.to_s
       }) if published
