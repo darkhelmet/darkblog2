@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: http://blog.darkhax.com/sitemap.xml
+Sitemap: http://blog.darkhax.com/sitemap.xml.gz
 Disallow: /search
 Disallow: /gist.github.com
 Allow: /
