@@ -1,10 +1,11 @@
 - content_for(:description, 'Archives by month')
 - content_for(:title, title_text("Monthly archives"))
 - content_for(:canonical, archive_url('month'))
-- Post.group_by_month.each do |month, posts|
-  %section
-    %h1= monthly_archive_link(month)
-    - posts.each do |post|
-      %article
-        %h4.archive_title= link_to(post.title, post_permalink(post))
-= render(:partial => 'layouts/archive_links')
+- cache do
+  - Post.group_by_month.each do |month, posts|
+    %section
+      %h1= monthly_archive_link(month)
+      - posts.each do |post|
+        %article
+          %h4.archive_title= link_to(post.title, post_permalink(post))
+  = render(:partial => 'layouts/archive_links')

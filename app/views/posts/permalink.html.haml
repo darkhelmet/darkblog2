@@ -3,19 +3,21 @@
   - content_for(:description, @post.description)
   - content_for(:canonical, post_permalink(@post))
 .post
-  %h1= link_to(@post.title, post_permalink(@post))
-  .meta
-    %time{ :datetime => @post.published_on.xmlschema }= @post.published_on.to_s(:post)
-    &raquo;
-    Posted in
-    %span.category= category_link(@post.category)
-    &raquo;
-    Tagged with
-    %span.tags
-      - @post.tags.each do |tag|
-        = link_to(tag, tag_path(tag))
-  .content!= @post.body_html
-  .clear
+  - cache(@post.cache_key) do
+    %h1= link_to(@post.title, post_permalink(@post))
+    .meta
+      %time{ :datetime => @post.published_on.xmlschema }= @post.published_on.to_s(:post)
+      &raquo;
+      Posted in
+      %span.category= category_link(@post.category)
+      &raquo;
+      Tagged with
+      %span.tags
+        - @post.tags.each do |tag|
+          = link_to(tag, tag_path(tag))
+    .content!= @post.body_html
+    .clear
   - unless request.xhr?
-    = render(:partial => 'layouts/add_to_any')
-    = render(:partial => 'posts/disqus_single')
+    - cache('post_extras') do
+      = render(:partial => 'layouts/add_to_any')
+      = render(:partial => 'posts/disqus_single')

@@ -4,17 +4,17 @@ class PostsController < CachedController
   def main
     # TODO: Future post
     # TODO: Caching
-    @posts = Post.publish_order.limit(6)
+    @posts = Post.publish_order.limit(6).to_a
   end
 
   def permalink
-    @post = Post.find_by_permalink_params(params)
+    @post = Rails.cache.fetch(cache_key('post', 'permalink', params.hash)) { Post.find_by_permalink_params(params) }
     render_404 and return if @post.nil?
     respond_with(@post)
   end
 
   def category
-    @posts = Post.publish_order.where(:category => params[:category])
+    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category])) { Post.publish_order.where(:category => params[:category]).to_a }
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end
@@ -24,7 +24,7 @@ class PostsController < CachedController
   end
 
   def monthly
-    @posts = Post.find_by_month(params)
+    @posts = Rails.cache.fetch(cache_key('posts', 'monthly', params.hash)) { Post.find_by_month(params).to_a }
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end
@@ -34,7 +34,7 @@ class PostsController < CachedController
   end
 
   def search
-    respond_with(@posts = Post.search(params[:query]))
+    respond_with(@posts = Post.search(params[:query]).to_a)
   end
 
   def feed
@@ -47,7 +47,8 @@ class PostsController < CachedController
   end
 
   def tag
-    respond_with(@posts = Post.find_by_tag(params[:tag]))
+    @posts = Rails.cache.fetch(cache_key('posts', 'tag', params[:tag])) { Post.find_by_tag(params[:tag]).to_a }
+    respond_with(@posts)
   end
 
 private

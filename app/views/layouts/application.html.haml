@@ -9,6 +9,7 @@
       %section#content.col.col_11= yield
       - cache('sidebar') do
         %aside#sidebar.col.col_5= render(:partial => 'layouts/sidebar')
-      .clear
-      %footer.col.col_16= render(:partial => 'layouts/footer')
-      = render(:partial => 'layouts/extras')
+      - cache do # Footer might end up with extra stuff
+        .clear
+        %footer.col.col_16= render(:partial => 'layouts/footer')
+        = render(:partial => 'layouts/extras')

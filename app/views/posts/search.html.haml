@@ -2,5 +2,6 @@
 - content_for(:description, title)
 - content_for(:title, title_text(title))
 - content_for(:canonical, search_url(params[:query]))
-%h1= title
-= render(:partial => 'post_preview', :collection => @posts)
+- cache([title, @posts].hash) do
+  %h1= title
+  = render(:partial => 'post_preview', :collection => @posts)
