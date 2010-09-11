@@ -24,7 +24,7 @@ gem 'aws', '~> 2.3.20'
 # gem 'nokogiri', '~> 1.4.3.1'
 
 group :development, :test do
-  gem 'ruby-debug19', :require => nil
+  # gem 'ruby-debug19', :require => nil
   gem 'rspec-rails', '2.0.0.beta.19', :require => nil
   gem 'factory_girl', :require => nil
   gem 'thin', :require => nil
