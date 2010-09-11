@@ -137,6 +137,6 @@ private
   end
 
   def clear_cache
-    Rails.cache.clear if published && Rails.cache.respond_to?(:clear)
+    Rails.cache.clear if published
   end
 end

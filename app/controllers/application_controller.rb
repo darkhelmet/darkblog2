@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
       unless cursor.empty?
         cursor.each(&:announce!)
         announce_new_posts
+        Rails.cache.clear
       end
     end
     head(:ok)
