@@ -10,7 +10,7 @@ gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', 
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 0.9.4'
 gem 'RedCloth', '~> 4.2.3'
-gem 'rack-gist', '~> 1.1.0', :require => 'rack/gist'
+gem 'rack-gist', '~> 1.1.1', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.4.0', :require => nil
 gem 'rest-client', '~> 1.6.0'
 gem 'barista', '~> 0.5.0'
@@ -24,7 +24,7 @@ gem 'aws', '~> 2.3.20'
 # gem 'nokogiri', '~> 1.4.3.1'
 
 group :development, :test do
-  gem 'ruby-debug', :require => nil
+  gem 'ruby-debug19', :require => nil
   gem 'rspec-rails', '2.0.0.beta.19', :require => nil
   gem 'factory_girl', :require => nil
   gem 'thin', :require => nil

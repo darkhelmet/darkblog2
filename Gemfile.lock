@@ -41,6 +41,7 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
+    archive-tar-minitar (0.5.2)
     arel (1.0.1)
       activesupport (~> 3.0.0)
     aws (2.3.20)
@@ -80,7 +81,8 @@ GEM
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
-    linecache (0.43)
+    linecache19 (0.5.11)
+      ruby_core_source (>= 0.1.4)
     mail (2.2.5)
       activesupport (>= 2.3.6)
       mime-types
@@ -95,7 +97,7 @@ GEM
       oyster
     polyglot (0.3.1)
     rack (1.2.1)
-    rack-gist (1.1.0)
+    rack-gist (1.1.1)
       nokogiri (~> 1.4.3.1)
       rest-client (~> 1.6.0)
     rack-mount (0.6.13)
@@ -131,11 +133,16 @@ GEM
     rspec-rails (2.0.0.beta.19)
       rspec (= 2.0.0.beta.19)
       webrat (>= 0.7.2.beta.1)
-    ruby-debug (0.10.3)
-      columnize (>= 0.1)
-      ruby-debug-base (~> 0.10.3.0)
-    ruby-debug-base (0.10.3)
-      linecache (>= 0.3)
+    ruby-debug-base19 (0.11.24)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.4)
+      archive-tar-minitar (>= 0.5.2)
     sanitize (1.2.1)
       nokogiri (~> 1.4.1)
     sinatra (1.0)
@@ -181,12 +188,12 @@ DEPENDENCIES
   hoptoad_notifier
   mongo
   mongoid (= 2.0.0.beta.16)!
-  rack-gist (~> 1.1.0)
+  rack-gist (~> 1.1.1)
   rails (~> 3.0.0)
   rest-client (~> 1.6.0)
   rmagick (~> 2.13.1)
   rspec-rails (= 2.0.0.beta.19)
-  ruby-debug
+  ruby-debug19
   sanitize (~> 1.2.1)
   sinatra-bundles (~> 0.4.0)
   thin

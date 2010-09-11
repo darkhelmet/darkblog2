@@ -1,4 +1,3 @@
-require 'app/uploaders/image'
 require 'carrierwave/orm/mongoid'
 
 class Pic
