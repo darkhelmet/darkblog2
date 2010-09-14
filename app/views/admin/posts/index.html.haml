@@ -25,9 +25,9 @@
     %th
 
   - @posts.each do |post|
-    %tr
+    %tr{ :post_id => post.id }
       %td= post.title
       %td= post.published
-      %td= link_to 'Show', admin_post_path(post)
-      %td= link_to 'Edit', edit_admin_post_path(post)
-      %td= link_to 'Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete
+      %td= link_to('Show', admin_post_path(post))
+      %td= link_to('Edit', edit_admin_post_path(post))
+      %td= link_to('Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete, :remote => true)

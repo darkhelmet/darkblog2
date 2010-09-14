@@ -41,13 +41,15 @@ class Admin::PostsController < ApplicationController
       end
       format.js do
         if @post.valid?
-          render(:js => %Q{$('#title').pulse({
-            opacity: [0,1]
-          }, {
-            times: 3,
-            easing: 'linear',
-            duration: 'slow'
-          });})
+          render(:js => %Q{
+            $('#title').pulse({
+              opacity: [0,1]
+            }, {
+              times: 3,
+              easing: 'linear',
+              duration: 'slow'
+            });
+          })
         else
           render(:js => %Q{alert(#{@post.errors.full_messages.join('. ').to_json})})
         end
@@ -58,7 +60,16 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to(admin_posts_url)
+    respond_with(@post) do |format|
+      format.html { redirect_to(admin_posts_url) }
+      format.js do
+        render(:js => %Q{
+          $('tr[post_id="#{@post.id}"]').fadeOut(function() {
+            $(this).remove();
+          })
+        })
+      end
+    end
   end
 
   def pics
