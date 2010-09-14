@@ -20,5 +20,5 @@ Darkblog2::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
-  # config.cache_store = ActiveSupport::Cache::DalliStore.new(:compress => true)
+  # config.cache_store = ActiveSupport::Cache::DalliStore.new(:compress => true, :compress_threshold => 64.kilobytes)
 end
