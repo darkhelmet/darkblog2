@@ -7,7 +7,6 @@ require 'active_resource/railtie'
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
-require 'active_support/cache/dalli_store'
 
 module Darkblog2
   class Application < Rails::Application
@@ -59,7 +58,7 @@ module Darkblog2
       mw.insert_before(Rack::Sendfile, Rack::ETag)
       mw.use Rack::Sinatra, Bundles.new
 
-      mw.use Rack::Gist, :cache => ActiveSupport::Cache::DalliStore.new(:compress => true), :jquery => false
+      mw.use Rack::Gist, :cache => ActiveSupport::Cache::DalliStore.new(:compress => true, :compress_threshold => 64.kilobytes), :jquery => false
 
       # mw.use Rack::InlineCompress
 

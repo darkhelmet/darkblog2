@@ -49,5 +49,5 @@ Darkblog2::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.cache_store = ActiveSupport::Cache::DalliStore.new(:compress => true)
+  config.cache_store = :dalli_store, :compress => true, :compress_threshold => 64.kilobytes
 end
