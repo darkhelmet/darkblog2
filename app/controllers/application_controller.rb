@@ -6,8 +6,10 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render(:template => 'application/not_found', :status => :not_found)
-    true
+    respond_to do |format|
+      format.html { render(:template => 'application/not_found', :status => :not_found) }
+      format.any { render(:nothing => true, :status => :not_found) }
+    end
   end
 
   def announce
