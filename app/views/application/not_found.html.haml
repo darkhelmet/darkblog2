@@ -1,7 +1,15 @@
 .page
   %h1 404 Not Found
   = image_tag('kitty.png', :class => 'mcenter')
-  %h5 Every time you get a 404, a kitten cries.
-  %h5
-    You should probably click on some links. If this URL was supposed to work,
-    = link_to('let me know', '/contact')
+  %h5 Every time you get a 404, a kitten cries. You should probably click on some links. If this URL was supposed to work, maybe you could let me know about it.
+  :javascript
+    var host = (("https:" == document.location.protocol) ? "https://secure." : "http://");document.write(unescape("%3Cscript src='" + host + "wufoo.com/scripts/embed/form.js' type='text/javascript'%3E%3C/script%3E"));
+  :javascript
+    var r7x3p9 = new WufooForm();
+    r7x3p9.initialize({
+      userName: 'darkhelmetlive',
+      formHash: 'r7x3p9',
+      autoResize: true,
+      height: '494'
+    });
+    r7x3p9.display();
