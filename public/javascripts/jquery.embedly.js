@@ -85,7 +85,7 @@
           data: data,
           success: function(data) {
             return $.each(data, function(index, elem) {
-              return elem.title && !elem.error_code ? embed(elem, batch[index]) : null;
+              return !(elem.error_code) ? embed(elem, batch[index]) : null;
             });
           }
         });

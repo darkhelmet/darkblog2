@@ -68,7 +68,7 @@
         data: data
         success: (data) ->
           $.each data, (index, elem) ->
-            if elem.title && !elem.error_code
+            unless elem.error_code
               embed(elem, batch[index])
       })
 
