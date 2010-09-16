@@ -1,7 +1,11 @@
-= javascript_include_tag('http://static.woopra.com/js/woopra.v2.js')
+= jquery_tag('1.4.2')
+!= Bundles.javascript_bundles[:all].to_html(:all)
+= javascript_include_tag('http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js')
 = javascript_include_tag('http://assets.skribit.com/javascripts/SkribitSuggest.js')
 :javascript
-  woopraTracker.track();
+  CFInstall.check({
+    mode: 'overlay'
+  });
   SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
     placement: 'right',
     color: '#333333',
@@ -9,3 +13,8 @@
     distance_vert: '32%',
     distance_horiz: ''
   });
+
+- if Rails.env.production?
+  = javascript_include_tag('http://static.woopra.com/js/woopra.v2.js')
+  :javascript
+    woopraTracker.track();
