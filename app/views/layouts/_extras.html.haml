@@ -1,5 +1,7 @@
+= javascript_include_tag('http://static.woopra.com/js/woopra.v2.js')
 = javascript_include_tag('http://assets.skribit.com/javascripts/SkribitSuggest.js')
 :javascript
+  woopraTracker.track();
   SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
     placement: 'right',
     color: '#333333',
