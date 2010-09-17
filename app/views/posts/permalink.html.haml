@@ -2,6 +2,9 @@
   - content_for(:title, title_for(@post))
   - content_for(:description, @post.description)
   - content_for(:canonical, post_permalink(@post))
+  - content_for(:top_level) do
+    = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
+    = javascript_include_tag('http://platform.twitter.com/widgets.js')
 .post
   - cache(@post.cache_key) do
     %h1= link_to(@post.title, post_permalink(@post))
