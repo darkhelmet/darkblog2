@@ -73,7 +73,7 @@ class Post
   end
 
   def cache_key
-    "post-#{id}-#{hash}"
+    "post-#{id}-#{attributes.hash}"
   end
 
   class << self
