@@ -44,7 +44,7 @@
       })(#{Post.tags.to_json});
     });
 
-= form_for(['admin', @post], :remote => true) do |f|
+= form_for(['admin', @post], :remote => !@post.new_record?) do |f|
   -if @post.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
