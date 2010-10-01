@@ -10,6 +10,7 @@ class Post
   before_save :slug!
   after_save :update_search_index
   after_save :clear_cache
+  after_save :push, :unless => :published
 
   field :title, :type => String
   field :category, :type => String
@@ -76,6 +77,10 @@ class Post
     "post-#{id}-#{attributes.hash}"
   end
 
+  def pusher_channel
+    "post-#{id}"
+  end
+
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
@@ -138,5 +143,9 @@ private
 
   def clear_cache
     Rails.cache.clear if published
+  end
+
+  def push
+    Pusher[pusher_channel].trigger('post-update', attributes.merge(:html => body_html))
   end
 end

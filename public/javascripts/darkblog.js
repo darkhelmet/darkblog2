@@ -1,12 +1,5 @@
 (function() {
-  $(document).ready(function() {
-    var query;
-    $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
-    $('.post a:regex(href, png|jpe?g|gif)').facebox();
-    query = $.map($('a[href$=#disqus_thread]'), function(a, index) {
-      return "url" + (index) + "=" + (encodeURIComponent(a.href));
-    }).join('&');
-    $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
+  window['setupEmbedly'] = function() {
     $('.content a').embedly({
       maxWidth: 640,
       wmode: 'opaque',
@@ -25,10 +18,20 @@
         });
       }
     });
-    $('.content a.twitter').embedly({
+    return $('.content a.twitter').embedly({
       urlRe: /http:\/\/(twitter\.com\/.*\/status\/.*|twitter\.com\/.*\/statuses\/.*)/i,
       maxWidth: 640
     });
+  };
+  $(document).ready(function() {
+    var query;
+    $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+    $('.post a:regex(href, png|jpe?g|gif)').facebox();
+    query = $.map($('a[href$=#disqus_thread]'), function(a, index) {
+      return "url" + (index) + "=" + (encodeURIComponent(a.href));
+    }).join('&');
+    $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
+    setupEmbedly();
     return $('a.remote-inline').live('click', function() {
       var href, p;
       href = this.href;

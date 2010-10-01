@@ -5,6 +5,15 @@
   - content_for(:top_level) do
     = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
     = javascript_include_tag('http://platform.twitter.com/widgets.js')
+  - unless @post.published
+    = javascript_include_tag('http://js.pusherapp.com/1.5/pusher.min.js')
+    :javascript
+      (function(server) {
+        server.bind('post-update', function(post) {
+          $('.post .content').html(post.html);
+          setupEmbedly();
+        });
+      })(new Pusher('#{Pusher.key}', '#{@post.pusher_channel}'));
 .post
   - cache(@post.cache_key) do
     %h1= link_to(@post.title, post_permalink(@post))
