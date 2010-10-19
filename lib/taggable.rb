@@ -9,7 +9,7 @@ module Taggable
     end
 
     def tag_string=(tags)
-      self.tags = tags.split(',').map(&:strip).map(&:parameterize)
+      self.tags = tags.split(',').map(&:strip).reject(&:empty?).map(&:parameterize)
     end
   end
 
