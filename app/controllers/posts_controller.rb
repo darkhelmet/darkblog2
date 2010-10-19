@@ -45,7 +45,8 @@ class PostsController < CachedController
   end
 
   def tag
-    @posts = Rails.cache.fetch(cache_key('posts', 'tag', params[:tag])) { Post.find_by_tag(params[:tag]).to_a }
+    tag = params[:tag].strip.parameterize
+    @posts = Rails.cache.fetch(cache_key('posts', 'tag', tag)) { Post.find_by_tag(tag).to_a }
     respond_with(@posts)
   end
 
