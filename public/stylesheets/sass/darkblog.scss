@@ -79,6 +79,14 @@ pre {
   @include droid-mono;
 }
 
+sup {
+  vertical-align: super;
+}
+
+sub {
+  vertical-align: sub;
+}
+
 ul, ol {
   margin: 0 0 1.52em;
 }
