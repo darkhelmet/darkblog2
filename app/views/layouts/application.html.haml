@@ -9,9 +9,9 @@
       %section#content.col.col_11= yield
       - cache('sidebar') do
         %aside#sidebar.col.col_5= render(:partial => 'layouts/sidebar')
-      - cache do # Footer might end up with extra stuff
+      - cache('footer') do # Footer might end up with extra stuff
         .clear
         %footer.col.col_16= render(:partial => 'layouts/footer')
         #extras= render(:partial => 'layouts/extras')
-        #extra_footer= yield(:footer)
+      #extra_footer= yield(:footer)
     = yield(:top_level)
