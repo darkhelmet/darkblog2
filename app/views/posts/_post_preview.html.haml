@@ -1,4 +1,4 @@
-%article
+%article.preview
   %h2= link_to(post_preview.title, post_permalink(post_preview))
   .meta
     %time{ :datetime => post_preview.published_on.xmlschema }= post_preview.published_on.to_s(:post)

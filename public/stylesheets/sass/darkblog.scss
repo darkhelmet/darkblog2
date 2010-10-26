@@ -17,15 +17,11 @@ $grey: #525252;
 }
 
 @mixin droid {
-  font: {
-    family: 'Droid Sans', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
-  }
+  font-family: 'Droid Sans', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
 }
 
 @mixin droid-mono {
-  font: {
-    family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
-  }
+  font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
 }
 
 @mixin transition($value, $time: 0.25s, $method: ease-in) {
@@ -40,32 +36,21 @@ html, body {
 }
 
 body {
-  margin: {
-    top: 65px;
-  }
+  margin-top: 65px;
 }
 
 a, a:visited {
-  text: {
-    decoration: none;
-  }
+  text-decoration: none;
 }
 
 a:hover {
-  border: {
-    bottom: 1px dotted;
-  }
-
-  text: {
-    decoration: none;
-  }
+  border-bottom: 1px dotted;
+  text-decoration: none;
 }
 
 ol {
   li {
-    margin: {
-      left: 25px
-    }
+    margin-left: 25px;
   }
 }
 
@@ -92,9 +77,7 @@ ul, ol {
 }
 
 .small, .footnote {
-  font: {
-    size: 0.8em;
-  }
+  font-size: 0.8em;
 }
 
 .fleft {
@@ -151,9 +134,7 @@ header {
       }
     }
 
-    margin: {
-      right: 10px;
-    }
+    margin-right: 10px;
   }
 
   a {
@@ -245,9 +226,7 @@ header {
     @include round-corners;
 
     .snippet {
-      margin: {
-        bottom: 10px;
-      }
+      margin-bottom: 10px;
     }
 
     .extra_links {
@@ -273,23 +252,32 @@ header {
       $back: transparentize(black, 0.9);
       background: $back;
     }
+
+    &.preview {
+      .meta, .extra_links {
+        @include transition(opacity);
+        opacity: 0.01;
+      }
+
+      &:hover {
+        .meta, .extra_links {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .post {
     .content {
       a, a:visited {
-        border: {
-          bottom: 1px dotted;
-        }
+        border-bottom: 1px dotted;
 
         &:hover {
           color: black;
         }
       }
 
-      font: {
-        size: 110%;
-      }
+      font-size: 110%;
     }
 
     h1 {
@@ -299,9 +287,7 @@ header {
 
   .page {
     a, a:visited {
-      border: {
-        bottom: 1px dotted;
-      }
+      border-bottom: 1px dotted;
 
       &:hover {
         color: black;
@@ -311,33 +297,26 @@ header {
 
   .meta {
     time {
-      text: {
-        transform: uppercase;
-      }
+      text-transform: uppercase;
     }
 
-    margin: {
-      bottom: 10px;
-    }
+    margin-bottom: 10px;
   }
 
   #archives {
-    font: {
-      weight: bold;
-    }
-
-    text: {
-      align: center;
-    }
+    font-weight: bold;
+    text-align: center;
   }
 }
 
 #sidebar {
   section {
     ul {
-      list-style-image: none;
-      list-style-position: outside;
-      list-style-type: none;
+      list-style: {
+        image: none;
+        position: outside;
+        type: none;
+      }
     }
 
     margin: {
@@ -347,9 +326,7 @@ header {
 }
 
 footer {
-  text: {
-    align: center;
-  }
+  text-align: center;
 
   padding: {
     top: 10px;
