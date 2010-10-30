@@ -50,4 +50,6 @@ Darkblog2::Application.configure do
   config.active_support.deprecation = :notify
 
   config.cache_store = ActiveSupport::Cache::DalliStore.new(:compress => true, :compress_threshold => 64.kilobytes)
+
+  config.action_controller.logger = Logger.new(STDOUT)
 end
