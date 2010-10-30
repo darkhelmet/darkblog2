@@ -31,4 +31,5 @@ group :development, :test do
   gem 'factory_girl', :require => nil
   gem 'thin', :require => nil
   gem 'heroku', :require => nil
+  gem 'metric_fu', :require => nil
 end
