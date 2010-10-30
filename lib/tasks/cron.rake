@@ -1,0 +1,17 @@
+task :cron => :environment do
+  Fog::AWS::Storage.new({
+    :aws_access_key_id => ENV['ACCESS_KEY_ID'],
+    :aws_secret_access_key => ENV['SECRET_ACCESS_KEY']
+  }).tap do |storage|
+    storage.directories.get(ENV['BACKUP_BUCKET']).tap do |directory|
+      directory.files.create({
+        :key => "backup/#{Time.now.strftime('%Y-%m-%d-%H-%M')}",
+        :body => {
+          :posts => Post.all
+        }.to_json,
+        :content_type => 'application/json',
+        :acl => 'private'
+      })
+    end
+  end
+end
