@@ -5,7 +5,7 @@ task :cron => :environment do
   }).tap do |storage|
     storage.directories.get(ENV['BACKUP_BUCKET']).tap do |directory|
       directory.files.create({
-        :key => "backup/#{Time.now.strftime('%Y-%m-%d-%H-%M')}",
+        :key => "backups/#{Time.now.strftime('%Y-%m-%d-%H-%M')}.json",
         :body => {
           :posts => Post.all
         }.to_json,
