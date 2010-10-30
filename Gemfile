@@ -8,7 +8,7 @@ gem 'bson_ext', '1.0.4'
 gem 'mongo'
 gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', :ref => 'f38e3ef'
 gem 'hoptoad_notifier'
-gem 'dalli', '~> 0.9.4', :require => 'active_support/cache/dalli_store'
+gem 'dalli', '~> 0.10.1', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.3', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.4.0', :require => nil
@@ -27,7 +27,7 @@ gem 'fog', '~> 0.3.7'
 
 group :development, :test do
   # gem 'ruby-debug19', :require => nil
-  gem 'rspec-rails', '2.0.0.beta.19', :require => nil
+  gem 'rspec-rails', '~> 2.0.0', :require => nil
   gem 'factory_girl', :require => nil
   gem 'thin', :require => nil
   gem 'heroku', :require => nil
