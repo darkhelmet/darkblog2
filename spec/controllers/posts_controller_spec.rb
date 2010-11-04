@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PostsController do
-
+=begin
   def mock_post(stubs={})
     @mock_post ||= mock_model(Post, stubs).as_null_object
   end
@@ -121,5 +121,5 @@ describe PostsController do
       response.should redirect_to(posts_url)
     end
   end
-
+=end
 end

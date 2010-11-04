@@ -27,8 +27,8 @@ gem 'fog', '~> 0.3.7'
 
 group :development, :test do
   # gem 'ruby-debug19', :require => nil
-  gem 'rspec-rails', '~> 2.0.0', :require => nil
-  gem 'factory_girl', :require => nil
+  gem 'rspec-rails', '~> 2.0.0'
+  gem 'factory_girl'
   gem 'thin', :require => nil
   gem 'heroku', :require => nil
   gem 'metric_fu', :require => nil

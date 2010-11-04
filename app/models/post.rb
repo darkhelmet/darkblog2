@@ -86,7 +86,7 @@ class Post
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       post = where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
       # Little hack since you can't seem to do the double where clause
-      post.published_on <= Time.now ? post : nil
+      post && post.published_on <= Time.now ? post : nil
     end
 
     def find_by_month(params)
@@ -111,7 +111,7 @@ class Post
     end
 
     def group_by_month
-      publish_order.group_by { |post| post.published_on.strftime('%B %Y') }.sort_by { |posts| posts.first.published_on }
+      publish_order.group_by { |post| post.published_on.strftime('%B %Y') }.sort_by { |group| group.last.first.published_on }
     end
 
     def admin_index

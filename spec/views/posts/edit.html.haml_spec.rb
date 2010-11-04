@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "posts/edit.html.haml" do
+=begin
   before(:each) do
     @post = assign(:post, stub_model(Post,
       :new_record? => false,
@@ -27,4 +28,5 @@ describe "posts/edit.html.haml" do
       form.should have_selector("input#post_description", :name => "post[description]")
     end
   end
+=end
 end

@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe PostsController do
+=begin
   describe "routing" do
 
         it "recognizes and generates #index" do
@@ -32,4 +33,5 @@ describe PostsController do
     end
 
   end
+=end
 end
