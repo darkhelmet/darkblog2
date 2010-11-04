@@ -153,7 +153,7 @@ GEM
       ruby-hmac
       signature
     rack (1.2.1)
-    rack-gist (1.1.4)
+    rack-gist (1.1.5)
       nokogiri (~> 1.4.3.1)
       rest-client (~> 1.6.0)
     rack-mount (0.6.13)
@@ -259,7 +259,7 @@ DEPENDENCIES
   mongo
   mongoid (= 2.0.0.beta.16)!
   pusher (~> 0.6.0)
-  rack-gist (~> 1.1.4)
+  rack-gist (~> 1.1.5)
   rails (~> 3.0.0)
   rest-client (~> 1.6.0)
   rmagick (~> 2.13.1)

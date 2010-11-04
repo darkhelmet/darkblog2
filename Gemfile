@@ -10,7 +10,7 @@ gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', 
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 0.10.1', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
-gem 'rack-gist', '~> 1.1.4', :require => 'rack/gist'
+gem 'rack-gist', '~> 1.1.5', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.4.0', :require => nil
 gem 'rest-client', '~> 1.6.0'
 gem 'barista', '~> 0.5.0'
