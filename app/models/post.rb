@@ -45,7 +45,7 @@ class Post
   validates_presence_of :title, :category
 
   scope(:publish_order, lambda {
-    where(:published => true, :published_on.lte => Time.zone.now).order_by(:published_on.desc)
+    where(:published => true, :published_on.lte => Time.now.utc).order_by(:published_on.desc)
   })
 
   def slug!
@@ -84,12 +84,12 @@ class Post
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
+      where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).publish_order.first
     end
 
     def find_by_month(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      publish_order.where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc)
+      where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc).publish_order
     end
 
     def categories
