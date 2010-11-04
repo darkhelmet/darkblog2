@@ -13,8 +13,3 @@
     distance_vert: '32%',
     distance_horiz: ''
   });
-
-- if Rails.env.production?
-  = javascript_include_tag('http://static.woopra.com/js/woopra.v2.js')
-  :javascript
-    woopraTracker.track();
