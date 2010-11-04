@@ -84,12 +84,18 @@ class Post
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
+      post = where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
+      # Little hack since you can't seem to do the double where clause
+      post.published_on <= Time.now ? post : nil
     end
 
     def find_by_month(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc).publish_order
+      posts = where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc, :published => true).order_by(:published_on.desc)
+      posts.reject do |post|
+        # Get rid of posts that are published in the future
+        post.published_on > Time.now
+      end
     end
 
     def categories
@@ -121,7 +127,13 @@ class Post
     end
 
     def search(query)
-      find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] }) rescue []
+      posts = find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
+      posts.reject do |post|
+        # Get rid of posts that are published in the future
+        post.published_on > Time.now
+      end
+    rescue
+      []
     end
   end
 
