@@ -111,7 +111,11 @@ class Post
     end
 
     def group_by_month
-      publish_order.group_by { |post| post.published_on.strftime('%B %Y') }.sort_by { |group| group.last.first.published_on }
+      publish_order.group_by do |post|
+        post.published_on.strftime('%B %Y')
+      end.map do |group|
+        [group.first, group.last.sort_by { |post| post.published_on }]
+      end
     end
 
     def admin_index
