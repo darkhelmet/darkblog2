@@ -111,12 +111,7 @@ class Post
     end
 
     def group_by_month
-      publish_order.group_by do |post|
-        post.published_on.strftime('%B %Y')
-      end.map do |group|
-        # FIXME: Sorting in wrong direction
-        [group.first, group.last.sort_by { |post| post.published_on }]
-      end
+      publish_order.group_by { |post| post.published_on.strftime('%B %Y') }
     end
 
     def admin_index
