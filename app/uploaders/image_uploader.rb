@@ -1,6 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
-  # include CarrierWave::ImageScience
 
   storage :s3
 

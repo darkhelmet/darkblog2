@@ -2,6 +2,7 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+tmp/restart.txt
 config/database.yml
 config/pusher.yml
 .DS_Store
