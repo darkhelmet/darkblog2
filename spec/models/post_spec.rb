@@ -15,4 +15,8 @@ describe Post do
       groups.length.should == 3
     end
   end
+
+  describe '#group_by_category' do
+    it 'should group by category'
+  end
 end

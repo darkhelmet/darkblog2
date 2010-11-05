@@ -107,7 +107,7 @@ class Post
     end
 
     def group_by_category
-      publish_order.group_by(&:category).sort_by { |posts| posts.first.published_on }
+      publish_order.group_by(&:category)
     end
 
     def group_by_month
