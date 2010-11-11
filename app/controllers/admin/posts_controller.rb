@@ -6,8 +6,9 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_id(params[:id])
-    render(:template => 'posts/permalink')
+    respond_with(post) do |format|
+      format.html { render(:template => 'posts/permalink') }
+    end
   end
 
   def new
@@ -15,12 +16,11 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    post
   end
 
   def create
     @post = Post.new(params[:post])
-
     if @post.save
       redirect_to(admin_post_url(@post), :notice => 'Post was successfully created.')
     else
@@ -29,18 +29,17 @@ class Admin::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    @post.update_attributes(params[:post])
-    respond_with(@post) do |format|
+    post.update_attributes(params[:post])
+    respond_with(post) do |format|
       format.html do
-        if @post.valid?
-          redirect_to(admin_post_url(@post), :notice => 'Post was successfully updated.')
+        if post.valid?
+          redirect_to(admin_post_url(post), :notice => 'Post was successfully updated.')
         else
           render(:action => 'edit')
         end
       end
       format.js do
-        if @post.valid?
+        if post.valid?
           render(:js => %Q{
             $('#title').pulse({
               opacity: [0,1]
@@ -58,13 +57,12 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    respond_with(@post) do |format|
+    post.destroy
+    respond_with(post) do |format|
       format.html { redirect_to(admin_posts_url) }
       format.js do
         render(:js => %Q{
-          $('tr[post_id="#{@post.id}"]').fadeOut(function() {
+          $('tr[post_id="#{post.id}"]').fadeOut(function() {
             $(this).remove();
           })
         })
@@ -73,8 +71,14 @@ class Admin::PostsController < ApplicationController
   end
 
   def pics
-    respond_with(@post = Post.find(params[:id])) do |format|
+    respond_with(post) do |format|
       format.html { redirect_to(admin_post_url(@post)) }
     end
+  end
+
+private
+
+  def post
+    @post ||= Post.find(params[:id])
   end
 end
