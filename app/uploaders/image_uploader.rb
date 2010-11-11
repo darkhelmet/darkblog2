@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-  storage :s3
+  storage Rails.env.development? ? :file : :s3
 
   def cache_dir
     Rails.root.join('tmp', 'carrierwave')
