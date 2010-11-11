@@ -55,8 +55,12 @@ class Post
   def body_html
     processed_body = body.gsub(/\{\{(\d+)(?::(\w+))?\}\}/) do |sub|
       index, version = $1.to_i, $2
-      image = pics[index].image
-      version.nil? ? image.url : image.url(version.to_sym)
+      if pic = pics[index]
+        image = pic.image
+        version.nil? ? image.url : image.url(version.to_sym)
+      else
+        ''
+      end
     end
     RedCloth.new(processed_body).to_html
   end
