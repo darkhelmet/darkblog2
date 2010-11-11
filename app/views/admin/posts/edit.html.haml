@@ -5,19 +5,9 @@
   = javascript_include_tag('plupload.full.min', 'jquery.plupload.queue.min')
   :javascript
     $(document).ready(function() {
-      $('.pics li a:first').facebox();
-      $('#file_upload').pluploadQueue({
-        runtimes: 'html5,flash,silverlight',
-        url: '#{admin_uploads_url}',
-        filters: [
-          { title: 'Images', extensions: 'jpg,gif,png' }
-        ],
-        multipart_params: {
-          authenticity_token: $('meta[name="csrf-token"]').attr('content'),
-          post_id: '#{@post.id}'
-        },
-        flash_swf_url: '/swf/plupload.flash.swf',
-        silverlight_xap_url: '/swf/plupload.silverlight.xap'
+      $('.pics li a:first, a[rel=facebox]').facebox();
+      $('#facebox .close').click(function() {
+        $.get("#{pics_admin_post_path(@post, :format => 'js')}");
       });
     });
 
@@ -29,11 +19,8 @@
 |
 = link_to('Back', admin_posts_path)
 |
-= link_to('Update Pics', pics_admin_post_path(@post), :remote => true)
+= link_to('Upload Pics', uploader_admin_post_path(@post), :rel => 'facebox')
 
 %br
 %br
 %ul.pics= render(:partial => 'pic', :collection => @post.pics)
-%br
-#file_upload
-  %h1 Get a real browser to upload files...

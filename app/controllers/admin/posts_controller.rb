@@ -76,6 +76,12 @@ class Admin::PostsController < ApplicationController
     end
   end
 
+  def uploader
+    respond_with(post) do |format|
+      format.html { render(:action => 'uploader', :layout => false) }
+    end
+  end
+
 private
 
   def post

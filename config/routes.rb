@@ -6,6 +6,7 @@ Darkblog2::Application.routes.draw do
       resources :posts do
         member do
           get :pics
+          get :uploader
         end
       end
       resources :uploads, :only => [:create,:destroy]

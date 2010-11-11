@@ -1,0 +1,17 @@
+#file_upload
+  %h1 Get a real browser to upload files...
+
+  :javascript
+    $('#file_upload').pluploadQueue({
+      runtimes: 'html5,silverlight,flash',
+      url: '#{admin_uploads_url}',
+      filters: [
+        { title: 'Images', extensions: 'jpg,gif,png' }
+      ],
+      multipart_params: {
+        authenticity_token: $('meta[name="csrf-token"]').attr('content'),
+        post_id: '#{@post.id}'
+      },
+      flash_swf_url: '/swf/plupload.flash.swf',
+      silverlight_xap_url: '/swf/plupload.silverlight.xap'
+    });
