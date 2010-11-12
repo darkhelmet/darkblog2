@@ -5,8 +5,8 @@ class ImageUploader < CarrierWave::Uploader::Base
     storage :file
   else
     storage :s3
-    def url
-      URI(super).tap do |u|
+    def url(*args)
+      URI(super(*args)).tap do |u|
         u.host = ENV['ASSET_HOST']
       end.to_s
     end
