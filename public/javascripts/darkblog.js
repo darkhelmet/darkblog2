@@ -32,7 +32,7 @@
     }).join('&');
     $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
     setupEmbedly();
-    return $('a.remote-inline').live('click', function() {
+    $('a.remote-inline').live('click', function() {
       var href, p;
       href = this.href;
       p = $(this).parent();
@@ -46,5 +46,6 @@
       });
       return false;
     });
+    return $('p.footnote:first').addClass('first');
   });
 }).call(this);

@@ -277,6 +277,12 @@ header {
         }
       }
 
+      p.footnote.first {
+        padding-top: 10px;
+        border-top: 1px solid transparentize(black, 0.75);
+        clear: both;
+      }
+
       font-size: 110%;
     }
 

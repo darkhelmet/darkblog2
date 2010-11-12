@@ -45,3 +45,5 @@ $(document).ready ->
         $(p).remove()
     })
     false
+
+  $('p.footnote:first').addClass('first');
