@@ -29,5 +29,5 @@ group :development, :test do
   gem 'faker', '~> 0.3.1'
   gem 'thin', :require => nil
   gem 'heroku', :require => nil
-  gem 'metric_fu', :require => nil
+  # gem 'metric_fu', :require => nil
 end
