@@ -2,9 +2,6 @@
   - content_for(:title, title_for(@post))
   - content_for(:description, @post.description)
   - content_for(:canonical, post_permalink(@post))
-  - content_for(:top_level) do
-    = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
-    = javascript_include_tag('http://platform.twitter.com/widgets.js')
   - unless @post.published
     = javascript_include_tag('http://js.pusherapp.com/1.5/pusher.min.js')
     :javascript
@@ -27,9 +24,12 @@
       %span.tags
         - @post.tags.each do |tag|
           = link_to(tag, tag_path(tag))
+    = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
     .content!= @post.body_html
     .clear
   - unless request.xhr?
     - cache('post_extras') do
       = render(:partial => 'layouts/add_to_any')
       = render(:partial => 'posts/disqus_single')
+- content_for(:footer) do
+  = javascript_include_tag('http://platform.twitter.com/widgets.js')
