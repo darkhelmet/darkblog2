@@ -33,7 +33,8 @@ Darkblog2::Application.configure do
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   config.action_controller.asset_host = lambda do |source|
-    source.starts_with?('/images') ? "http://#{ENV['ASSET_HOST']}" : ''
+    host = source.starts_with?('/images') ? ENV['ASSET_HOST'] : ENV['LOCAL_ASSET_HOST']
+    "http://#{host}"
   end
 
   # Disable delivery errors, bad email addresses will be ignored
