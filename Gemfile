@@ -11,7 +11,7 @@ gem 'hoptoad_notifier'
 gem 'dalli', '~> 0.11.0', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.6', :require => 'rack/gist'
-gem 'sinatra-bundles', '~> 0.4.0', :require => nil
+gem 'sinatra-bundles', '~> 0.5.0', :require => nil
 gem 'rest-client', '~> 1.6.1'
 gem 'barista', '~> 0.5.1'
 gem 'devise', '~> 1.1.3'
