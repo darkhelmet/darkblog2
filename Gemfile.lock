@@ -280,6 +280,3 @@ DEPENDENCIES
   sinatra-bundles (~> 0.4.0)
   thin
   yajl-ruby (~> 0.7.8)
-
-METADATA
-  version: 1.0.6
