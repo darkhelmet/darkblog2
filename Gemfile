@@ -27,6 +27,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0.0'
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
-  gem 'thin', :require => nil
+  # gem 'thin', :require => nil
   gem 'heroku', :require => nil
 end
