@@ -19,7 +19,7 @@ gem 'sanitize', '~> 1.2.1'
 gem 'carrierwave', '~> 0.5.0'
 gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.25'
-gem 'pusher', '~> 0.6.0'
+gem 'pusher', '~> 0.7.0'
 gem 'fog', '~> 0.3.17'
 
 group :development, :test do
@@ -29,5 +29,4 @@ group :development, :test do
   gem 'faker', '~> 0.3.1'
   gem 'thin', :require => nil
   gem 'heroku', :require => nil
-  # gem 'metric_fu', :require => nil
 end

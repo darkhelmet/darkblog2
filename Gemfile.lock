@@ -114,11 +114,11 @@ GEM
     packr (3.1.0)
       oyster
     polyglot (0.3.1)
-    pusher (0.6.0)
-      crack
-      json
-      ruby-hmac
-      signature
+    pusher (0.7.0)
+      crack (~> 0.1.0)
+      json (~> 1.4.0)
+      ruby-hmac (~> 0.4.0)
+      signature (~> 0.1.2)
     rack (1.2.1)
     rack-gist (1.1.6)
       nokogiri (~> 1.4.3.1)
@@ -210,7 +210,7 @@ DEPENDENCIES
   hoptoad_notifier
   mongo
   mongoid (= 2.0.0.beta.16)!
-  pusher (~> 0.6.0)
+  pusher (~> 0.7.0)
   rack-gist (~> 1.1.6)
   rails (~> 3.0.1)
   rest-client (~> 1.6.1)
