@@ -134,7 +134,7 @@ class Post
       posts = find(Index.search(query, :function => 0)['results'].map { |r| r['docid'] })
       posts.reject do |post|
         # Get rid of posts that are published in the future
-        post.published_on > Time.now
+        !post.published || post.published_on > Time.now
       end
     rescue
       []
