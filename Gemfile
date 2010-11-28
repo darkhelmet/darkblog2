@@ -7,7 +7,7 @@ gem 'bson_ext', '1.0.4'
 gem 'mongo'
 gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', :ref => 'f38e3ef'
 gem 'hoptoad_notifier'
-gem 'dalli', '~> 0.11.0', :require => 'active_support/cache/dalli_store'
+gem 'dalli', '~> 1.0.0', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.6', :require => 'rack/gist'
 gem 'sinatra-bundles', '~> 0.5.0', :require => nil
@@ -20,7 +20,6 @@ gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.25'
 gem 'pusher', '~> 0.7.0'
 gem 'fog', '~> 0.3.17'
-# gem 'heroku-autoscale', '~> 0.2.2', :require => 'heroku/autoscale'
 gem 'heroku'
 
 group :development, :test do
