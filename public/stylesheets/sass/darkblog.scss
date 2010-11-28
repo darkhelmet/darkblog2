@@ -6,10 +6,6 @@ $grey: #525252;
   -moz-box-shadow: $h $v $blur $color;
 }
 
-@mixin text-shadow($h, $v, $blur, $color) {
-  text-shadow: $h $v $blur $color;
-}
-
 @mixin round-corners($size: 5px) {
   -moz-border-radius: $size;
   -webkit-border-radius: $size;
@@ -113,8 +109,12 @@ ul, ol {
   }
 }
 
-blockquote > p {
-  margin: 0px;
+blockquote {
+  p {
+    margin: 0px;
+  }
+
+  text-shadow: transparentize(black, 0.75) 5px 5px 25px;
 }
 
 header {
