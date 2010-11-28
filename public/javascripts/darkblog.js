@@ -23,9 +23,19 @@
       maxWidth: 640
     });
   };
+  $.extend({
+    isMobile: function() {
+      return navigator.userAgent.match(/iP(ad|od|hone)|BlackBerry|Android|webOS|SymbianOS/);
+    },
+    showExtras: function() {
+      return !$.isMobile() && $(window).width() > 1050;
+    }
+  });
   $(document).ready(function() {
     var query;
-    $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+    if ($.showExtras()) {
+      $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
+    }
     $('.post a:regex(href, png|jpe?g|gif)').facebox();
     query = $.map($('a[href$=#disqus_thread]'), function(a, index) {
       return "url" + (index) + "=" + (encodeURIComponent(a.href));

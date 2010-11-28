@@ -22,8 +22,15 @@ window['setupEmbedly'] = ->
     maxWidth: 640
   });
 
+$.extend({
+  isMobile: ->
+    navigator.userAgent.match(/iP(ad|od|hone)|BlackBerry|Android|webOS|SymbianOS/)
+  showExtras: ->
+    !$.isMobile() && $(window).width() > 1050
+})
+
 $(document).ready ->
-  $.getScript('http://tweetboard.com/darkhelmetlive/tb.js')
+  $.getScript('http://tweetboard.com/darkhelmetlive/tb.js') if $.showExtras()
 
   $('.post a:regex(href, png|jpe?g|gif)').facebox()
 

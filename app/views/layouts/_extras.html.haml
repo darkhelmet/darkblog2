@@ -6,10 +6,12 @@
   CFInstall.check({
     mode: 'overlay'
   });
-  SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
-    placement: 'right',
-    color: '#333333',
-    text_color: 'white',
-    distance_vert: '32%',
-    distance_horiz: ''
-  });
+  if ($.showExtras()) {
+    SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
+      placement: 'right',
+      color: '#333333',
+      text_color: 'white',
+      distance_vert: '32%',
+      distance_horiz: ''
+    });
+  }
