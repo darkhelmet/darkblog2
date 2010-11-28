@@ -18,7 +18,8 @@ ol li {
 code {
   font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
   display: inline;
-  padding: 0px; }
+  padding: 0px 2px;
+  background: rgba(0, 0, 0, 0.1); }
 
 pre {
   font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace; }
