@@ -37,14 +37,14 @@ $(document).ready ->
   query = $.map($('a[href$=#disqus_thread]'), (a, index) ->
     "url#{index}=#{encodeURIComponent(a.href)}"
   ).join('&')
-  $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query);
+  $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query)
 
   setupEmbedly()
 
   $('a.remote-inline').live 'click', ->
     href = this.href
     p = $(this).parent()
-    $(this).replaceWith('Loading...');
+    $(this).replaceWith('Loading...')
     $.ajax({
       url: href
       dataType: 'script'
@@ -53,4 +53,5 @@ $(document).ready ->
     })
     false
 
-  $('p.footnote:first').addClass('first');
+  $('p.footnote:first').addClass('first')
+  $('#boastful').boastful({ location: $('link[rel=canonical]').attr('href') })

@@ -56,6 +56,9 @@
       });
       return false;
     });
-    return $('p.footnote:first').addClass('first');
+    $('p.footnote:first').addClass('first');
+    return $('#boastful').boastful({
+      location: $('link[rel=canonical]').attr('href')
+    });
   });
 }).call(this);

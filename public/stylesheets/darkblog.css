@@ -194,12 +194,14 @@ header {
   font-weight: bold;
   text-align: center; }
 
-#sidebar section {
-  margin-bottom: 20px; }
-  #sidebar section ul {
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none; }
+#sidebar {
+  overflow: visible; }
+  #sidebar section {
+    margin-bottom: 20px; }
+    #sidebar section ul {
+      list-style-image: none;
+      list-style-position: outside;
+      list-style-type: none; }
 
 footer {
   text-align: center;
