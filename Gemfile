@@ -21,6 +21,8 @@ gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.25'
 gem 'pusher', '~> 0.7.0'
 gem 'fog', '~> 0.3.17'
+gem 'heroku-autoscale', '~> 0.2.2'
+gem 'heroku'
 
 group :development, :test do
   # gem 'ruby-debug', :require => nil
@@ -28,5 +30,4 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
   gem 'thin', :require => nil
-  gem 'heroku', :require => nil
 end
