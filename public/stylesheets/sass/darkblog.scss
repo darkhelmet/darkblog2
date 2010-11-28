@@ -117,6 +117,14 @@ blockquote {
   text-shadow: transparentize(black, 0.75) 5px 5px 25px;
 }
 
+#file_upload {
+  width: 600px;
+}
+
+#pfButton {
+  display: inline;
+}
+
 header {
   @include box-shadow(0px, 0px, 5px, black);
 
@@ -341,8 +349,4 @@ footer {
     top: 10px;
     bottom: 10px;
   }
-}
-
-#file_upload {
-  width: 600px;
 }
