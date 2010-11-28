@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.1'
-# gem 'rails3-generators'
 gem 'haml', '~> 3.0.23' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.8', :require => 'yajl/json_gem' # JSON
 gem 'bson_ext', '1.0.4'
@@ -29,5 +28,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0.0'
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
-  gem 'thin', :require => nil
+  # gem 'thin', :require => nil
 end
