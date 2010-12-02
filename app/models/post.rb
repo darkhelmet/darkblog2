@@ -16,7 +16,7 @@ class Post
   field :category, :type => String
   field :body, :type => String
   field :published, :type => Boolean, :default => false
-  field :published_on, :type => Time, :default => lambda { Time.zone.now }
+  field :published_on, :type => Time, :default => lambda { Chronic.parse('monday 8am') }
   field :slug, :type => String
   field :description, :type => String
   field :announced, :type => Boolean, :default => false

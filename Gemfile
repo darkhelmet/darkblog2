@@ -20,6 +20,7 @@ gem 'rmagick', '~> 2.13.1'
 gem 'aws', '~> 2.3.25'
 gem 'pusher', '~> 0.7.0'
 gem 'fog', '~> 0.3.17'
+gem 'chronic', '~> 0.3.0'
 gem 'heroku'
 
 group :development, :test do
