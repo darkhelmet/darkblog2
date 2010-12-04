@@ -277,30 +277,12 @@ header {
   }
 
   .post {
-    .content {
-      a, a:visited {
-        border-bottom: 1px dotted;
-
-        &:hover {
-          color: black;
-        }
-      }
-
-      p.footnote.first {
-        padding-top: 10px;
-        border-top: 1px solid transparentize(black, 0.75);
-        clear: both;
-      }
-
-      font-size: 115%;
-    }
-
     h1 {
       margin: 0px;
     }
   }
 
-  .page {
+  .content {
     a, a:visited {
       border-bottom: 1px dotted;
 
@@ -309,7 +291,13 @@ header {
       }
     }
 
-    font-size: 110%;
+    p.footnote.first {
+      padding-top: 10px;
+      border-top: 1px solid transparentize(black, 0.75);
+      clear: both;
+    }
+
+    font-size: 115%;
   }
 
   .meta {

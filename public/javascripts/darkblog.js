@@ -36,7 +36,7 @@
     if ($.showExtras()) {
       $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
     }
-    $('.post a:regex(href, png|jpe?g|gif)').facebox();
+    $('.content a:regex(href, png|jpe?g|gif)').facebox();
     query = $.map($('a[href$=#disqus_thread]'), function(a, index) {
       return "url" + (index) + "=" + (encodeURIComponent(a.href));
     }).join('&');

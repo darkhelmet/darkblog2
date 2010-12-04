@@ -168,24 +168,18 @@ header {
     opacity: 0.01; }
   #content article.preview:hover .meta, #content article.preview:hover .extra_links {
     opacity: 1; }
-#content .post .content {
+#content .post h1 {
+  margin: 0px; }
+#content .content {
   font-size: 115%; }
-  #content .post .content a, #content .post .content a:visited {
+  #content .content a, #content .content a:visited {
     border-bottom: 1px dotted; }
-    #content .post .content a:hover, #content .post .content a:visited:hover {
+    #content .content a:hover, #content .content a:visited:hover {
       color: black; }
-  #content .post .content p.footnote.first {
+  #content .content p.footnote.first {
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.25);
     clear: both; }
-#content .post h1 {
-  margin: 0px; }
-#content .page {
-  font-size: 110%; }
-  #content .page a, #content .page a:visited {
-    border-bottom: 1px dotted; }
-    #content .page a:hover, #content .page a:visited:hover {
-      color: black; }
 #content .meta {
   margin-bottom: 10px; }
   #content .meta time {

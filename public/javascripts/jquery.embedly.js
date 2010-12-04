@@ -43,10 +43,10 @@
           urls: urls
         };
         if (settings.maxWidth) {
-          data.maxWidth = settings.maxWidth;
+          data.maxwidth = settings.maxWidth;
         }
         if (settings.maxHeight) {
-          data.maxHeight = settings.maxHeight;
+          data.maxheight = settings.maxHeight;
         }
         if (settings.wmode) {
           data.wmode = settings.wmode;

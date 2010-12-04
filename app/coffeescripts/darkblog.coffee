@@ -32,7 +32,7 @@ $.extend({
 $(document).ready ->
   $.getScript('http://tweetboard.com/darkhelmetlive/tb.js') if $.showExtras()
 
-  $('.post a:regex(href, png|jpe?g|gif)').facebox()
+  $('.content a:regex(href, png|jpe?g|gif)').facebox()
 
   query = $.map($('a[href$=#disqus_thread]'), (a, index) ->
     "url#{index}=#{encodeURIComponent(a.href)}"

@@ -35,8 +35,8 @@
         urls: urls
       }
 
-      data.maxWidth = settings.maxWidth if settings.maxWidth
-      data.maxHeight = settings.maxHeight if settings.maxHeight
+      data.maxwidth = settings.maxWidth if settings.maxWidth
+      data.maxheight = settings.maxHeight if settings.maxHeight
       data.wmode = settings.wmode if settings.wmode
 
       embed = (oembed, dict) ->
