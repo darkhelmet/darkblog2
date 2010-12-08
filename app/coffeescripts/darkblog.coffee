@@ -46,8 +46,12 @@ $(document).ready ->
     p = $(this).parent()
     $(this).replaceWith('Loading...')
     $.ajax({
-      url: href
-      dataType: 'script'
+      url: href,
+      cache: false,
+      data: {
+        inline: 1
+      },
+      dataType: 'script',
       success: ->
         $(p).remove()
     })

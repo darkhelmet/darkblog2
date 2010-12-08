@@ -1,4 +1,4 @@
-- unless request.xhr?
+- unless inline?
   - content_for(:title, title_for(@post))
   - content_for(:description, @post.description)
   - content_for(:canonical, post_permalink(@post))
@@ -11,9 +11,9 @@
           setupEmbedly();
         });
       })(new Pusher('#{Pusher.key}', '#{@post.pusher_channel}'));
-.post
+.post.hentry
   - cache(@post.cache_key) do
-    %h1= link_to(@post.title, post_permalink(@post))
+    %h1.entry-title= post_link(@post)
     .meta
       %time{ :datetime => @post.published_on.xmlschema }= @post.published_on.to_s(:post)
       &raquo;
@@ -23,11 +23,12 @@
       Tagged with
       %span.tags
         - @post.tags.each do |tag|
-          = link_to(tag, tag_path(tag))
-    = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
+          = tag_link(tag)
+    - unless inline?
+      = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
     .content!= @post.body_html
     .clear
-  - unless request.xhr?
+  - unless inline?
     - cache('post_extras') do
       = render(:partial => 'layouts/post_extras')
       = render(:partial => 'posts/disqus_single')

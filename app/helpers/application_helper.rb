@@ -58,4 +58,16 @@ module ApplicationHelper
   def index_tag
     tag(:link, :rel => 'index', :title => Darkblog2.config[:title], :href => root_url)
   end
+
+  def post_link(post)
+    link_to(post.title, post_permalink(post), :rel => 'bookmark')
+  end
+
+  def tag_link(tag)
+    link_to(tag.downcase, tag_url(tag), :rel => 'tag')
+  end
+
+  def inline?
+    @inline ||= !params[:inline].to_i.zero?
+  end
 end

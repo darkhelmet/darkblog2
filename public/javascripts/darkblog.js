@@ -49,6 +49,10 @@
       $(this).replaceWith('Loading...');
       $.ajax({
         url: href,
+        cache: false,
+        data: {
+          inline: 1
+        },
         dataType: 'script',
         success: function() {
           return $(p).remove();
