@@ -23,6 +23,15 @@
         .pr_clearBottomLeft
         .pr_solidSpecialMiddle
         .pr_clearBottomRight
+- if show_ads?
+  %section#adsense
+    :javascript
+      google_ad_client = "ca-pub-5644409813387398";
+      /* verbose logging sidebar */
+      google_ad_slot = "8428722578";
+      google_ad_width = 250;
+      google_ad_height = 250;
+    = javascript_include_tag('http://pagead2.googlesyndication.com/pagead/show_ads.js')
 %section#boastful
 %section#shout_out
   Hosting by:

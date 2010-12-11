@@ -70,4 +70,8 @@ module ApplicationHelper
   def inline?
     @inline ||= !params[:inline].to_i.zero?
   end
+
+  def show_ads?
+    !ENV['SHOW_ADS'].blank?
+  end
 end
