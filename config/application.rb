@@ -50,12 +50,11 @@ module Darkblog2
 
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
-      require 'rack/sinatra'
       require 'bundles'
 
       mw.insert_after(Rack::Lock, Rack::RemoveSlash)
       mw.insert_before(Rack::Sendfile, Rack::ETag)
-      mw.use Rack::Sinatra, Bundles.new
+      mw.use Bundles
 
       mw.use Rack::Gist, :cache => ActiveSupport::Cache::DalliStore.new(:compress => true, :compress_threshold => 64.kilobytes), :jquery => false
 

@@ -1,7 +1,7 @@
-require 'sinatra/base'
+require 'rack/sinatra'
 require 'sinatra/bundles'
 
-class Bundles < Sinatra::Base
+class Bundles < Rack::Sinatra
   set({
     :environment => Rails.env,
     :public => Rails.public_path,
