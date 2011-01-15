@@ -23,9 +23,9 @@ gem 'chronic', '~> 0.3.0'
 gem 'heroku'
 
 group :development, :test do
-  # gem 'ruby-debug', :require => nil
   gem 'rspec-rails', '~> 2.0.0'
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
   # gem 'mongrel', :require => nil
+  # gem 'ruby-debug', :require => nil
 end
