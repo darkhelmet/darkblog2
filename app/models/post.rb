@@ -168,13 +168,12 @@ private
   end
 
   def schedule_announce_job
-    RestClient.post('https://momentapp.com/jobs.json', {
+    query = {
       :apikey => MomentApiKey,
-      :job => {
-        :at => (published_on + 1.minute).to_s(:moment),
-        :method => 'POST',
-        :uri => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
-      }
-    }) unless MomentApiKey.blank?
+      'job[at]' => (published_on + 1.minute).to_s(:moment),
+      'job[method]' => 'POST',
+      'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
+    }.map { |k,v| "#{k}=#{CGI.escape(v)}" }.join('&')
+    RestClient.post("https://momentapp.com/jobs.json?#{query}") unless MomentApiKey.blank?
   end
 end
