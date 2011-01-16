@@ -12,7 +12,7 @@ class Post
   after_save :update_search_index, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
-  after_save :schedule_announce_job, :if => :published, :unless => :announced
+  after_save :schedule_announce_job, :if => :published, :unless => :announce_job_id?
 
   field :title, :type => String
   field :category, :type => String
@@ -175,7 +175,7 @@ private
       'job[method]' => 'POST',
       'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}" }.join('&')
-    unless MomentApiKey.blank? || announce_job_id?
+    unless MomentApiKey.blank?
       response = Excon.post("https://momentapp.com/jobs.json?#{query}")
       if 200 == response.status
         json = JSON.parse(response.body)
