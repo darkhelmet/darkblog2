@@ -1,5 +1,6 @@
 class Post
   Index = IndexTank::HerokuClient.new.get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}") rescue nil
+  MomentApiKey = ENV['MOMENT_API_KEY']
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -8,9 +9,10 @@ class Post
   embeds_many :pics
 
   before_save :slug!
-  after_save :update_search_index
-  after_save :clear_cache
+  after_save :update_search_index, :if => :published
+  after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
+  after_save :schedule_announce_job, :if => :published, :unless => :announced
 
   field :title, :type => String
   field :category, :type => String
@@ -153,15 +155,26 @@ private
         :text => body_for_index,
         :title => title,
         :timestamp => published_on.to_i.to_s
-      }) if published
+      })
     end
   end
 
   def clear_cache
-    Rails.cache.clear if published
+    Rails.cache.clear
   end
 
   def push
     Pusher[pusher_channel].trigger('post-update', attributes.merge(:html => body_html))
+  end
+
+  def schedule_announce_job
+    RestClient.post('https://momentapp.com/jobs.json', {
+      :apikey => MomentApiKey,
+      :job => {
+        :at => (published_on + 1.minute).to_s(:moment),
+        :method => 'POST',
+        :uri => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
+      }
+    }) unless MomentApiKey.blank?
   end
 end
