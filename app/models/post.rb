@@ -1,5 +1,5 @@
 class Post
-  Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}-#{Rails.env}") rescue nil
+  Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}_#{Rails.env}") rescue nil
   MomentApiKey = ENV['MOMENT_API_KEY']
 
   include Mongoid::Document
