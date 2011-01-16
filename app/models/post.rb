@@ -19,7 +19,7 @@ class Post
   field :body, :type => String
   field :published, :type => Boolean, :default => false
   field :published_on, :type => Time, :default => lambda { Chronic.parse('monday 8am') }
-  field :slug, :type => String
+  field :slugs, :type => Array, :default => []
   field :description, :type => String
   field :announced, :type => Boolean, :default => false
   field :announce_job_id, :type => String
@@ -35,7 +35,7 @@ class Post
   index([
     [:published, Mongo::ASCENDING],
     [:published_on, Mongo::DESCENDING],
-    [:slug, Mongo::ASCENDING]
+    [:slugs, Mongo::ASCENDING]
   ], :background => true)
 
   # Publish info with tags
@@ -51,8 +51,17 @@ class Post
     where(:published => true, :published_on.lte => Time.now.utc).order_by(:published_on.desc)
   })
 
+  def slug
+    slugs.first
+  end
+
   def slug!
-    self.slug = title.parameterize
+    new_slug = title.parameterize
+    if public?
+      self.slugs.unshift(new_slug) unless slugs.include?(new_slug)
+    else
+      self.slugs = [new_slug]
+    end
   end
 
   def body_html
@@ -70,6 +79,10 @@ class Post
 
   def published_on
     super.in_time_zone
+  end
+
+  def public?
+    published && published_on <= Time.zone.now
   end
 
   def announce!
@@ -91,7 +104,7 @@ class Post
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      post = where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slug => params[:slug]).first
+      post = where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slugs => params[:slug]).first
       # Little hack since you can't seem to do the double where clause
       post && post.published_on <= Time.now ? post : nil
     end
@@ -151,13 +164,11 @@ private
   end
 
   def update_search_index
-    unless Index.nil?
-      Index.document(id).add({
-        :text => body_for_index,
-        :title => title,
-        :timestamp => published_on.to_i.to_s
-      })
-    end
+    Index.document(id).add({
+      :text => body_for_index,
+      :title => title,
+      :timestamp => published_on.to_i.to_s
+    }) unless Index.nil?
   end
 
   def clear_cache
@@ -169,22 +180,21 @@ private
   end
 
   def schedule_announce_job
+    return if MomentApiKey.blank? || !Rails.env.production?
     query = {
       :apikey => MomentApiKey,
       'job[at]' => (published_on + 1.minute).to_s(:moment),
       'job[method]' => 'POST',
-      'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
+      'job[uri]' => "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}" }.join('&')
-    unless MomentApiKey.blank?
-      response = Excon.post("https://momentapp.com/jobs.json?#{query}")
-      if 200 == response.status
-        json = JSON.parse(response.body)
-        collection.update({ '_id' => id }, {
-          '$set' => {
-            :announce_job_id => json['success']['job']['id']
-          }
-        })
-      end
+    response = Excon.post("https://momentapp.com/jobs.json?#{query}")
+    if 200 == response.status
+      json = JSON.parse(response.body)
+      collection.update({ '_id' => id }, {
+        '$set' => {
+          :announce_job_id => json['success']['job']['id']
+        }
+      })
     end
   end
 end

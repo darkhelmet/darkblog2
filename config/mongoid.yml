@@ -1,4 +1,5 @@
 defaults: &defaults
+  allow_dynamic_fields: false
   # slaves:
   #   - host: slave1.local
   #     port: 27018

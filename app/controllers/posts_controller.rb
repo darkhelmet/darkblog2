@@ -8,6 +8,7 @@ class PostsController < CachedController
   def permalink
     @post = Rails.cache.fetch(cache_key('post', 'permalink', params.hash)) { Post.find_by_permalink_params(params) }
     render_404 and return if @post.nil?
+    redirect_to_post(@post) and return if @post.slug != params[:slug]
     respond_with(@post)
   end
 
@@ -59,5 +60,10 @@ private
 
   def feedburner_url
     "http://feeds.feedburner.com/#{Darkblog2.config[:feedburner]}"
+  end
+
+  def redirect_to_post(post)
+    year, month, day = post.published_on.strftime('%Y-%m-%d').split('-')
+    redirect_to(permalink_path(year, month, day, post.slug))
   end
 end
