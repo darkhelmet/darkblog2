@@ -174,6 +174,6 @@ private
       'job[method]' => 'POST',
       'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{k}=#{CGI.escape(v)}" }.join('&')
-    RestClient.post("https://momentapp.com/jobs.json?#{query}") unless MomentApiKey.blank?
+    RestClient.post("https://momentapp.com/jobs.json?#{query}", {}) unless MomentApiKey.blank?
   end
 end
