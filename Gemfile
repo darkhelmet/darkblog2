@@ -21,6 +21,7 @@ gem 'pusher', '~> 0.7.0'
 gem 'fog', '~> 0.3.17'
 gem 'chronic', '~> 0.3.0'
 gem 'indextank', '~> 0.0.6'
+gem 'excon', '~> 0.4.0'
 gem 'heroku'
 
 group :development, :test do

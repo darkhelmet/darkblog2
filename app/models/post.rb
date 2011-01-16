@@ -173,7 +173,7 @@ private
       'job[at]' => (published_on + 1.minute).to_s(:moment),
       'job[method]' => 'POST',
       'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
-    }.map { |k,v| "#{k}=#{CGI.escape(v)}" }.join('&')
-    RestClient.post("https://momentapp.com/jobs.json?#{query}", {}) unless MomentApiKey.blank?
+    }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}" }.join('&')
+    Excon.post("https://momentapp.com/jobs.json?#{query}") unless MomentApiKey.blank?
   end
 end
