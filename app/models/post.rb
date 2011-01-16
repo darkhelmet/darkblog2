@@ -1,5 +1,5 @@
 class Post
-  Index = IndexTank::HerokuClient.new.get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}") rescue nil
+  Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).get_index("#{Darkblog2.config[:search_index]}-#{Rails.env}") rescue nil
   MomentApiKey = ENV['MOMENT_API_KEY']
 
   include Mongoid::Document
@@ -151,7 +151,7 @@ private
 
   def update_search_index
     unless Index.nil?
-      Index.add_document(id, {
+      Index.document(id).add({
         :text => body_for_index,
         :title => title,
         :timestamp => published_on.to_i.to_s
