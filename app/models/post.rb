@@ -22,6 +22,7 @@ class Post
   field :slug, :type => String
   field :description, :type => String
   field :announced, :type => Boolean, :default => false
+  field :announce_job_id, :type => String
 
   # Publish info with category
   index([
@@ -174,6 +175,16 @@ private
       'job[method]' => 'POST',
       'job[uri]' => "https://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}" }.join('&')
-    Excon.post("https://momentapp.com/jobs.json?#{query}") unless MomentApiKey.blank?
+    unless MomentApiKey.blank? || announce_job_id?
+      response = Excon.post("https://momentapp.com/jobs.json?#{query}")
+      if 200 == response.status
+        json = JSON.parse(response.body)
+        collection.update({ '_id' => id }, {
+          '$set' => {
+            :announce_job_id => json['success']['job']['id']
+          }
+        })
+      end
+    end
   end
 end
