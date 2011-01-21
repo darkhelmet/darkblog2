@@ -26,7 +26,7 @@ $.extend({
   isMobile: ->
     navigator.userAgent.match(/iP(ad|od|hone)|BlackBerry|Android|webOS|SymbianOS/)
   showExtras: ->
-    !$.isMobile() && $(window).width() > 1050
+    !$.isMobile() && $(window).width() > 1050 && !document.location.pathname.match(/\/admin\/posts/)
 })
 
 $(document).ready ->
