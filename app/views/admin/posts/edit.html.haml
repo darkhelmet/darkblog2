@@ -11,7 +11,7 @@
         ],
         multipart_params: {
           authenticity_token: $('meta[name="csrf-token"]').attr('content'),
-          post_id: #{@post.id}
+          post_id: '#{@post.id}'
         },
         flash_swf_url: '/swf/plupload.flash.swf',
         silverlight_xap_url: '/swf/plupload.silverlight.xap'
