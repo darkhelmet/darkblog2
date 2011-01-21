@@ -54,30 +54,24 @@
 
   .field
     = f.label :title
-    %br
     = f.text_field :title, :class => 'width_10'
   .field
     = f.label :category
-    %br
     = f.text_field :category, :class => 'width_10'
   .field
     = f.label :body
-    %br
     = f.text_area :body, :class => 'width_10'
   .field
     = f.label :published
     = f.check_box :published
   .field
     = f.label :published_on
-    %br
     = f.text_field :published_on
   .field
     = f.label :tag_string
-    %br
     = f.text_field :tag_string, :class => 'width_10'
   .field
     = f.label :description
-    %br
     = f.text_field :description, :class => 'width_10'
   .actions
     = f.submit 'Save'
