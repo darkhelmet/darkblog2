@@ -16,6 +16,9 @@
         flash_swf_url: '/swf/plupload.flash.swf',
         silverlight_xap_url: '/swf/plupload.silverlight.xap'
       });
+      uploader.bind('FilesAdded', function() {
+        uploader.start();
+      });
       uploader.bind('FileUploaded', function() {
         $.get("#{pics_admin_post_path(@post, :format => 'js')}");
       });
