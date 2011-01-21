@@ -1,14 +1,24 @@
-- content_for(:head) do
-  = stylesheet_link_tag('plupload.queue')
-
 - content_for(:footer) do
-  = javascript_include_tag('plupload.full.min', 'jquery.plupload.queue.min')
+  = javascript_include_tag('plupload.full.min')
   :javascript
     $(document).ready(function() {
-      $('.pics li a:first, a[rel=facebox]').facebox();
-      $('#facebox .close').click(function() {
+      var uploader = new plupload.Uploader({
+        runtimes: 'html5,silverlight,flash',
+        browse_button: 'uploader',
+        url: '#{admin_uploads_path(@post)}',
+        filters: [
+          { title: 'Images', extensions: 'jpg,gif,png' }
+        ],
+        multipart_params: {
+          authenticity_token: $('meta[name="csrf-token"]').attr('content')
+        },
+        flash_swf_url: '/swf/plupload.flash.swf',
+        silverlight_xap_url: '/swf/plupload.silverlight.xap'
+      });
+      uploader.bind('FileUploaded', function() {
         $.get("#{pics_admin_post_path(@post, :format => 'js')}");
       });
+      $('.pics li a:first]').facebox();
     });
 
 %h1 Editing post
@@ -19,7 +29,7 @@
 |
 = link_to('Back', admin_posts_path)
 |
-= link_to('Upload Pics', uploader_admin_post_path(@post), :rel => 'facebox')
+= link_to('Upload Pics', admin_uploads_path(@post), :id => 'uploader')
 
 %br
 %br
