@@ -5,12 +5,13 @@
       var uploader = new plupload.Uploader({
         runtimes: 'html5,silverlight,flash',
         browse_button: 'uploader',
-        url: '#{admin_uploads_path(@post)}',
+        url: '#{admin_uploads_path}',
         filters: [
           { title: 'Images', extensions: 'jpg,gif,png' }
         ],
         multipart_params: {
-          authenticity_token: $('meta[name="csrf-token"]').attr('content')
+          authenticity_token: $('meta[name="csrf-token"]').attr('content'),
+          post_id: #{@post.id}
         },
         flash_swf_url: '/swf/plupload.flash.swf',
         silverlight_xap_url: '/swf/plupload.silverlight.xap'
@@ -29,7 +30,7 @@
 |
 = link_to('Back', admin_posts_path)
 |
-= link_to('Upload Pics', admin_uploads_path(@post), :id => 'uploader')
+= link_to('Upload Pics', '#', :id => 'uploader')
 
 %br
 %br
