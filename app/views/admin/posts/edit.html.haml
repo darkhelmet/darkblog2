@@ -19,6 +19,7 @@
       uploader.bind('FileUploaded', function() {
         $.get("#{pics_admin_post_path(@post, :format => 'js')}");
       });
+      uploader.init();
       $('.pics li a:first]').facebox();
     });
 
