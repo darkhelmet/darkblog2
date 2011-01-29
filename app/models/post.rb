@@ -184,6 +184,6 @@ private
       :at => (published_on + 1.minute).to_i,
       :url => "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}" }.join('&')
-    RestClient.post("https://verbose-scheduling.appspot.com/delay?#{query}", {})
+    RestClient.get("https://verbose-scheduling.appspot.com/delay?#{query}")
   end
 end
