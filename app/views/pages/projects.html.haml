@@ -57,6 +57,16 @@
     * Links
     ** "Source":https://github.com/darkhelmet/sinatra-bundles
 
+    h2. "rack-gist":https://github.com/darkhelmet/rack-gist
+
+    rack-gist rewrites Github gist script includes to make them load asynchronously, without blocking your page from loading.
+
+    * Platform: "rack":http://rack.rubyforge.org/
+    * Language: ruby
+    * Links
+    ** "Source":https://github.com/darkhelmet/rack-gist
+    ** "Blog post":http://blog.darkhax.com/2010/07/16/rack-gist-the-gists-are-now-diamonds
+
     h2. "goo.gl":https://github.com/darkhelmet/goo.gl
 
     goo.gl is a little API endpoint to use Google's URL shortener to shorten URLs in the Twitter iPhone client.
@@ -67,22 +77,18 @@
     * Links
     ** "Source":https://github.com/darkhelmet/goo.gl
 
+    h2. Twitter Link Filter Bookmarklet
+
+    Filter out tweets without links using a simple bookmarklet. Drag it up and go to town.
+
+    "Filter Links":javascript:(function() { setInterval(function() { $('.main-content .stream-item:not(:has(.twitter-timeline-link))').fadeOut(function() { $(this).remove(); }); }, 1000); })();
+
     h2. "Twitter Catch Up":https://github.com/darkhelmet/twitter-catch-up
 
-    Twitter Catch Up is a Chrome extension that removes tweets without links.
+    Twitter Catch Up is a Chrome extension that removes tweets without links (deprecated in favor of the previous bookmarklet).
 
     * Platform: "Google Chrome":http://chrome.google.com/
     * Language: Javascript
     * Links
     ** "Source":https://github.com/darkhelmet/twitter-catch-up
     ** "Webpage":https://chrome.google.com/extensions/detail/poamgdllmljoaajemjegicggdfcmiidl
-
-    h2. "rack-gist":https://github.com/darkhelmet/rack-gist
-
-    rack-gist rewrites Github gist script includes to make them load asynchronously, without blocking your page from loading.
-
-    * Platform: "rack":http://rack.rubyforge.org/
-    * Language: ruby
-    * Links
-    ** "Source":https://github.com/darkhelmet/rack-gist
-    ** "Blog post":http://blog.darkhax.com/2010/07/16/rack-gist-the-gists-are-now-diamonds
