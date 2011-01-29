@@ -1,6 +1,5 @@
 class Post
   Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}_#{Rails.env}") rescue nil
-  MomentApiKey = ENV['MOMENT_API_KEY']
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -12,7 +11,7 @@ class Post
   after_save :update_search_index, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
-  after_save :schedule_announce_job, :if => :published, :unless => :announce_job_id?
+  after_save :schedule_announce_job, :if => :published
 
   field :title, :type => String
   field :category, :type => String
@@ -180,21 +179,11 @@ private
   end
 
   def schedule_announce_job
-    return if MomentApiKey.blank? || !Rails.env.production?
+    return unless Rails.env.production?
     query = {
-      :apikey => MomentApiKey,
-      'job[at]' => (published_on + 1.minute).to_s(:moment),
-      'job[method]' => 'POST',
-      'job[uri]' => "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
+      :at => (published_on + 1.minute).to_i,
+      :url => "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}" }.join('&')
-    response = Excon.post("https://momentapp.com/jobs.json?#{query}")
-    if 200 == response.status
-      json = JSON.parse(response.body)
-      collection.update({ '_id' => id }, {
-        '$set' => {
-          :announce_job_id => json['success']['job']['id']
-        }
-      })
-    end
+    RestClient.post("https://verbose-scheduling.appspot.com/delay?#{query}")
   end
 end
