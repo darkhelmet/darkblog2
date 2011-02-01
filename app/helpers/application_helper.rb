@@ -27,6 +27,10 @@ module ApplicationHelper
     tag(:meta, :name => 'description', :content => yield_or_default(:description, Darkblog2.config[:tagline]))
   end
 
+  def readability_tag
+    tag(:meta, :name => 'readability-verification', :content => 'ee3QxRba5qSzvNEXBLAgbYCyCMTqMkkmJQrhvQKs')
+  end
+
   def title_tag
     content_tag(:title, yield_or_default(:title, Darkblog2.config[:title]))
   end
