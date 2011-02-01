@@ -21,7 +21,6 @@ class Post
   field :slugs, :type => Array, :default => []
   field :description, :type => String
   field :announced, :type => Boolean, :default => false
-  field :announce_job_id, :type => String
 
   # Publish info with category
   index([
