@@ -133,6 +133,10 @@ blockquote {
   margin-bottom: 10px;
 }
 
+.hidden {
+  display: none;
+}
+
 #rdbWrapper {
   display: inline-block;
   height: 23px;
@@ -246,7 +250,7 @@ header {
 }
 
 #content {
-  article {
+  article.main {
     @include transition(background);
     @include round-corners;
 

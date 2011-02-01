@@ -76,6 +76,9 @@ blockquote {
 .field {
   margin-bottom: 10px; }
 
+.hidden {
+  display: none; }
+
 #rdbWrapper {
   display: inline-block;
   height: 23px;
@@ -154,7 +157,7 @@ header {
       right: 8px;
       opacity: 0.65; }
 
-#content article {
+#content article.main {
   -webkit-transition: background 0.25s ease-in;
   -moz-transition: background 0.25s ease-in;
   -o-transition: background 0.25s ease-in;
@@ -164,22 +167,22 @@ header {
   margin-bottom: 10px;
   padding: 5px;
   margin: 5px 0px; }
-  #content article .snippet {
+  #content article.main .snippet {
     margin-bottom: 10px; }
-  #content article .extra_links {
+  #content article.main .extra_links {
     height: 1.5em; }
-  #content article h2 {
+  #content article.main h2 {
     margin: 0px; }
-  #content article .archive_title {
+  #content article.main .archive_title {
     display: inline; }
-  #content article:hover {
+  #content article.main:hover {
     background: rgba(0, 0, 0, 0.1); }
-  #content article.preview .meta, #content article.preview .extra_links {
+  #content article.main.preview .meta, #content article.main.preview .extra_links {
     -webkit-transition: opacity 0.25s ease-in;
     -moz-transition: opacity 0.25s ease-in;
     -o-transition: opacity 0.25s ease-in;
     opacity: 0.01; }
-  #content article.preview:hover .meta, #content article.preview:hover .extra_links {
+  #content article.main.preview:hover .meta, #content article.main.preview:hover .extra_links {
     opacity: 1; }
 #content .post h1 {
   margin: 0px; }

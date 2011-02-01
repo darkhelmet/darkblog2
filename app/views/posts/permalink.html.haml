@@ -11,11 +11,15 @@
           setupEmbedly();
         });
       })(new Pusher('#{Pusher.key}', '#{@post.pusher_channel}'));
-.post.hentry
+%article.post.hentry
   - cache(@post.cache_key) do
     %h1.entry-title= post_link(@post)
     .meta
-      %time{ :datetime => @post.published_on.xmlschema }= @post.published_on.to_s(:post)
+      %time.updated{ :datetime => @post.published_on.xmlschema, :pubdate => '' }= @post.published_on.to_s(:post)
+      &raquo;
+      %span.byline.author.vcard
+        By
+        %span.fn= Darkblog2.config[:author]
       &raquo;
       Posted in
       %span.category= category_link(@post.category)
@@ -36,7 +40,7 @@
             s.parentNode.insertBefore(rdb, s);
         })();
       = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
-    .content!= @post.body_html
+    .content.entry-content!= @post.body_html
     .clear
   - unless inline?
     - cache('post_extras') do

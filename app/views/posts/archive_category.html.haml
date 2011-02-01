@@ -6,6 +6,6 @@
     %section
       %h1= category_link(category)
       - posts.each do |post|
-        %article
+        %article.main
           %h4.archive_title= link_to(post.title, post_permalink(post))
   = render(:partial => 'layouts/archive_links')
