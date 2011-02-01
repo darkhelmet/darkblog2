@@ -133,6 +133,14 @@ blockquote {
   margin-bottom: 10px;
 }
 
+#rdbWrapper {
+  display: inline-block;
+  height: 23px;
+  width: 155px;
+  position: relative;
+  top: 1px;
+}
+
 header {
   @include box-shadow(0px, 0px, 5px, black);
 

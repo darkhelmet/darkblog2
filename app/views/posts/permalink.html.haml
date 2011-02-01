@@ -25,6 +25,16 @@
         - @post.tags.each do |tag|
           = tag_link(tag)
     - unless inline?
+      #rdbWrapper
+      :javascript
+        (function() {
+            var s     = document.getElementsByTagName('script')[0],
+                rdb   = document.createElement('script');
+            rdb.type  = 'text/javascript';
+            rdb.async = true;
+            rdb.src   = document.location.protocol + '//www.readability.com/embed.js';
+            s.parentNode.insertBefore(rdb, s);
+        })();
       = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
     .content!= @post.body_html
     .clear
