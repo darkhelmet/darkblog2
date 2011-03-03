@@ -86,6 +86,9 @@ blockquote {
   position: relative;
   top: 1px; }
 
+#readabilityEmbedContainer, #readabilityEmbedIFrame {
+  height: 23px !important; }
+
 header {
   box-shadow: 0px 0px 5px black;
   -webkit-box-shadow: 0px 0px 5px black;
