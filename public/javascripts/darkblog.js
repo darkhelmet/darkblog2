@@ -32,7 +32,7 @@
     }
   });
   $(document).ready(function() {
-    var query;
+    var gImages, grayscale, query;
     if ($.showExtras()) {
       $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
     }
@@ -61,8 +61,62 @@
       return false;
     });
     $('p.footnote:first').addClass('first');
-    return $('#boastful').boastful({
+    $('#boastful').boastful({
       location: $('link[rel=canonical]').attr('href')
+    });
+    grayscale = function(src) {
+      var avg, canvas, ctx, i, imgObj, imgPixels, x, y, _ref, _ref2;
+      canvas = document.createElement('canvas');
+      ctx = canvas.getContext('2d');
+      imgObj = new Image();
+      imgObj.src = src;
+      canvas.width = imgObj.width;
+      canvas.height = imgObj.height;
+      ctx.drawImage(imgObj, 0, 0);
+      imgPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      for (y = 0, _ref = imgPixels.height; (0 <= _ref ? y <= _ref : y >= _ref); (0 <= _ref ? y += 1 : y -= 1)) {
+        for (x = 0, _ref2 = imgPixels.width; (0 <= _ref2 ? x <= _ref2 : x >= _ref2); (0 <= _ref2 ? x += 1 : x -= 1)) {
+          i = (y * 4) * imgPixels.width + x * 4;
+          avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+          imgPixels.data[i] = avg;
+          imgPixels.data[i + 1] = avg;
+          imgPixels.data[i + 2] = avg;
+        }
+      }
+      ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+      return canvas.toDataURL();
+    };
+    gImages = $('#where img, .rss img');
+    gImages.fadeIn(250);
+    gImages.each(function() {
+      var $this;
+      $this = $(this);
+      $this.css({
+        'position': 'absolute'
+      }).wrap("<div class='img_wrapper' style='display: inline-block'>").clone().addClass('img_grayscale').css({
+        'position': 'absolute',
+        'z-index': '998',
+        'opacity': '0'
+      }).insertBefore($this).queue(function() {
+        var el;
+        el = $(this);
+        el.parent().css({
+          'width': this.width,
+          'height': this.height
+        });
+        return el.dequeue();
+      });
+      return this.src = grayscale(this.src);
+    });
+    $('#where img, .rss img').mouseover(function() {
+      return $(this).parent().find('img:first').stop().animate({
+        opacity: 1
+      }, 250);
+    });
+    return $('.img_grayscale').mouseout(function() {
+      return $(this).stop().animate({
+        opacity: 0
+      }, 250);
     });
   });
 }).call(this);

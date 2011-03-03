@@ -13,6 +13,19 @@
   = link_to(image_tag('icons/skype.png', :alt => 'Skype Icon'), 'skype:darkhelmetlive?call', :title => 'Call on me! Call me! Call on me! Call me...on Skype')
   = link_to(image_tag('icons/flickr.png', :alt => 'Flickr Icon'), 'http://www.flickr.com/photos/darkhelmetlive/', :title => 'My pictures on Flickr')
 = link_to(image_tag('rss.png', :alt => 'RSS'), feed_path, :class => 'rss', :title => 'Get new articles in your RSS reader.')
+%noscript
+  :css
+    #where img, header .rss img {
+      display: inline !important;
+      -webkit-transition: opacity 0.25s ease-in;
+      -moz-transition: opacity 0.25s ease-in;
+      -o-transition: opacity 0.25s ease-in;
+      opacity: 0.65;
+    }
+
+    #where img:hover, header .rss img:hover {
+      opacity: 1;
+    }
 #search
   = form_tag('/search', :method => :get) do
     = text_field_tag('query', nil, :class => 'width_3', :placeholder => "Search #{Darkblog2.config[:title]}")

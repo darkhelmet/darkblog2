@@ -178,15 +178,10 @@ header {
     }
   }
 
+  /* This is fixed by noscript css later, or the Grayscale javascript */
   #where, .rss {
     img {
-      @include transition(opacity);
-
-      opacity: 0.65;
-
-      &:hover {
-        opacity: 1;
-      }
+      display: none;
     }
   }
 
