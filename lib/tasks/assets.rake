@@ -52,3 +52,9 @@ namespace :compress do
     end
   end
 end
+
+namespace :coffee do
+  task :compile do
+    system("coffee -wc -o public/javascripts app/coffeescripts/*")
+  end
+end

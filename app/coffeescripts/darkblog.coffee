@@ -60,25 +60,6 @@ $(document).ready ->
   $('p.footnote:first').addClass('first')
   $('#boastful').boastful({ location: $('link[rel=canonical]').attr('href') })
 
-  grayscale = (src) ->
-    canvas = document.createElement('canvas')
-    ctx = canvas.getContext('2d')
-    imgObj = new Image()
-    imgObj.src = src
-    canvas.width = imgObj.width
-    canvas.height = imgObj.height
-    ctx.drawImage(imgObj, 0, 0)
-    imgPixels = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    for y in [0..imgPixels.height]
-      for x in [0..imgPixels.width]
-        i = (y * 4) * imgPixels.width + x * 4
-        avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3
-        imgPixels.data[i] = avg
-        imgPixels.data[i + 1] = avg
-        imgPixels.data[i + 2] = avg
-    ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height)
-    canvas.toDataURL()
-
   # Fade in images so there isn't a color "pop" document load and then on window load
   gImages = $('#where img, .rss img')
   gImages.fadeIn(250)
@@ -99,7 +80,7 @@ $(document).ready ->
       })
       el.dequeue()
 
-    this.src = grayscale(this.src)
+    this.src = $this.attr('grayscale')
 
   $('#where img, .rss img').mouseover ->
     $(this).parent().find('img:first').stop().animate({ opacity: 1 }, 250)
