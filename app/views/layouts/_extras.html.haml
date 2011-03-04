@@ -1,4 +1,4 @@
-= javascript_include_tag('all')
+= javascript_include_tag("all-#{ENV['JS_VERSION']}")
 = javascript_include_tag('http://assets.skribit.com/javascripts/SkribitSuggest.js')
 :javascript
   CFInstall.check({

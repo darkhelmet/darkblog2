@@ -30,8 +30,10 @@ rescue LoadError
 end
 
 namespace :compress do
+  raise 'NEED VERSION' if ENV['JS_VERSION'].blank?
+
   script_names = %w(jquery rails jquery.darkblog facebox jquery.embedly jquery.boastful darkblog CFInstall)
-  out = "public/javascripts/all.js"
+  out = "public/javascripts/all-#{ENV['JS_VERSION']}.js"
 
   yui = `which yuicompressor`.strip
   yui = `which yui-compressor`.strip if yui.blank?
