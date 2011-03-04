@@ -10,6 +10,5 @@ class Bundles < Rack::Sinatra
 
   register Sinatra::Bundles
 
-  javascript_bundle(:all, %w(jquery rails jquery.darkblog facebox jquery.embedly jquery.boastful darkblog CFInstall))
   stylesheet_bundle(:all, %w(reset grid general facebox boastful darkblog))
 end
