@@ -30,8 +30,6 @@ rescue LoadError
 end
 
 namespace :compress do
-  raise 'NEED VERSION' if ENV['JS_VERSION'].blank?
-
   script_names = %w(jquery rails jquery.darkblog facebox jquery.embedly jquery.boastful darkblog CFInstall)
   out = "public/javascripts/all-#{ENV['JS_VERSION']}.js"
 
@@ -40,6 +38,7 @@ namespace :compress do
 
   unless yui.blank?
     task :yui do
+      raise 'NEED VERSION' if ENV['JS_VERSION'].blank?
       scripts = script_names.map { |file| "public/javascripts/#{file}.js" }.join(' ')
       system("cat #{scripts} | #{yui} --type js -o #{out}")
     end
@@ -49,6 +48,7 @@ namespace :compress do
 
   unless closure.blank?
     task :closure do
+      raise 'NEED VERSION' if ENV['JS_VERSION'].blank?
       scripts = script_names.map { |file| "--js public/javascripts/#{file}.js" }.join(' ')
       system("#{closure} #{scripts} --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file #{out}")
     end
