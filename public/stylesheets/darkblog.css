@@ -120,20 +120,21 @@ header {
     -o-transition: color 0.25s ease-in; }
     header a:hover {
       color: white; }
-  header #where img, header .rss img {
-    display: none; }
-  header .rss {
-    position: absolute;
-    top: 20px;
-    right: 175px; }
-    header .rss:hover {
-      border: 0px; }
   header #where {
     position: absolute;
     top: 21px;
-    right: 207px; }
-    header #where a:hover {
-      border: 0px; }
+    right: 175px; }
+    header #where img {
+      display: none; }
+    header #where a {
+      position: relative;
+      margin: 2px;
+      height: 28px;
+      width: 28px; }
+      header #where a:hover {
+        border: 0px; }
+      header #where a.rss {
+        top: -1px; }
   header #search {
     position: absolute;
     top: 20px;

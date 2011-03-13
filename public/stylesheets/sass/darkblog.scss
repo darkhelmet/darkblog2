@@ -179,32 +179,29 @@ header {
   }
 
   /* This is fixed by noscript css later, or the Grayscale javascript */
-  #where, .rss {
+  #where {
     img {
       display: none;
     }
-  }
 
-  .rss {
-    position: absolute;
-    top: 20px;
-    right: 175px;
-
-    &:hover {
-      border: 0px
-    }
-  }
-
-  #where {
     a {
+      position: relative;
+      margin: 2px;
+      height: 28px;
+      width: 28px;
+
       &:hover {
         border: 0px
+      }
+
+      &.rss {
+        top: -1px;
       }
     }
 
     position: absolute;
     top: 21px;
-    right: 207px;
+    right: 175px;
   }
 
   #search {
