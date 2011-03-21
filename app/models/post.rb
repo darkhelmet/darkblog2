@@ -63,9 +63,9 @@ class Post
   end
 
   def body_html
-    processed_body = body.gsub(/\{\{(\d+)(?::(\w+))?\}\}/) do |sub|
-      index, version = $1.to_i, $2
-      if pic = pics[index]
+    processed_body = body.gsub(/\{\{(\w+)(?::(\w+))?\}\}/) do |sub|
+      id, version = $1, $2
+      if pic = id.match(/^\d+$/) ? pics[id.to_i] : pics.detect { |p| p.image_filename.start_with?(id) }
         image = pic.image
         version.nil? ? image.url : image.url(version.to_sym)
       else
