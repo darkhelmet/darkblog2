@@ -12,6 +12,8 @@ namespace :db do
     task :stop do
       if File.exists?(pidfile)
         Process.kill('TERM', File.read(pidfile).to_i) rescue nil
+        sleep(2)
+        File.delete(pidfile) rescue nil
       end
     end
   end
