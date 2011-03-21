@@ -40,6 +40,7 @@
             s.parentNode.insertBefore(rdb, s);
         })();
       = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
+    %hr
     .content.entry-content!= @post.body_html
     .clear
   - unless inline?
