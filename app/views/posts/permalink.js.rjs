@@ -1,4 +1,4 @@
-escape_javascript(render(:template => 'posts/permalink.html.haml', :layout => nil)).tap do |partial|
+escape_javascript(render(template: 'posts/permalink.html.haml', layout: nil)).tap do |partial|
   page << <<-EOJS
     (function(partial) {
       partial.hide();

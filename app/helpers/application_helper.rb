@@ -16,19 +16,19 @@ module ApplicationHelper
   end
 
   def favicon_tag
-    favicon_link_tag('favicon.png', :type => 'image/png')
+    favicon_link_tag('favicon.png', type: 'image/png')
   end
 
   def gravatar(size = 120)
-    image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}", :alt => "Gravatar for #{Darkblog2.config[:author]}")
+    image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}", alt: "Gravatar for #{Darkblog2.config[:author]}")
   end
 
   def description_tag
-    tag(:meta, :name => 'description', :content => yield_or_default(:description, Darkblog2.config[:tagline]))
+    tag(:meta, name: 'description', content: yield_or_default(:description, Darkblog2.config[:tagline]))
   end
 
   def readability_tag
-    tag(:meta, :name => 'readability-verification', :content => 'ee3QxRba5qSzvNEXBLAgbYCyCMTqMkkmJQrhvQKs')
+    tag(:meta, name: 'readability-verification', content: 'ee3QxRba5qSzvNEXBLAgbYCyCMTqMkkmJQrhvQKs')
   end
 
   def title_tag
@@ -40,15 +40,15 @@ module ApplicationHelper
   end
 
   def canonical_tag
-    tag(:link, :rel => 'canonical', :href => content_for(:canonical)) if content_for?(:canonical)
+    tag(:link, rel: 'canonical', href: content_for(:canonical)) if content_for?(:canonical)
   end
 
   def opensearch_tag
-    tag(:link, :rel => 'search', :type => 'application/opensearchdescription+xml', :href => opensearch_url, :title => Darkblog2.config[:title])
+    tag(:link, rel: 'search', type: 'application/opensearchdescription+xml', href: opensearch_url, title: Darkblog2.config[:title])
   end
 
   def sitemap_tag
-    tag(:link, :rel => 'sitemap', :type => 'application/xml', :title => 'Sitemap', :href => sitemap_url)
+    tag(:link, rel: 'sitemap', type: 'application/xml', title: 'Sitemap', href: sitemap_url)
   end
 
   def managing_editor
@@ -56,19 +56,19 @@ module ApplicationHelper
   end
 
   def rss_tag
-    auto_discovery_link_tag(:rss, feed_url, :title => "#{Darkblog2.config[:title]} RSS Feed")
+    auto_discovery_link_tag(:rss, feed_url, title: "#{Darkblog2.config[:title]} RSS Feed")
   end
 
   def index_tag
-    tag(:link, :rel => 'index', :title => Darkblog2.config[:title], :href => root_url)
+    tag(:link, rel: 'index', title: Darkblog2.config[:title], href: root_url)
   end
 
   def post_link(post)
-    link_to(post.title, post_permalink(post), :rel => 'bookmark')
+    link_to(post.title, post_permalink(post), rel: 'bookmark')
   end
 
   def tag_link(tag)
-    link_to(tag.downcase, tag_url(tag), :rel => 'tag')
+    link_to(tag.downcase, tag_url(tag), rel: 'tag')
   end
 
   def inline?
@@ -109,7 +109,7 @@ module ApplicationHelper
     }
     [:twitter, :linkedin, :skype, :flickr, :rss].each do |icon|
       data = header_icons[icon]
-      concat(link_to(image_tag("icons/#{icon}.png", :alt => "#{icon.to_s.capitalize} Icon", :grayscale => data[:grayscale], :height => 28, :width => 28), data[:link], :title => data[:title], :class => icon))
+      concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", grayscale: data[:grayscale], height: 28, width: 28), data[:link], title: data[:title], :class => icon))
     end
   end
 end

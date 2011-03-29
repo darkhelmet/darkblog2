@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
 
   def render_404
     respond_to do |format|
-      format.html { render(:template => 'application/not_found', :status => :not_found) }
-      format.any { render(:nothing => true, :status => :not_found) }
+      format.html { render(template: 'application/not_found', status: :not_found) }
+      format.any { render(nothing: true, status: :not_found) }
     end
   end
 
   def announce
-    Post.publish_order.where(:announced => false).tap do |cursor|
+    Post.publish_order.where(announced: false).tap do |cursor|
       unless cursor.empty?
         cursor.each(&:announce!)
         announce_new_posts

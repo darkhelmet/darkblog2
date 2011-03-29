@@ -7,7 +7,7 @@ class Admin::PostsController < ApplicationController
 
   def show
     respond_with(post) do |format|
-      format.html { render(:template => 'posts/permalink') }
+      format.html { render(template: 'posts/permalink') }
     end
   end
 
@@ -22,9 +22,9 @@ class Admin::PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     if @post.save
-      redirect_to(admin_post_url(@post), :notice => 'Post was successfully created.')
+      redirect_to(admin_post_url(@post), notice: 'Post was successfully created.')
     else
-      render(:action => 'new')
+      render(action: 'new')
     end
   end
 
@@ -33,9 +33,9 @@ class Admin::PostsController < ApplicationController
     respond_with(post) do |format|
       format.html do
         if post.valid?
-          redirect_to(admin_post_url(post), :notice => 'Post was successfully updated.')
+          redirect_to(admin_post_url(post), notice: 'Post was successfully updated.')
         else
-          render(:action => 'edit')
+          render(action: 'edit')
         end
       end
       format.js do
@@ -50,7 +50,7 @@ class Admin::PostsController < ApplicationController
             });
           })
         else
-          render(:js => %Q{alert(#{@post.errors.full_messages.join('. ').to_json})})
+          render(js: %Q{alert(#{@post.errors.full_messages.join('. ').to_json})})
         end
       end
     end
@@ -61,7 +61,7 @@ class Admin::PostsController < ApplicationController
     respond_with(post) do |format|
       format.html { redirect_to(admin_posts_url) }
       format.js do
-        render(:js => %Q{
+        render(js: %Q{
           $('tr[post_id="#{post.id}"]').fadeOut(function() {
             $(this).remove();
           })
@@ -78,7 +78,7 @@ class Admin::PostsController < ApplicationController
 
   def uploader
     respond_with(post) do |format|
-      format.html { render(:action => 'uploader', :layout => false) }
+      format.html { render(action: 'uploader', layout: false) }
     end
   end
 

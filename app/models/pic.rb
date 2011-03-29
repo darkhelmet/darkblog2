@@ -5,7 +5,7 @@ class Pic
   include Mongoid::Timestamps
 
   mount_uploader :image, ImageUploader
-  embedded_in :post, :inverse_of => :pics
+  embedded_in :post, inverse_of: :pics
 
   validates_presence_of :image
 end

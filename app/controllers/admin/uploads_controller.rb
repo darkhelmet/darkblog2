@@ -1,6 +1,6 @@
 class Admin::UploadsController < ApplicationController
   def create
-    post.pics.create(:image => params[:file]) if params[:file]
+    post.pics.create(image: params[:file]) if params[:file]
   ensure
     head(:ok)
   end
@@ -10,7 +10,7 @@ class Admin::UploadsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(edit_admin_post_path(@post)) }
       format.js do
-        render(:js => %Q{$('.pics li[pic_id="#{params[:id]}"]').fadeOut(function() { $(this).remove(); });})
+        render(js: %Q{$('.pics li[pic_id="#{params[:id]}"]').fadeOut(function() { $(this).remove(); });})
       end
     end
   end

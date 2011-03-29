@@ -4,4 +4,4 @@
 - content_for(:canonical, category_url(params[:category]))
 - cache([title, @posts].hash) do
   %h1= title
-  = render(:partial => 'post_preview', :collection => @posts)
+  = render(partial: 'post_preview', collection: @posts)

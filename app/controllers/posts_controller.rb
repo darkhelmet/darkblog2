@@ -14,13 +14,13 @@ class PostsController < CachedController
 
   def category
     # FIXME: This will be a bug
-    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category].parameterize)) { Post.publish_order.where(:category => params[:category]).to_a }
+    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category].parameterize)) { Post.publish_order.where(category: params[:category]).to_a }
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end
 
   def archive
-    render(:action => "archive_#{params[:archive].parameterize}")
+    render(action: "archive_#{params[:archive].parameterize}")
   end
 
   def monthly
@@ -40,7 +40,7 @@ class PostsController < CachedController
   def feed
     expires_now
     unless Rails.env.development? || user_agent?(/feedburner/i) || params[:no_fb]
-      redirect_to(feedburner_url, :status => :moved_permanently) and return
+      redirect_to(feedburner_url, status: :moved_permanently) and return
     end
     request.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
     @posts = Post.publish_order.limit(10)

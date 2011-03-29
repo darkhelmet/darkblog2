@@ -56,7 +56,7 @@ module Darkblog2
       mw.insert_before(Rack::Sendfile, Rack::ETag)
       mw.use Bundles
 
-      mw.use Rack::Gist, :cache => ActiveSupport::Cache::DalliStore.new(:compress => true, :compress_threshold => 64.kilobytes), :jquery => false
+      mw.use Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false
 
       if Rails.env.development?
         require 'rack/showexceptions'

@@ -34,16 +34,16 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :small do
     # Thumbnail, basically
-    process :resize_to_fit => [100, 100]
+    process resize_to_fit: [100, 100]
   end
 
   version :medium do
     # Half size
-    process :resize_to_fit => [320, 320]
+    process resize_to_fit: [320, 320]
   end
 
   version :large do
     # Full width
-    process :resize_to_fit => [640, 10_000] # Max 640 pixels wide
+    process resize_to_fit: [640, 10_000] # Max 640 pixels wide
   end
 end

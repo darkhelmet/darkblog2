@@ -8,4 +8,4 @@
       - posts.each do |post|
         %article.main
           %h4.archive_title= link_to(post.title, post_permalink(post))
-  = render(:partial => 'layouts/archive_links')
+  = render(partial: 'layouts/archive_links')

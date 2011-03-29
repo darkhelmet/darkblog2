@@ -13,40 +13,40 @@ class Post
   after_save :push, :unless => :published
   after_save :schedule_announce_job, :if => :published
 
-  field :title, :type => String
-  field :category, :type => String
-  field :body, :type => String
-  field :published, :type => Boolean, :default => false
-  field :published_on, :type => Time, :default => lambda { Chronic.parse('monday 8am') }
-  field :slugs, :type => Array, :default => []
-  field :description, :type => String
-  field :announced, :type => Boolean, :default => false
+  field :title, type: String
+  field :category, type: String
+  field :body, type: String
+  field :published, type: Boolean, default: false
+  field :published_on, type: Time, default: -> { Chronic.parse('monday 8am') }
+  field :slugs, type: Array, default: []
+  field :description, type: String
+  field :announced, type: Boolean, default: false
 
   # Publish info with category
   index([
     [:published, Mongo::ASCENDING],
     [:published_on, Mongo::DESCENDING],
     [:category, Mongo::ASCENDING]
-  ], :background => true)
+  ], background: true)
 
   # Publish info with slug
   index([
     [:published, Mongo::ASCENDING],
     [:published_on, Mongo::DESCENDING],
     [:slugs, Mongo::ASCENDING]
-  ], :background => true)
+  ], background: true)
 
   # Publish info with tags
   index([
     [:published, Mongo::ASCENDING],
     [:published_on, Mongo::DESCENDING],
     [:tags, Mongo::ASCENDING]
-  ], :background => true)
+  ], background: true)
 
   validates_presence_of :title, :category
 
-  scope(:publish_order, lambda {
-    where(:published => true, :published_on.lte => Time.now.utc).order_by(:published_on.desc)
+  scope(:publish_order, -> {
+    where(published: true, :published_on.lte => Time.now.utc).order_by(:published_on.desc)
   })
 
   def slug
@@ -85,9 +85,7 @@ class Post
 
   def announce!
     collection.update({ '_id' => id }, {
-      '$set' => {
-        :announced => true
-      }
+      '$set' => { announced: true }
     })
   end
 
@@ -102,14 +100,14 @@ class Post
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      post = where(:published => true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, :slugs => params[:slug]).first
+      post = where(published: true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, slugs: params[:slug]).first
       # Little hack since you can't seem to do the double where clause
       post && post.published_on <= Time.now ? post : nil
     end
 
     def find_by_month(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      posts = where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc, :published => true).order_by(:published_on.desc)
+      posts = where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc, published: true).order_by(:published_on.desc)
       posts.reject do |post|
         # Get rid of posts that are published in the future
         post.published_on > Time.now
@@ -145,7 +143,7 @@ class Post
     end
 
     def search(query)
-      posts = find(Index.search(query, :function => 1)['results'].map { |r| r['docid'] })
+      posts = find(Index.search(query, function: 1)['results'].map { |r| r['docid'] })
       posts.reject do |post|
         # Get rid of posts that are published in the future
         !post.published || post.published_on > Time.now
@@ -163,9 +161,9 @@ private
 
   def update_search_index
     Index.document(id).add({
-      :text => body_for_index,
-      :title => title,
-      :timestamp => published_on.to_i.to_s
+      text: body_for_index,
+      title: title,
+      timestamp: published_on.to_i.to_s
     }) unless Index.nil?
   end
 
@@ -174,14 +172,14 @@ private
   end
 
   def push
-    Pusher[pusher_channel].trigger('post-update', attributes.merge(:html => body_html))
+    Pusher[pusher_channel].trigger('post-update', attributes.merge(html: body_html))
   end
 
   def schedule_announce_job
     return unless Rails.env.production?
     query = {
-      :at => (published_on + 1.minute).to_i,
-      :url => "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
+      at: (published_on + 1.minute).to_i,
+      url: "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}" }.join('&')
     RestClient.get("https://verbose-scheduling.appspot.com/delay?#{query}")
   end
