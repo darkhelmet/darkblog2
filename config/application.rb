@@ -62,6 +62,17 @@ module Darkblog2
         require 'rack/showexceptions'
         mw.swap(ActionDispatch::ShowExceptions, Rack::ShowExceptions)
       end
+
+      config.action_controller.asset_path = lambda do |raw_asset_path|
+        file = Rails.root.join('public', raw_asset_path[1..-1])
+        return raw_asset_path unless File.exists?(file)
+        md5 = Digest::MD5.hexdigest(File.read(file))
+        "/fingerprint/#{md5}#{raw_asset_path}"
+      end
+
+      mw.insert_before Rack::Sendfile, Rack::Rewrite do
+        rewrite %r{/fingerprint/\w*/(.*)}, '/$1'
+      end
     end
   end
 end

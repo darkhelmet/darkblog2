@@ -64,27 +64,27 @@
     $('#boastful').boastful({
       location: $('link[rel=canonical]').attr('href')
     });
-    gImages = $('#where img, .rss img');
+    gImages = $('#where img');
     gImages.fadeIn(250);
     gImages.each(function() {
       var $this;
       $this = $(this);
       $this.css({
-        'position': 'absolute'
+        position: 'absolute'
       }).wrap("<div class='img_wrapper' style='display: inline-block'>").clone().addClass('img_grayscale').css({
-        'position': 'absolute',
+        position: 'absolute',
         'z-index': '998',
-        'opacity': '0'
+        opacity: '0'
       }).insertBefore($this).queue(function() {
         var el;
         el = $(this);
         el.parent().css({
-          'width': this.width,
-          'height': this.height
+          width: this.width,
+          height: this.height
         });
         return el.dequeue();
       });
-      return this.src = $this.attr('grayscale');
+      return this.src = this.src.replace(/\.png$/, '-grayscale.png');
     });
     $('#where img, .rss img').mouseover(function() {
       return $(this).parent().find('img:first').stop().animate({

@@ -38,17 +38,6 @@ Darkblog2::Application.configure do
     "http://#{ENV['LOCAL_ASSET_HOST']}"
   end
 
-  config.action_controller.asset_path = lambda do |raw_asset_path|
-    file = Rails.root.join('public', raw_asset_path[1..-1])
-    return raw_asset_path unless File.exists?(file)
-    md5 = Digest::MD5.hexdigest(File.read(file))
-    "/fingerprint/#{md5}#{raw_asset_path}"
-  end
-
-  config.middleware.insert_before Rack::Sendfile, Rack::Rewrite do
-    rewrite %r{/fingerprint/\w*/(.*)}, '/$1'
-  end
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
