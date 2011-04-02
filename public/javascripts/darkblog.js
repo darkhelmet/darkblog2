@@ -86,7 +86,7 @@
       });
       return this.src = this.src.replace(/\.png$/, '-grayscale.png');
     });
-    $('#where img, .rss img').mouseover(function() {
+    $('#where img').mouseover(function() {
       return $(this).parent().find('img:first').stop().animate({
         opacity: 1
       }, 250);

@@ -82,7 +82,7 @@ $(document).ready ->
 
     this.src = this.src.replace(/\.png$/, '-grayscale.png')
 
-  $('#where img, .rss img').mouseover ->
+  $('#where img').mouseover ->
     $(this).parent().find('img:first').stop().animate({ opacity: 1 }, 250)
 
   $('.img_grayscale').mouseout ->
