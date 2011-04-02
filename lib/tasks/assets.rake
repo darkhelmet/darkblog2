@@ -6,6 +6,7 @@ namespace :compress do
   yui = `which yui-compressor`.strip if yui.blank?
 
   unless yui.blank?
+    desc 'Compress Javascript with the YUI Compressor'
     task :yui do
       scripts = script_names.map { |file| "public/javascripts/#{file}.js" }.join(' ')
       system("cat #{scripts} | #{yui} --type js -o #{out}")
@@ -15,15 +16,10 @@ namespace :compress do
   closure = `which closure`.strip
 
   unless closure.blank?
+    desc 'Compress Javascript with the Google Closure Compiler'
     task :closure do
       scripts = script_names.map { |file| "--js public/javascripts/#{file}.js" }.join(' ')
       system("#{closure} #{scripts} --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file #{out}")
     end
-  end
-end
-
-namespace :coffee do
-  task :compile do
-    system("coffee -wc -o public/javascripts app/coffeescripts/*")
   end
 end
