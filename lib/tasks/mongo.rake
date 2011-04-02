@@ -25,7 +25,7 @@ namespace :db do
     dev_db = Post.db.name
     conn.drop_database(dev_db)
     conn.copy_database(uri.path[1..-1], dev_db, "#{uri.host}:#{uri.port}", uri.user, uri.password)
-    # FIXME: Can't find a way to repair form here, but it needs to happen.
+    system(%Q{echo "db.repairDatabase()" | mongo #{dev_db}})
     Admin.first.update_attributes(:password => 'admin', :password_confirmation => 'admin')
   end
 end
