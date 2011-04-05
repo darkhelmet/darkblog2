@@ -16,7 +16,7 @@ module Taggable
   def self.included(klass)
     klass.field :tags, :type => Array, :default => []
     klass.instance_eval do
-      scope(:by_tag, lambda { |tag|
+      scope(:by_tag, ->(tag) {
         where(:tags.in => [tag])
       })
     end

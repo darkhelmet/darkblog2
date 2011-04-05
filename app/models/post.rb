@@ -84,7 +84,7 @@ class Post
   end
 
   def announce!
-    collection.update({ '_id' => id }, {
+    collection.update({ _id: id }, {
       '$set' => { announced: true }
     })
   end
