@@ -8,7 +8,7 @@ class Post
   embeds_many :pics
 
   before_save :slug!
-  after_save :update_search_index, :if => :published
+  after_save :update_search_index!, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
   after_save :schedule_announce_job, :if => :published
@@ -100,14 +100,23 @@ class Post
   class << self
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      post = where(published: true, :published_on.gte => time.beginning_of_day.utc, :published_on.lte => time.end_of_day.utc, slugs: params[:slug]).first
+      post = where({
+        published: true,
+        :published_on.gte => time.beginning_of_day.utc,
+        :published_on.lte => time.end_of_day.utc,
+        slugs: params[:slug]
+      }).first
       # Little hack since you can't seem to do the double where clause
       post && post.published_on <= Time.now ? post : nil
     end
 
     def find_by_month(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      posts = where(:published_on.gte => time.beginning_of_month.utc, :published_on.lte => time.end_of_month.utc, published: true).order_by(:published_on.desc)
+      posts = where({
+        :published_on.gte => time.beginning_of_month.utc,
+        :published_on.lte => time.end_of_month.utc,
+        published: true
+      }).order_by(:published_on.desc)
       posts.reject do |post|
         # Get rid of posts that are published in the future
         post.published_on > Time.now
@@ -156,10 +165,14 @@ class Post
 private
 
   def body_for_index
-    [title, Sanitize.clean(body_html), tag_string].join("\n")
+    [title, clean_body, tag_string].join("\n")
   end
 
-  def update_search_index
+  def clean_body
+    Sanitize.clean(body_html)
+  end
+
+  def update_search_index!
     Index.document(id).add({
       text: body_for_index,
       title: title,
