@@ -3,9 +3,9 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.0.3'
 gem 'haml', '~> 3.0.24' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
-gem 'bson_ext', '1.0.4'
-gem 'mongo'
-gem 'mongoid', '2.0.0.beta.16', :git => 'git://github.com/mongoid/mongoid.git', :ref => 'f38e3ef'
+gem 'bson_ext', '1.3'
+gem 'mongo', '1.3'
+gem 'mongoid', '2.0.0'
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 1.0.0', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
