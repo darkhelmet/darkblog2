@@ -109,7 +109,7 @@ class Post
   def related(limit = 5)
     # This doesn't use an index, I think because of the $elemMatch
     Post.publish_order.where({
-      terms: { "$elemMatch" => { "$in" => terms } },
+      terms: { "$in" => terms },
       :_id.ne => id
     }).sort_by do |post|
       -(post.terms & terms).length
