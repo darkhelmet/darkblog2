@@ -22,25 +22,31 @@ class Post
   field :description, type: String
   field :announced, type: Boolean, default: false
 
-  # Publish info with category
+  # Basic search
   index([
     [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING],
-    [:category, Mongo::ASCENDING]
+    [:published_on, Mongo::DESCENDING]
   ], background: true)
 
-  # Publish info with slug
+  # Search by category
   index([
+    [:category, Mongo::ASCENDING],
     [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING],
-    [:slugs, Mongo::ASCENDING]
+    [:published_on, Mongo::DESCENDING]
   ], background: true)
 
-  # Publish info with tags
+  # Search by slug
   index([
+    [:slugs, Mongo::ASCENDING],
     [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING],
-    [:tags, Mongo::ASCENDING]
+    [:published_on, Mongo::DESCENDING]
+  ], background: true)
+
+  # Search by tags
+  index([
+    [:tags, Mongo::ASCENDING],
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING]
   ], background: true)
 
   validates_presence_of :title, :category
