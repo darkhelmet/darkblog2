@@ -1,4 +1,5 @@
 class Post
+  Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
   Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}_#{Rails.env}") rescue nil
 
   include Mongoid::Document
@@ -8,6 +9,7 @@ class Post
   embeds_many :pics
 
   before_save :slug!
+  before_save :update_terms!
   after_save :update_search_index!, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
@@ -21,6 +23,7 @@ class Post
   field :slugs, type: Array, default: []
   field :description, type: String
   field :announced, type: Boolean, default: false
+  field :terms, type: Array, default: []
 
   # Basic search
   index([
@@ -101,6 +104,16 @@ class Post
 
   def pusher_channel
     "post-#{id}"
+  end
+
+  def related(limit = 5)
+    # This doesn't use an index, I think because of the $elemMatch
+    Post.publish_order.where({
+      terms: { "$elemMatch" => { "$in" => terms } },
+      :_id.ne => id
+    }).sort_by do |post|
+      -(post.terms & terms).length
+    end.take(limit)
   end
 
   class << self
@@ -205,5 +218,14 @@ private
       url: "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
     }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}" }.join('&')
     RestClient.get("https://verbose-scheduling.appspot.com/delay?#{query}")
+  end
+
+  def update_terms!
+    json = RestClient.post(Yahoo, {
+      appid: ENV['YAHOO_APPID'],
+      context: clean_body,
+      output: 'json'
+    })
+    self.terms = JSON.parse(json)['ResultSet']['Result']
   end
 end
