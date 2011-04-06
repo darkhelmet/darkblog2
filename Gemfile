@@ -29,4 +29,5 @@ group :development, :test do
   gem 'mongrel', '1.2.0.pre2', :require => nil
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'heroku'
+  gem 'awesome_print', :require => 'ap'
 end
