@@ -85,8 +85,8 @@
     settings: {
       opacity      : 0,
       overlay      : true,
-      loadingImage : 'http://static.verboselogging.com/images/facebox/loading.gif',
-      closeImage   : 'http://static.verboselogging.com/images/facebox/closelabel.gif',
+      loadingImage : 'http://cdn.blog.darkhax.com/images/facebox/loading.gif',
+      closeImage   : 'http://cdn.blog.darkhax.com/images/facebox/closelabel.gif',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
     <div id="facebox" style="display:none;"> \
@@ -103,7 +103,7 @@
                 </div> \
                 <div class="footer"> \
                   <a href="#" class="close"> \
-                    <img src="http://static.verboselogging.com/images/facebox/closelabel.gif" title="close" class="close_image" /> \
+                    <img src="http://cdn.blog.darkhax.com/images/facebox/closelabel.gif" title="close" class="close_image" /> \
                   </a> \
                 </div> \
               </td> \
