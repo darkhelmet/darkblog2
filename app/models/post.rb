@@ -13,7 +13,7 @@ class Post
   after_save :update_search_index!, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
-  after_save :schedule_announce_job, :if => :published
+  after_save :schedule_announce_job, :if => :published, :unless => :announced
 
   field :title, type: String
   field :category, type: String
