@@ -14,7 +14,7 @@ class PostsController < CachedController
 
   def category
     # FIXME: This will be a bug
-    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category].parameterize)) { Post.publish_order.where(category: params[:category]).to_a }
+    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category].parameterize)) { Post.find_by_category(params[:category]) }
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end

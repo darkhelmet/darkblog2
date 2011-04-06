@@ -123,6 +123,10 @@ class Post
       end
     end
 
+    def find_by_category(category)
+      Post.publish_order.where(category: category).to_a
+    end
+
     def categories
       collection.distinct('category')
     end
