@@ -70,7 +70,7 @@ module Darkblog2
         "/fingerprint/#{md5}#{raw_asset_path}"
       end
 
-      mw.insert_before(Rack::Lock, Rack::Rewrite) do
+      mw.insert_before(ActionDispatch::Static, Rack::Rewrite) do
         rewrite %r{/fingerprint/\w*/(.*)}, '/$1'
       end
     end
