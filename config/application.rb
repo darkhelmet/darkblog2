@@ -52,11 +52,11 @@ module Darkblog2
       require 'rack/remove_slash'
       require 'bundles'
 
-      mw.insert_after(Rack::Lock, Rack::RemoveSlash)
+      mw.insert_before(Rack::Lock, Rack::RemoveSlash)
       mw.insert_before(Rack::Sendfile, Rack::ETag)
-      mw.use Bundles
+      mw.use(Bundles)
 
-      mw.use Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false
+      mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
 
       if Rails.env.development?
         require 'rack/showexceptions'
@@ -70,7 +70,7 @@ module Darkblog2
         "/fingerprint/#{md5}#{raw_asset_path}"
       end
 
-      mw.insert_before Rack::Sendfile, Rack::Rewrite do
+      mw.insert_before(Rack::Lock, Rack::Rewrite) do
         rewrite %r{/fingerprint/\w*/(.*)}, '/$1'
       end
     end
