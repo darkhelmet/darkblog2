@@ -18,7 +18,7 @@ gem 'carrierwave', '~> 0.5.3'
 gem 'rmagick', '~> 2.13.1'
 gem 'pusher', '~> 0.8.0'
 gem 'fog', '~> 0.7.1'
-gem 'chronic', '~> 0.3.0'
+gem 'chronic', '~> 0.3.0', :git => 'git://github.com/castiglione/chronic.git', :branch => '1.9-fixes'
 gem 'indextank', '~> 1.0.8'
 gem 'rack-rewrite', '~> 1.0.2', :require => 'rack/rewrite'
 

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/castiglione/chronic.git
+  revision: 095a796ebf5f354ad503350606db372f9a284cce
+  branch: 1.9-fixes
+  specs:
+    chronic (0.3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -39,7 +46,6 @@ GEM
     builder (2.1.2)
     carrierwave (0.5.3)
       activesupport (~> 3.0)
-    chronic (0.3.0)
     columnize (0.3.2)
     configuration (1.2.0)
     crack (0.1.8)
@@ -202,7 +208,7 @@ DEPENDENCIES
   awesome_print
   bson_ext (= 1.3)
   carrierwave (~> 0.5.3)
-  chronic (~> 0.3.0)
+  chronic (~> 0.3.0)!
   dalli (~> 1.0.0)
   devise (~> 1.1.5)
   factory_girl_rails (~> 1.0)
