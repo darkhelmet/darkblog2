@@ -5,7 +5,7 @@ gem 'haml', '~> 3.0.24' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
 gem 'bson_ext', '1.3'
 gem 'mongo', '1.3'
-gem 'mongoid', '2.0.0'
+gem 'mongoid', '~> 2.0.0'
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 1.0.0', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'

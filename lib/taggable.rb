@@ -1,7 +1,7 @@
 module Taggable
   module InstanceMethods
     def tags=(t)
-      self.tags = Set.new(t).to_a
+      write_attribute(:tags, t.uniq)
     end
 
     def tag_string
@@ -9,6 +9,7 @@ module Taggable
     end
 
     def tag_string=(tags)
+      # TODO: Some piping DSL like "tags.split(',') | :strip | :empty?.reject | :parameterize"
       self.tags = tags.split(',').map(&:strip).reject(&:empty?).map(&:parameterize)
     end
   end
