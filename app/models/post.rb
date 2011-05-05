@@ -9,7 +9,7 @@ class Post
   embeds_many :pics
 
   before_save :slug!
-  before_save :update_terms!
+  before_save :update_terms!, :unless => -> { ENV['YAHOO_APPID'].blank? }
   after_save :update_search_index!, :if => :published
   after_save :clear_cache, :if => :published
   after_save :push, :unless => :published
