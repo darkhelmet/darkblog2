@@ -52,6 +52,13 @@ class Post
     [:published_on, Mongo::DESCENDING]
   ], background: true)
 
+  # Search by terms
+  index([
+    [:terms, Mongo::ASCENDING],
+    [:published, Mongo::ASCENDING],
+    [:published_on, Mongo::DESCENDING]
+  ], background: true)
+
   validates_presence_of :title, :category
 
   scope(:publish_order, -> {
@@ -107,13 +114,11 @@ class Post
   end
 
   def related(limit = 5)
-    # This doesn't use an index, I think because of the $elemMatch
-    Post.publish_order.where({
-      terms: { "$in" => terms },
-      :_id.ne => id
-    }).sort_by do |post|
-      -(post.terms & terms).length
-    end.take(limit)
+    Post.publish_order.
+      where(:terms.in => terms).
+      reject { |post| post.id == id }.
+      sort_by { |post| -(post.terms & terms).length }.
+      take(limit)
   end
 
   class << self
