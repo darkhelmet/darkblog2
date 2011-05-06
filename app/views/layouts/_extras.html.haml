@@ -1,15 +1,5 @@
 = javascript_include_tag('all')
-= javascript_include_tag('http://assets.skribit.com/javascripts/SkribitSuggest.js')
 :javascript
   CFInstall.check({
     mode: 'overlay'
   });
-  if ($.showExtras()) {
-    SkribitSuggest.suggest('http://skribit.com/lightbox/verbose-logging', {
-      placement: 'right',
-      color: '#333333',
-      text_color: 'white',
-      distance_vert: '32%',
-      distance_horiz: ''
-    });
-  }
