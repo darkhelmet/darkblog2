@@ -212,6 +212,10 @@ header {
       list-style-image: none;
       list-style-position: outside;
       list-style-type: none; }
+  #sidebar iframe.twitter-follow-button {
+    width: 175px !important;
+    position: relative;
+    top: -6px; }
 
 footer {
   text-align: center;

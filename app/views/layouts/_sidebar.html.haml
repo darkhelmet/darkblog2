@@ -2,10 +2,12 @@
   = gravatar(280)
   Daniel Huckstep is a software engineer (EIT) in
   = link_to('Edmonton, Alberta, Canada', "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Edmonton,+Alberta,+Canada&sll=53.543564,-113.490452&sspn=0.456975,1.234589&ie=UTF8&hq=&hnear=Edmonton,+Division+No.+11,+Alberta,+Canada&t=h&z=11")
-%section#feedburner
+%section#chicklet
   %p
     = link_to(feed_path) do
       = image_tag('http://feeds.feedburner.com/~fc/VerboseLogging?bg=FF9900&fg=000000&anim=0', size: '88x26', style: 'border: 0', alt: 'Feedburner Chicklet')
+    %a.twitter-follow-button{ :href => 'http://twitter.com/darkhelmetlive', 'data-show-count' => 'false' } Follow @darkhelmetlive
+    = javascript_include_tag('http://platform.twitter.com/widgets.js')
 %section#postrank
   .postrank-widget.theDarkSide
     = javascript_include_tag('http://api.postrank.com/static/widget-v2.js')
