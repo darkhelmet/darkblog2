@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.3'
-gem 'rake', '~> 0.8.7'
 gem 'haml', '~> 3.0.24' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
 gem 'bson_ext', '1.3.1'
@@ -19,7 +18,7 @@ gem 'carrierwave', '~> 0.5.3'
 gem 'rmagick', '~> 2.13.1'
 gem 'pusher', '~> 0.8.0'
 gem 'fog', '~> 0.7.1'
-gem 'chronic', '~> 0.3.0', :git => 'git://github.com/castiglione/chronic.git', :branch => '1.9-fixes'
+gem 'chronic', '~> 0.4.0'
 gem 'indextank', '~> 1.0.8'
 gem 'rack-rewrite', '~> 1.0.2', :require => 'rack/rewrite'
 
