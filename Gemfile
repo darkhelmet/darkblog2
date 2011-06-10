@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.3'
-gem 'haml', '~> 3.0.24' # ERB sucks
+gem 'haml', '~> 3.1.0' # ERB sucks
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
 gem 'bson_ext', '1.3.1'
 gem 'mongo', '1.3.1'
