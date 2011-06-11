@@ -51,5 +51,3 @@ Darkblog2::Application.configure do
 
   config.action_controller.logger = Logger.new(STDOUT)
 end
-
-Sass::Plugin.options[:style] = :compressed
