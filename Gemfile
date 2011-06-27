@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.3'
+gem 'rails', '~> 3.0.9'
 gem 'haml', '~> 3.1.0' # ERB sucks
 gem 'sass', '~> 3.1.0'
 gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
