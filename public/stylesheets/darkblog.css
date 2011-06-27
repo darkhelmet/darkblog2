@@ -3,7 +3,8 @@ html, body {
   color: #525252; }
 
 body {
-  margin-top: 65px; }
+  margin-top: 65px;
+  background: url(http://cdn.blog.darkhax.com/images/handmadepaper.png); }
 
 a, a:visited {
   text-decoration: none; }
@@ -97,7 +98,7 @@ header {
   padding-top: 0px;
   padding-bottom: 10px;
   padding-left: 5px;
-  background: black;
+  background: url(http://cdn.blog.darkhax.com/images/concrete_wall.png);
   color: white;
   z-index: 1000;
   position: fixed;
