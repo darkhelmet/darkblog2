@@ -36,6 +36,8 @@
     if ($.showExtras()) {
       $.getScript('http://tweetboard.com/darkhelmetlive/tb.js');
     }
+    $('plusone').replaceWith('<g:plusone size="medium"></g:plusone>');
+    $.getScript('https://apis.google.com/js/plusone.js');
     $('.content a:regex(href, png|jpe?g|gif)').facebox();
     query = $.map($('a[href$=#disqus_thread]'), function(a, index) {
       return "url" + index + "=" + (encodeURIComponent(a.href));
