@@ -121,7 +121,29 @@ class Post
       take(limit)
   end
 
+  def to_fts
+    {
+      :title => title,
+      :body => clean_body,
+      :description => description,
+      :tags => tags.join(' ')
+    }
+  end
+
+  def goindex
+    Excon.post("http://localhost:5678/blog/posts/#{id.to_s}", :body => to_fts.to_json, :headers => { 'Content-Type' => 'application/json; content-type=utf8' })
+  end
+
   class << self
+    def goindex
+      Post.all.each(&:goindex)
+    end
+
+    def gofetch(query)
+      json = JSON.parse(Excon.get("http://localhost:5678/blog/posts?query=#{query}").body)
+      json['results'].map { |id| Post.find(id).title }
+    end
+
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       post = where({
