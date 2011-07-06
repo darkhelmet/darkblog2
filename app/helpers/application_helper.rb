@@ -97,12 +97,20 @@ module ApplicationHelper
         link: 'http://www.flickr.com/photos/darkhelmetlive/',
         title: 'My pictures on Flickr'
       },
+      github: {
+        link: 'https://github.com/darkhelmet',
+        title: 'My codez on teh Githubz'
+      },
+      gplus: {
+        link: 'http://gplus.to/darkhelmetlive',
+        title: 'Add me to a Circle on Google+'
+      },
       rss: {
         link: feed_path,
-        title: 'Get new articles in your RSS reader.'
+        title: 'Get new articles in your RSS reader'
       }
     }
-    [:twitter, :linkedin, :skype, :flickr, :rss].each do |icon|
+    [:twitter, :gplus, :linkedin, :skype, :github, :flickr, :rss].each do |icon|
       data = header_icons[icon]
       concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", height: 28, width: 28), data[:link], title: data[:title], :class => icon))
     end
