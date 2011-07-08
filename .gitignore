@@ -8,3 +8,4 @@ config/pusher.yml
 .DS_Store
 config.sqlite
 mongrel2.conf
+.sass-cache/

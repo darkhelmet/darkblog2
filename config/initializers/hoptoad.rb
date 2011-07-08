@@ -13,7 +13,7 @@ end
 # Move the Hoptoad middleware WAY up the stack.
 Rails.application.config.middleware.tap do |mw|
   mw.delete(HoptoadNotifier::Rack)
-  mw.insert_before(Bundles, HoptoadNotifier::Rack)
+  mw.insert_before(Rack::Gist, HoptoadNotifier::Rack)
 end
 
 HoptoadNotifier.configure do |config|

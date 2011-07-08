@@ -36,6 +36,9 @@ module Darkblog2
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = 'utf-8'
 
@@ -50,29 +53,11 @@ module Darkblog2
 
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
-      require 'bundles'
 
       mw.insert_before(Rack::Lock, Rack::RemoveSlash)
       mw.insert_before(Rack::Sendfile, Rack::ETag)
-      mw.use(Bundles)
 
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
-
-      if Rails.env.development?
-        require 'rack/showexceptions'
-        mw.swap(ActionDispatch::ShowExceptions, Rack::ShowExceptions)
-      end
-
-      config.action_controller.asset_path = lambda do |raw_asset_path|
-        file = Rails.root.join('public', raw_asset_path[1..-1])
-        return raw_asset_path unless File.exists?(file)
-        md5 = Digest::MD5.hexdigest(File.read(file))
-        "/fingerprint/#{md5}#{raw_asset_path}"
-      end
-
-      mw.insert_before(ActionDispatch::Static, Rack::Rewrite) do
-        rewrite %r{/fingerprint/\w*/(.*)}, '/$1'
-      end
     end
   end
 end

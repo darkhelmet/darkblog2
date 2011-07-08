@@ -34,6 +34,10 @@ Darkblog2::Application.configure do
   # Enable serving of images, stylesheets, and javascripts from an asset server
   config.action_controller.asset_host = ENV['LOCAL_ASSET_HOST']
 
+  # Compress both stylesheets and JavaScripts
+  config.assets.js_compressor  = :uglifier
+  config.assets.css_compressor = :scss
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 

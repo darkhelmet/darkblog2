@@ -19,6 +19,10 @@ module ApplicationHelper
     favicon_link_tag('favicon.png', type: 'image/png')
   end
 
+  def apple_touch_icon_tag
+    tag(:link, rel: 'apple-touch-icon', href: 'http://www.gravatar.com/avatar/48409ce1953c290351fcb875b20eccbb.png?s=114')
+  end
+
   def gravatar(size = 120)
     image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}", alt: "Gravatar for #{Darkblog2.config[:author]}")
   end

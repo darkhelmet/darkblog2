@@ -1,34 +1,41 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.9'
+gem 'rails', '3.1.0.rc4'
 gem 'haml', '~> 3.1.0' # ERB sucks
 gem 'sass', '~> 3.1.0'
-gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
+gem 'yajl-ruby', '~> 0.8.2', :require => 'yajl/json_gem' # JSON
 gem 'bson_ext', '1.3.1'
 gem 'mongo', '1.3.1'
 gem 'mongoid', '~> 2.0.0'
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 1.0.0', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
-gem 'rack-gist', '~> 1.1.7', :require => 'rack/gist'
-gem 'sinatra-bundles', '~> 0.5.0', :require => nil
+gem 'rack-gist', '~> 1.1.8', :require => 'rack/gist'
 gem 'rest-client', '~> 1.6.1'
 gem 'devise', '~> 1.1.5'
 gem 'sanitize', '~> 2.0.1'
 gem 'carrierwave', '~> 0.5.3'
 gem 'rmagick', '~> 2.13.1'
 gem 'pusher', '~> 0.8.0'
-gem 'fog', '~> 0.7.1'
-gem 'chronic', '~> 0.4.0'
+gem 'fog', '~> 0.9.0'
+gem 'chronic', '~> 0.5.0'
 gem 'indextank', '~> 1.0.8'
 gem 'rack-rewrite', '~> 1.0.2', :require => 'rack/rewrite'
+gem 'coffee-script', '~> 2.2'
+gem 'jquery-rails', '~> 1.0.12'
+gem 'uglifier', '~> 1.0.0'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.0.0'
+  gem 'therubyracer', '0.9.2'
+  gem 'rspec-rails', '~> 2.6.0'
   gem 'factory_girl_rails', '~> 1.0'
-  gem 'faker', '~> 0.3.1'
+  gem 'faker', '~> 0.9.5'
   gem 'mongrel', '1.2.0.pre2', :require => nil
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
+end
+
+group :production do
+  gem 'therubyracer-heroku', '0.8.1.pre3'
 end
