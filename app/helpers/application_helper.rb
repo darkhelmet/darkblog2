@@ -116,7 +116,7 @@ module ApplicationHelper
     }
     [:twitter, :gplus, :linkedin, :skype, :github, :flickr, :rss].each do |icon|
       data = header_icons[icon]
-      concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", height: 28, width: 28), data[:link], title: data[:title], :class => icon))
+      concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", height: 28, width: 28, grayscale: image_path("icons/#{icon}_grayscale.png")), data[:link], title: data[:title], :class => icon))
     end
   end
 end

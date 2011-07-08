@@ -82,7 +82,7 @@ $(document).ready ->
       })
       el.dequeue()
 
-    this.src = this.src.replace(/((-[0-9a-f]+)?\.png)$/, '_grayscale$1')
+    this.src = $this.attr('grayscale')
 
   $('#where img').mouseover ->
     $(this).parent().find('img:first').stop().animate({ opacity: 1 }, 250)
