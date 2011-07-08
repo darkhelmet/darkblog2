@@ -35,8 +35,8 @@ Darkblog2::Application.configure do
   config.action_controller.asset_host = ENV['LOCAL_ASSET_HOST']
 
   # Compress both stylesheets and JavaScripts
+  config.assets.compress = true
   config.assets.js_compressor  = :uglifier
-  config.assets.css_compressor = :scss
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
