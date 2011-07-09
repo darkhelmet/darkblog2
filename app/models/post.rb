@@ -1,3 +1,5 @@
+Chronic.time_class = Time.zone
+
 class Post
   Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
   Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}_#{Rails.env}") rescue nil
