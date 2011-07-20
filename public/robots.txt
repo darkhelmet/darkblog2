@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: http://verboselogging.com/sitemap.xml.gz
+Sitemap: http://verboselogging.com/sitemap.xml
 Disallow: /search
 Disallow: /gist.github.com
 Allow: /
