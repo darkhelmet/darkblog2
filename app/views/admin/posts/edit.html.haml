@@ -1,5 +1,6 @@
 - content_for(:footer) do
-  = javascript_include_tag('plupload.full.min')
+  = javascript_include_tag('plupload.full.min.js')
+  = javascript_include_tag('keymaster.min.js')
   :javascript
     $(document).ready(function() {
       var uploader = new plupload.Uploader({
@@ -24,6 +25,10 @@
         $.get("#{pics_admin_post_path(@post, :format => 'js')}");
       });
       $('.pics li a:first').facebox();
+      key('⌘+s, ctrl+s', function() {
+        $(':submit').click();
+        return false;
+      });
     });
 
 %h1 Editing post
