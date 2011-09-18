@@ -1,5 +1,3 @@
-require 'carrierwave/orm/mongoid'
-
 class Pic
   include Mongoid::Document
   include Mongoid::Timestamps
