@@ -1,3 +1,6 @@
+- content_for(:head) do
+  = render('open_graph', :post => @post)
+
 - unless inline?
   - content_for(:title, title_for(@post))
   - content_for(:description, @post.description)
@@ -15,7 +18,7 @@
   - cache(@post.cache_key) do
     %h1.entry-title= post_link(@post)
     .meta
-      %time.updated{ :datetime => @post.published_on.xmlschema, :pubdate => '' }= @post.published_on.to_s(:post)
+      = render_updated_at(@post)
       &raquo;
       %span.byline.author.vcard
         By

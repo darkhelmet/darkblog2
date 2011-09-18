@@ -20,11 +20,15 @@ module ApplicationHelper
   end
 
   def apple_touch_icon_tag
-    tag(:link, rel: 'apple-touch-icon', href: 'http://www.gravatar.com/avatar/48409ce1953c290351fcb875b20eccbb.png?s=114')
+    tag(:link, rel: 'apple-touch-icon', href: gravatar_url(114))
+  end
+
+  def gravatar_url(size = 120)
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}"
   end
 
   def gravatar(size = 120)
-    image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}", alt: "Gravatar for #{Darkblog2.config[:author]}")
+    image_tag(gravatar_url(size), alt: "Gravatar for #{Darkblog2.config[:author]}")
   end
 
   def description_tag
@@ -53,6 +57,10 @@ module ApplicationHelper
 
   def sitemap_tag
     tag(:link, rel: 'sitemap', type: 'application/xml', title: 'Sitemap', href: sitemap_url)
+  end
+
+  def open_graph_tag(name, content)
+    tag(:meta, :property => "og:#{name}", :content => content)
   end
 
   def managing_editor

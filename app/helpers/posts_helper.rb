@@ -16,4 +16,13 @@ module PostsHelper
   def title_for(post)
     "#{post.title} | #{Darkblog2.config[:title]}"
   end
+
+  def render_updated_at(post)
+    content_tag(:time, post.published_on.to_s(:post), :class => 'updated', datetime: post.published_on.xmlschema, pubdate: '')
+  end
+
+  def image_for(post)
+    body_image = Nokogiri(post.body_html).search('img').first
+    body_image.nil? ? gravatar_url : body_image[:src]
+  end
 end
