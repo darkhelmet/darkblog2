@@ -1,18 +1,18 @@
 !!! 5
 %html
-  %head= render(partial: 'layouts/head')
+  %head= render('layouts/head')
   %body
     - cache('header') do
-      %header= render(partial: 'layouts/header')
+      %header= render('layouts/header')
     .clear
     .row
       %section#content.col.col_11= yield
       - cache('sidebar') do
-        %aside#sidebar.col.col_5= render(partial: 'layouts/sidebar')
+        %aside#sidebar.col.col_5= render('layouts/sidebar')
       - cache('footer') do # Footer might end up with extra stuff
         .clear
-        %footer.col.col_16= render(partial: 'layouts/footer')
-        #extras= render(partial: 'layouts/extras')
+        %footer.col.col_16= render('layouts/footer')
+        #extras= render('layouts/extras')
       #extra_footer= yield(:footer)
     :javascript
       (function() {

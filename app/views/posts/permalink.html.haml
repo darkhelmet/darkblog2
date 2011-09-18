@@ -56,7 +56,7 @@
     .clear
   - unless inline?
     - cache("post_extras:#{@post.cache_key}") do
-      = render(partial: 'layouts/post_extras')
-      = render(partial: 'posts/disqus_single')
+      = render('layouts/post_extras')
+      = render('posts/disqus_single')
 - content_for(:footer) do
   = javascript_include_tag('http://platform.twitter.com/widgets.js')
