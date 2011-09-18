@@ -2,7 +2,6 @@
 - content_for(:title, title_text('Full archives'))
 - content_for(:canonical, archive_url('full'))
 - cache('full-archive', expires_in: 1.hour) do
-  -# FIXME: Refactor
   - Post.publish_order.each do |post|
     %article.main
       %h4.archive_title= link_to(post.title, post_permalink(post))

@@ -2,7 +2,6 @@
 - content_for(:title, title_text("Monthly archives"))
 - content_for(:canonical, archive_url('month'))
 - cache('monthly-archive') do
-  -# FIXME: Refactor
   - Post.group_by_month.each do |month, posts|
     %section
       %h1= monthly_archive_link(month)
