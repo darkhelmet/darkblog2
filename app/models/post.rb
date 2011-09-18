@@ -21,7 +21,7 @@ class Post
   field :category, type: String
   field :body, type: String
   field :published, type: Boolean, default: false
-  field :published_on, type: Time, default: -> { Chronic.parse('monday 8am') }
+  field :published_on, type: Time, default: -> { Chronic.parse('monday 10am') }
   field :slugs, type: Array, default: []
   field :description, type: String
   field :announced, type: Boolean, default: false

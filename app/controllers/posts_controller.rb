@@ -2,7 +2,7 @@ class PostsController < CachedController
   respond_to :html, :json, :js
 
   def main
-    respond_with(@posts = Post.publish_order.limit(6).to_a)
+    respond_with(@posts = Post.publish_order.limit(6))
   end
 
   def permalink

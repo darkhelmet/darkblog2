@@ -41,6 +41,16 @@
         })();
       = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
       %plusone
+      #fb-root
+      :javascript
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#appId=286712658022064&xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      .fb-like{ 'data-send' => 'true', 'data-layout' => 'button_count', 'data-width' => '150', 'data-show-faces' => 'true' }
     %hr
     .content.entry-content!= @post.body_html
     .clear
