@@ -25,4 +25,8 @@ module PostsHelper
     body_image = Nokogiri(post.body_html).search('img').first
     body_image.nil? ? gravatar_url : body_image[:src]
   end
+
+  def robohash_for(post, size = 25)
+    image_tag("http://static1.robohash.org/#{post.slug}?size=#{size}x#{size}", :alt => 'Random icon from robohash.org')
+  end
 end

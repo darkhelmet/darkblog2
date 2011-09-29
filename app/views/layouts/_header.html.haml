@@ -1,4 +1,6 @@
-%h1#title.left= link_to(Darkblog2.config[:title], '/')
+%h1#title.left
+  = link_to(Darkblog2.config[:title], '/')
+  = content_for(:icon)
 %nav.right
   %ul
     %li= link_to('Home', '/')

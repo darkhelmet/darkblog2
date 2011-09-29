@@ -1,6 +1,9 @@
 - content_for(:head) do
   = render('open_graph', :post => @post)
 
+- content_for(:icon) do
+  = robohash_for(@post, 28)
+
 - unless inline?
   - content_for(:title, title_for(@post))
   - content_for(:description, @post.description)
