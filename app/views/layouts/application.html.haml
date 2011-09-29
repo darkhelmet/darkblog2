@@ -2,8 +2,7 @@
 %html
   %head= render('layouts/head')
   %body
-    - cache('header') do
-      %header= render('layouts/header')
+    %header= render('layouts/header')
     .clear
     .row
       %section#content.col.col_11= yield
