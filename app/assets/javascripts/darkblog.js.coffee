@@ -30,7 +30,6 @@ $.extend({
 })
 
 $(document).ready ->
-  $.getScript('http://tweetboard.com/darkhelmetlive/tb.js') if $.showExtras()
   $('plusone').replaceWith('<g:plusone size="medium"></g:plusone>')
   $.getScript('https://apis.google.com/js/plusone.js')
 
