@@ -13,7 +13,7 @@ gem 'dalli', '~> 1.1.2', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.8', :require => 'rack/gist'
 gem 'rest-client', '~> 1.6.1'
-gem 'devise', '1.4.4' # Needs to be at 1.4.4
+gem 'devise', '1.4.5' # Needs to be at 1.4.5
 gem 'sanitize', '~> 2.0.1'
 gem 'carrierwave', '0.5.4'
 gem 'rmagick', '~> 2.13.1'
