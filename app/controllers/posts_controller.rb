@@ -6,15 +6,14 @@ class PostsController < CachedController
   end
 
   def permalink
-    @post = Rails.cache.fetch(cache_key('post', 'permalink', params.hash)) { Post.find_by_permalink_params(params) }
+    @post = Post.find_by_permalink_params(params)
     render_404 and return if @post.nil?
     redirect_to_post(@post) and return if @post.slug != params[:slug]
     respond_with(@post)
   end
 
   def category
-    # FIXME: This will be a bug
-    @posts = Rails.cache.fetch(cache_key('posts', 'category', params[:category].parameterize)) { Post.find_by_category(params[:category]) }
+    @posts = Post.find_by_category(params[:category])
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end
@@ -24,7 +23,7 @@ class PostsController < CachedController
   end
 
   def monthly
-    @posts = Rails.cache.fetch(cache_key('posts', 'monthly', params.hash)) { Post.find_by_month(params).to_a }
+    @posts = Post.find_by_month(params)
     render_404 and return if @posts.empty?
     respond_with(@posts)
   end
@@ -34,7 +33,7 @@ class PostsController < CachedController
   end
 
   def search
-    respond_with(@posts = Post.search(params[:query]).to_a)
+    respond_with(@posts = Post.search(params[:query]))
   end
 
   def feed
