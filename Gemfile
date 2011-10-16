@@ -1,19 +1,19 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1'
-gem 'haml', '~> 3.1.2' # ERB sucks
-gem 'sass', '~> 3.1.2'
-gem 'sass-rails', '3.1.2'
+gem 'rails', '3.1.1'
+gem 'haml', '~> 3.1.3' # ERB sucks
+gem 'sass', '~> 3.1.10'
+gem 'sass-rails', '3.1.4'
 gem 'yajl-ruby', '~> 1.0.0', :require => 'yajl/json_gem' # JSON
-gem 'bson_ext', '1.3.1'
-gem 'mongo', '1.3.1'
-gem 'mongoid', '~> 2.2.0'
+gem 'bson_ext', '1.4.0'
+gem 'mongo', '1.4.0'
+gem 'mongoid', '~> 2.3.1'
 gem 'hoptoad_notifier'
 gem 'dalli', '~> 1.1.2', :require => 'active_support/cache/dalli_store'
 gem 'RedCloth', '~> 4.2.3'
 gem 'rack-gist', '~> 1.1.8', :require => 'rack/gist'
 gem 'rest-client', '~> 1.6.1'
-gem 'devise', '1.4.4'
+gem 'devise', '1.4.4' # Needs to be at 1.4.4
 gem 'sanitize', '~> 2.0.1'
 gem 'carrierwave', '0.5.4'
 gem 'rmagick', '~> 2.13.1'
@@ -26,7 +26,7 @@ gem 'jquery-rails', '~> 1.0.12'
 gem 'uglifier', '~> 1.0.0'
 
 group :development, :test do
-  gem 'therubyracer', '0.9.2'
+  gem 'therubyracer', '0.9.8'
   # gem 'rspec-rails', '~> 2.6.0'
   # gem 'factory_girl_rails', '~> 1.0'
   # gem 'faker', '~> 0.9.5'
