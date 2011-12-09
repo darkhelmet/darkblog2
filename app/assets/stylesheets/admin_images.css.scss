@@ -1,0 +1,14 @@
+fieldset#images {
+  img {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:first-of-type {
+      padding-left: 30px
+    }
+
+    &:last-of-type {
+      padding-right: 30px;
+    }
+  }
+}

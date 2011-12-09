@@ -5,7 +5,7 @@
   - Post.group_by_month.each do |month, posts|
     %section
       %h1= monthly_archive_link(month)
-      - posts.each do |post|
+      - PostDecorator.decorate(posts).each do |post|
         %article.main
-          %h4.archive_title= link_to(post.title, post_permalink(post))
+          %h4.archive_title= post.link
   = render('layouts/archive_links')

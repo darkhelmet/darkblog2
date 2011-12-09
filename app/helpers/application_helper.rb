@@ -24,15 +24,15 @@ module ApplicationHelper
   end
 
   def gravatar_url(size = 120)
-    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config[:email].strip.downcase)}.png?s=#{size}"
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(Darkblog2.config.email.strip.downcase)}.png?s=#{size}"
   end
 
   def gravatar(size = 120)
-    image_tag(gravatar_url(size), alt: "Gravatar for #{Darkblog2.config[:author]}")
+    image_tag(gravatar_url(size), alt: "Gravatar for #{Darkblog2.config.author}")
   end
 
   def description_tag
-    tag(:meta, name: 'description', content: yield_or_default(:description, Darkblog2.config[:tagline]))
+    tag(:meta, name: 'description', content: yield_or_default(:description, Darkblog2.config.tagline))
   end
 
   def readability_tag
@@ -40,11 +40,11 @@ module ApplicationHelper
   end
 
   def title_tag
-    content_tag(:title, yield_or_default(:title, Darkblog2.config[:title]))
+    content_tag(:title, yield_or_default(:title, Darkblog2.config.title))
   end
 
   def title_text(text)
-    "#{text} | #{Darkblog2.config[:title]}"
+    "#{text} | #{Darkblog2.config.title}"
   end
 
   def canonical_tag
@@ -52,7 +52,7 @@ module ApplicationHelper
   end
 
   def opensearch_tag
-    tag(:link, rel: 'search', type: 'application/opensearchdescription+xml', href: opensearch_url, title: Darkblog2.config[:title])
+    tag(:link, rel: 'search', type: 'application/opensearchdescription+xml', href: opensearch_url, title: Darkblog2.config.title)
   end
 
   def sitemap_tag
@@ -64,19 +64,15 @@ module ApplicationHelper
   end
 
   def managing_editor
-    "#{Darkblog2.config[:email]} (#{Darkblog2.config[:author]})"
+    "#{Darkblog2.config.email} (#{Darkblog2.config.author})"
   end
 
   def rss_tag
-    auto_discovery_link_tag(:rss, feed_url, title: "#{Darkblog2.config[:title]} RSS Feed")
+    auto_discovery_link_tag(:rss, feed_url, title: "#{Darkblog2.config.title} RSS Feed")
   end
 
   def index_tag
-    tag(:link, rel: 'index', title: Darkblog2.config[:title], href: root_url)
-  end
-
-  def post_link(post)
-    link_to(post.title, post_permalink(post), rel: 'bookmark')
+    tag(:link, rel: 'index', title: Darkblog2.config.title, href: root_url)
   end
 
   def tag_link(tag)
@@ -126,5 +122,13 @@ module ApplicationHelper
       data = header_icons[icon]
       concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", height: 28, width: 28, grayscale: image_path("icons/#{icon}_grayscale.png")), data[:link], title: data[:title], :class => icon))
     end
+  end
+
+  def license_image
+    link_to(image_tag('http://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png', alt: 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', no_escape: true, rel: 'license')
+  end
+
+  def license_link
+    link_to('Creative Commons Licence', 'http://creativecommons.org/licenses/by-sa/2.5/ca/')
   end
 end

@@ -32,7 +32,7 @@ Darkblog2::Application.configure do
   config.serve_static_assets = true # Heroku needs this to be true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
-  config.action_controller.asset_host = ENV['LOCAL_ASSET_HOST']
+  config.action_controller.asset_host = AssetHost.new(ENV['LOCAL_ASSET_HOST'])
 
   # Compress both stylesheets and JavaScripts
   config.assets.compress = true

@@ -1,6 +1,4 @@
-%h1#title.left
-  = link_to(Darkblog2.config[:title], '/')
-  = content_for(:icon)
+%h1#title.left= link_to(Darkblog2.config.title, '/')
 %nav.right
   %ul
     %li= link_to('Home', '/')
@@ -26,7 +24,7 @@
     }
 #search
   = form_tag('/search', method: :get) do
-    = text_field_tag('query', nil, :class => 'width_3', placeholder: "Search #{Darkblog2.config[:title]}")
+    = text_field_tag('query', nil, :class => 'width_3', placeholder: "Search #{Darkblog2.config.title}")
     = image_submit_tag(image_path('magnifier.png'))
 .clear
-%em#tagline= Darkblog2.config[:tagline]
+%em#tagline= Darkblog2.config.tagline

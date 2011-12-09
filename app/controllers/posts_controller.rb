@@ -2,20 +2,20 @@ class PostsController < CachedController
   respond_to :html, :json, :js
 
   def main
-    respond_with(@posts = Post.publish_order.limit(6))
+    respond_with(@posts = PostDecorator.decorate(Post.publish_order.limit(6)))
   end
 
   def permalink
-    @post = Post.find_by_permalink_params(params)
-    render_404 and return if @post.nil?
-    redirect_to_post(@post) and return if @post.slug != params[:slug]
-    respond_with(@post)
+    post = Post.find_by_permalink_params(params)
+    render_404 and return unless post.present?
+    redirect_to_post(post) and return if post.slug != params[:slug]
+    respond_with(@post = PostDecorator.decorate(post))
   end
 
   def category
-    @posts = Post.find_by_category(params[:category])
-    render_404 and return if @posts.empty?
-    respond_with(@posts)
+    posts = Post.find_by_category(params[:category])
+    render_404 and return if posts.empty?
+    respond_with(@posts = PostDecorator.decorate(posts))
   end
 
   def archive
@@ -23,17 +23,17 @@ class PostsController < CachedController
   end
 
   def monthly
-    @posts = Post.find_by_month(params)
-    render_404 and return if @posts.empty?
-    respond_with(@posts)
+    posts = Post.find_by_month(params)
+    render_404 and return if posts.empty?
+    respond_with(@posts = PostDecorator.decorate(posts))
   end
 
   def sitemap
-    @posts = Post.publish_order.all
+    @posts = PostDecorator.decorate(Post.publish_order.all)
   end
 
   def search
-    respond_with(@posts = Post.search(params[:query]))
+    respond_with(@posts = PostDecorator.decorate(Post.search(params[:query])))
   end
 
   def feed
@@ -42,13 +42,12 @@ class PostsController < CachedController
       redirect_to(feedburner_url, status: :moved_permanently) and return
     end
     request.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
-    @posts = Post.publish_order.limit(10)
+    @posts = PostDecorator.decorate(Post.publish_order.limit(10))
   end
 
   def tag
     tag = params[:tag].strip.parameterize
-    @posts = Rails.cache.fetch(cache_key('posts', 'tag', tag)) { Post.find_by_tag(tag).to_a }
-    respond_with(@posts)
+    respond_with(@posts = PostDecorator.decorate(Post.find_by_tag(tag)))
   end
 
 private
@@ -58,7 +57,7 @@ private
   end
 
   def feedburner_url
-    "http://feeds.feedburner.com/#{Darkblog2.config[:feedburner]}"
+    "http://feeds.feedburner.com/#{Darkblog2.config.feedburner}"
   end
 
   def redirect_to_post(post)

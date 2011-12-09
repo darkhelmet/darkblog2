@@ -1,7 +1,7 @@
 %hr
 #disqus_thread
-= javascript_include_tag("http://disqus.com/forums/#{Darkblog2.config[:disqus]}/embed.js", async: 'async', defer: 'defer')
-%noscript= link_to('View the discussion thread.', "http://#{Darkblog2.config[:disqus]}.disqus.com/?url=ref")
+= javascript_include_tag("http://disqus.com/forums/#{Darkblog2.config.disqus}/embed.js", async: 'async', defer: 'defer')
+%noscript= link_to('View the discussion thread.', "http://#{Darkblog2.config.disqus}.disqus.com/?url=ref")
 %a.dsq-brlink{ :href => "http://disqus.com" }
   Comments powered by
   %span.logo-disqus Disqus

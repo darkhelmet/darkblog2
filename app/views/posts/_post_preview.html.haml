@@ -1,12 +1,12 @@
 - post = post_preview
 %article.preview.main
-  %h2.entry-title= post_link(post)
+  %h2.entry-title= post.link
   .meta
-    %time{ :datetime => post.published_on.xmlschema }= post.published_on.to_s(:post)
+    = post.meta_time
     &raquo;
     Posted in
-    %span.category= category_link(post.category)
-  .snippet!= truncate(strip_tags(post.body_html), :length => 450)
+    %span.category= post.category_link
+  .snippet!= post.truncated_body_html
   .extra_links
-    = link_to('Keep Reading', post_permalink(post), :class => 'read_more fleft')
-    = link_to('Comments', post_permalink(post, anchor: 'disqus_thread'), :class => 'fright')
+    = link_to('Keep Reading', post.permalink, :class => 'read_more fleft')
+    = link_to('Comments', post.permalink(anchor: 'disqus_thread'), :class => 'fright')

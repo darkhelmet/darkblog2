@@ -1,23 +1,21 @@
 %p
-  = link_to(image_tag('http://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png', alt: 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', no_escape: true, rel: 'license')
+  = license_image
   %br
   This work is licensed under a
-  = link_to('Creative Commons Licence', 'http://creativecommons.org/licenses/by-sa/2.5/ca/')
+  = license_link
   %br
-  = link_to('Home', '/')
-  |
-  = link_to('About', '/about')
-  |
-  = link_to('Talks', '/talks')
-  |
-  = link_to('Projects', '/projects')
-  |
-  = link_to('Contact', '/contact')
-  |
-  = link_to('Disclaimer', '/disclaimer')
-  |
-  = link_to('Sitemap', '/sitemap.xml')
+  = link_to('Home', root_path)
+  &middot;
+  = link_to('About', page_path(:about))
+  &middot;
+  = link_to('Talks', page_path(:talks))
+  &middot;
+  = link_to('Projects', page_path(:projects))
+  &middot;
+  = link_to('Contact', page_path(:contact))
+  &middot;
+  = link_to('Disclaimer', page_path(:disclaimer))
+  &middot;
+  = link_to('Sitemap', sitemap_path(:format => :xml))
   %br
-  Theme
-  %em darkhax2
-  by Daniel Huckstep
+  Design by Daniel Huckstep

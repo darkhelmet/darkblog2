@@ -1,8 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'action_controller/railtie'
-require "action_mailer/railtie" # DAMN YOU DEVISE!!!
-require 'active_resource/railtie'
+require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -36,6 +34,9 @@ module Darkblog2
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    require 'asset_host'
+    config.action_controller.asset_host = AssetHost.new
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
@@ -46,9 +47,7 @@ module Darkblog2
     config.filter_parameters += [:password]
 
     config.generators do |g|
-      g.orm :mongoid
       g.template_engine :haml
-      g.test_framework :rspec, :fixture_replacement => :factory_girl
     end
 
     config.middleware.tap do |mw|

@@ -11,10 +11,10 @@
     ]
   ];
 = javascript_include_tag('http://static.addtoany.com/menu/page.js')
-- related = @post.related
+- related = PostDecorator.decorate(@post.related)
 - unless related.empty?
   %hr
   %h5 If you liked this post, you might like these:
   %ul
     - related.each do |related_post|
-      %li= post_link(related_post)
+      %li= related_post.link

@@ -1,77 +1,76 @@
-- content_for(:head) do
-  = stylesheet_link_tag('dark-hive/jquery-ui-1.8.4.custom.css')
-
-- content_for(:footer) do
-  = javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js')
-  = javascript_include_tag('jquery.pulse')
-  :javascript
-    $(document).ready(function() {
-      $('#post_category').autocomplete({
-        source: #{Post.categories.to_json}
-      });
-
-      (function(tags) {
-        var split = function(val) {
-          return val.split(/,\s*/);
-        };
-
-        var extractLast = function(term) {
-          return split(term).pop();
-        };
-
-        $('#post_tag_string').autocomplete({
-          minLength: 0,
-          source: function(request, response) {
-            // delegate back to autocomplete, but extract the last term
-            response($.ui.autocomplete.filter(tags, extractLast(request.term)));
-          },
-          focus: function() {
-            // prevent value inserted on focus
-            return false;
-          },
-          select: function(event, ui) {
-            var terms = split(this.value);
-            // remove the current input
-            terms.pop();
-            // add the selected item
-            terms.push(ui.item.value);
-            // add placeholder to get the comma-and-space at the end
-            terms.push('');
-            this.value = terms.join(', ');
-            return false;
-          }
-        });
-      })(#{Post.tags.to_json});
+= stylesheet_link_tag('dark-hive/jquery-ui-1.8.4.custom.css')
+= stylesheet_link_tag('admin_images.css')
+= javascript_include_tag('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js')
+:javascript
+  $(document).ready(function() {
+    $('#post_category').autocomplete({
+      source: #{Post.categories.to_json}
     });
 
-= form_for(['admin', @post], :remote => !@post.new_record?) do |f|
-  -if @post.errors.any?
-    #errorExplanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
-        - @post.errors.full_messages.each do |msg|
-          %li= msg
+    (function(tags) {
+      var split = function(val) {
+        return val.split(/,\s*/);
+      };
 
-  .field
-    = f.label :title
-    = f.text_field :title, :class => 'width_10'
-  .field
-    = f.label :category
-    = f.text_field :category, :class => 'width_10'
-  .field
-    = f.label :body
-    = f.text_area :body, :class => 'width_10'
-  .field
-    = f.label :published
-    = f.check_box :published
-  .field
-    = f.label :published_on
-    = f.text_field :published_on
-  .field
-    = f.label :tag_string
-    = f.text_field :tag_string, :class => 'width_10'
-  .field
-    = f.label :description
-    = f.text_field :description, :class => 'width_10'
-  .actions
-    = f.submit 'Save'
+      var extractLast = function(term) {
+        return split(term).pop();
+      };
+
+      $('#post_tag_string').autocomplete({
+        minLength: 0,
+        source: function(request, response) {
+          // delegate back to autocomplete, but extract the last term
+          response($.ui.autocomplete.filter(tags, extractLast(request.term)));
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function(event, ui) {
+          var terms = split(this.value);
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push(ui.item.value);
+          // add placeholder to get the comma-and-space at the end
+          terms.push('');
+          this.value = terms.join(', ');
+          return false;
+        }
+      });
+    })(#{Post.tags.to_json});
+  });
+
+= semantic_form_for([:admin, @post]) do |f|
+  = f.inputs 'Basics' do
+    = f.input(:title)
+    = f.input(:description)
+    = f.input(:category)
+    = f.input(:tag_string)
+
+  = f.inputs 'Content' do
+    = f.input(:body)
+
+  = f.inputs 'Images', id: :images do
+    - images = PostDecorator.decorate(@post).image_hash
+    - images.keys.each do |key|
+      = image_tag(image_path(images[key]['small']))
+
+  = f.inputs 'Publishing' do
+    = f.input(:published_on, :label => 'Publish Date')
+    = f.input(:published)
+
+  = f.buttons
+
+= form_tag('http://api2.transloadit.com/assemblies', multipart: true, id: :uploader) do
+  = hidden_field_tag(:params, { auth: { key: ENV['TRANSLOADIT_AUTH_KEY'] }, template_id: '4728d6347d1d4025aaa914e87d764b7e', redirect_url: upload_admin_post_url(@post) }.to_json)
+  = tag(:input, type: :file, name: :image, multiple: :multiple)
+  = tag(:br)
+  = tag(:br)
+  = submit_tag('Upload')
+
+= javascript_include_tag('//assets.transloadit.com/js/jquery.transloadit2.js')
+:javascript
+  $(document).ready(function() {
+    $('#uploader').transloadit({ wait: true });
+  });

@@ -2,11 +2,11 @@
 - content_for(:title, title_text('Full archives'))
 - content_for(:canonical, archive_url('full'))
 - cache('full-archive', expires_in: 1.hour) do
-  - Post.publish_order.each do |post|
+  - PostDecorator.decorate(Post.publish_order).each do |post|
     %article.main
-      %h4.archive_title= link_to(post.title, post_permalink(post))
+      %h4.archive_title= post.link
       &raquo;
-      %time{ :datetime => post.published_on.xmlschema }
-        = time_ago_in_words(post.published_on)
+      %time{ :datetime => post.published_on_schema }
+        = post.published_on_time_ago_in_words
         ago
   = render('layouts/archive_links')

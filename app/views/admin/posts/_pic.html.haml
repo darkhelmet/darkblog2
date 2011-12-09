@@ -1,4 +1,0 @@
-%li{ :pic_id => pic.id }
-  = link_to(pic.image_filename, pic.image.url)
-  |
-  = link_to('destroy', admin_upload_path(pic, :post_id => pic.post.id), :method => :delete, :remote => true)

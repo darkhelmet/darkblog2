@@ -1,19 +1,7 @@
 Darkblog2::Application.routes.draw do
-  devise_for :admins
+  ActiveAdmin.routes(self)
 
-  authenticate :admin do
-    namespace :admin do
-      resources :posts do
-        member do
-          get :pics
-          get :uploader
-        end
-      end
-      resources :uploads, :only => [:create,:destroy]
-    end
-
-    post '/announce' => 'application#announce', :as => :announce
-  end
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   root :to => 'posts#main'
   get '/opensearch.xml' => 'application#opensearch', :as => :opensearch, :format => 'xml'
@@ -40,9 +28,7 @@ Darkblog2::Application.routes.draw do
   Dir[Rails.root.join('app', 'views', 'pages', '*')].map do |path|
     path.split('/').last.split('.').first
   end.join('|').tap do |pages|
-    get '/:page' => 'static#page', :as => :path, :constraints => {
-      :page => Regexp.new(pages)
-    }
+    get '/:page' => 'static#page', :as => :page, :constraints => { :page => Regexp.new(pages) }
   end
 
   get '/*not_found' => 'application#render_404'

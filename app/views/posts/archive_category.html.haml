@@ -5,7 +5,7 @@
   - Post.group_by_category.each do |category, posts|
     %section
       %h1= category_link(category)
-      - posts.each do |post|
+      - PostDecorator.decorate(posts).each do |post|
         %article.main
-          %h4.archive_title= link_to(post.title, post_permalink(post))
+          %h4.archive_title= post.link
   = render('layouts/archive_links')

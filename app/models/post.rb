@@ -1,186 +1,118 @@
 Chronic.time_class = Time.zone
 
-class Post
+class Post < ActiveRecord::Base
   Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
-  Index = IndexTank::Client.new(ENV['INDEXTANK_API_URL']).indexes("#{Darkblog2.config[:search_index]}_#{Rails.env}") rescue nil
 
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Taggable
-
-  embeds_many :pics
+  extend Searchable(:title, :description, :body)
 
   before_save :slug!
   before_save :update_terms!, :unless => -> { ENV['YAHOO_APPID'].blank? }
-  after_save :update_search_index!, :if => :published
+  after_initialize :set_default_published_on
   after_save :clear_cache, :if => :published
-  after_save :push, :unless => :published
-  after_save :schedule_announce_job, :if => :published, :unless => :announced
-
-  field :title, type: String
-  field :category, type: String
-  field :body, type: String
-  field :published, type: Boolean, default: false
-  field :published_on, type: Time, default: -> { Chronic.parse('monday 10am') }
-  field :slugs, type: Array, default: []
-  field :description, type: String
-  field :announced, type: Boolean, default: false
-  field :terms, type: Array, default: []
-
-  # Basic search
-  index([
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], background: true)
-
-  # Search by category
-  index([
-    [:category, Mongo::ASCENDING],
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], background: true)
-
-  # Search by slug
-  index([
-    [:slugs, Mongo::ASCENDING],
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], background: true)
-
-  # Search by tags
-  index([
-    [:tags, Mongo::ASCENDING],
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], background: true)
-
-  # Search by terms
-  index([
-    [:terms, Mongo::ASCENDING],
-    [:published, Mongo::ASCENDING],
-    [:published_on, Mongo::DESCENDING]
-  ], background: true)
 
   validates_presence_of :title, :category
 
-  scope(:publish_order, -> {
-    where(published: true, :published_on.lte => Time.now.utc).order_by(:published_on.desc)
-  })
+  def tags=(t)
+    write_attribute(:tags, t.uniq)
+  end
+
+  def tag_string=(tags)
+    self.tags = tags.split(',').map(&:strip).reject(&:empty?).map(&:parameterize)
+  end
+
+  def tag_string
+    tags.join(', ')
+  end
 
   def slug
     slugs.first
   end
 
   def slug!
-    new_slug = title.parameterize
-    if public?
-      self.slugs.unshift(new_slug) unless slugs.include?(new_slug)
+    new_slug = title.parameterize.to_s
+    self.slugs = if public?
+      Array(new_slug) | self.slugs
     else
-      self.slugs = [new_slug]
+      Array(new_slug)
     end
   end
 
-  def body_html
-    processed_body = body.gsub(/\{\{(\w+)(?::(\w+))?\}\}/) do |sub|
-      id, version = $1, $2
-      if pic = id.match(/^\d+$/) ? pics[id.to_i] : pics.detect { |p| p.image_filename.start_with?(id) }
-        image = pic.image
-        version.nil? ? image.url : image.url(version.to_sym)
-      else
-        ''
-      end
-    end
-    RedCloth.new(processed_body).to_html
-  end
-
-  def published_on
-    super.in_time_zone
+  def images
+    Array(read_attribute(:images))
   end
 
   def public?
-    published && published_on <= Time.zone.now
+    published? && published_on <= Time.zone.now
+  end
+
+  def publish!
+    update_attribute(:published, true)
+  end
+
+  def unpublish!
+    update_attribute(:published, false)
   end
 
   def announce!
-    collection.update({ _id: id }, {
-      '$set' => { announced: true }
-    })
+    update_attribute(:announced, true)
   end
 
   def cache_key
     "post-#{id}-#{attributes.hash}"
   end
 
-  def pusher_channel
-    "post-#{id}"
+  def month
+    published_on.strftime('%B %Y')
   end
 
   def related(limit = 5)
     Post.publish_order.
-      where(:terms.in => terms).
-      reject { |post| post.id == id }.
+      where(terms: terms.search_any(:string)).
+      where('id <> ?', id).
       sort_by { |post| -(post.terms & terms).length }.
       take(limit)
   end
 
-  def to_fts
-    {
-      :title => title,
-      :body => clean_body,
-      :description => description,
-      :tags => tags.join(' ')
-    }
-  end
-
-  def goindex
-    Excon.post("http://localhost:5678/blog/posts/#{id.to_s}", :body => to_fts.to_json, :headers => { 'Content-Type' => 'application/json; content-type=utf8' })
+  def update_from_transloadit(transloadit)
+    urls = transloadit['results'].values.flatten.map { |result| result['url'] }
+    paths = urls.map { |url| URI.parse(url).path }
+    update_attributes(images: images | paths)
   end
 
   class << self
-    def goindex
-      Post.all.each(&:goindex)
-    end
-
-    def gofetch(query)
-      json = JSON.parse(Excon.get("http://localhost:5678/blog/posts?query=#{query}").body)
-      json['results'].map { |id| Post.find(id).title }
+    def published_in_range(start, stop)
+      publish_order.
+        where('published_on >= ?', start).
+        where('published_on <= ?', stop)
     end
 
     def find_by_permalink_params(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      post = where({
-        published: true,
-        :published_on.gte => time.beginning_of_day.utc,
-        :published_on.lte => time.end_of_day.utc,
-        slugs: params[:slug]
-      }).first
-      # Little hack since you can't seem to do the double where clause
-      post && post.published_on <= Time.now ? post : nil
+      slugs = Array(params[:slug]).search_any(:string)
+      published_in_range(time.beginning_of_day, time.end_of_day).where(slugs: slugs).first
+    end
+
+    def publish_order
+      where(published: true).
+        where('published_on <= ?', Time.zone.now).
+        order('published_on DESC')
     end
 
     def find_by_month(params)
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, 1)
-      posts = where({
-        :published_on.gte => time.beginning_of_month.utc,
-        :published_on.lte => time.end_of_month.utc,
-        published: true
-      }).order_by(:published_on.desc)
-      posts.reject do |post|
-        # Get rid of posts that are published in the future
-        post.published_on > Time.now
-      end
+      published_in_range(time.beginning_of_month, time.end_of_month)
     end
 
     def find_by_category(category)
-      Post.publish_order.where(category: category).to_a
+      publish_order.where(category: category)
     end
 
     def categories
-      collection.distinct('category')
+      connection.select_values(select('DISTINCT(category)').order(:category).to_sql)
     end
 
     def tags
-      collection.distinct('tags')
+      connection.select_values(select('DISTINCT(UNNEST(tags)) AS tag').order(:tag).to_sql)
     end
 
     def group_by_category
@@ -188,73 +120,62 @@ class Post
     end
 
     def group_by_month
-      publish_order.group_by { |post| post.published_on.strftime('%B %Y') }
-    end
-
-    def admin_index
-      order_by(:published_on.desc)
+      publish_order.group_by(&:month)
     end
 
     def find_by_id(id)
       find(id)
     end
 
-    def find_by_tag(tag)
-      publish_order.by_tag(tag).all
+    def with_images
+      where(%q(body ~ '\{\{[^{]+\.[^{]+\}\}'))
     end
 
-    def search(query)
-      posts = find(Index.search(query, function: 1)['results'].map { |r| r['docid'] })
-      posts.reject do |post|
-        # Get rid of posts that are published in the future
-        !post.published || post.published_on > Time.now
+    def unpublished
+      where(published: false)
+    end
+
+    def unannounced
+      publish_order.where(announced: false)
+    end
+
+    def find_by_tag(tag)
+      tag = Array(tag).search_any(:string)
+      publish_order.where(tags: tag)
+    end
+
+    def pull
+      # This auth token doesn't matter anymore, so who cares if it's in the code?
+      json = JSON.parse(RestClient.get('http://verboselogging.com/admin/posts.json?auth_token=xzakg1UypqDrzGafV6Ul'))
+      transaction do
+        json.reverse_each do |post|
+          attrs = post.except('_id', 'pics', 'announce_job_id')
+          Post.create!(attrs.merge('published_on' => Time.zone.parse(attrs.delete('published_on'))))
+        end
       end
-    rescue
-      []
+    end
+
+    def inform_google
+      RestClient.get('http://feedburner.google.com/fb/a/pingSubmit?bloglink=http://verboselogging.com/')
     end
   end
 
 private
 
-  def body_for_index
-    [title, clean_body, tag_string].join("\n")
-  end
-
-  def clean_body
-    Sanitize.clean(body_html)
-  end
-
-  def update_search_index!
-    Index.document(id).add({
-      text: body_for_index,
-      title: title,
-      timestamp: published_on.to_i.to_s
-    }) unless Index.nil?
-  end
-
   def clear_cache
     Rails.cache.clear
-  end
-
-  def push
-    Pusher[pusher_channel].trigger('post-update', attributes.merge(html: body_html))
-  end
-
-  def schedule_announce_job
-    return unless Rails.env.production?
-    query = {
-      at: (published_on + 1.minute).to_i,
-      url: "http://blog.darkhax.com/announce?auth_token=#{Admin.first.authentication_token}"
-    }.map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}" }.join('&')
-    RestClient.get("https://verbose-scheduling.appspot.com/delay?#{query}")
   end
 
   def update_terms!
     json = RestClient.post(Yahoo, {
       appid: ENV['YAHOO_APPID'],
-      context: clean_body,
+      context: body,
       output: 'json'
     })
     self.terms = JSON.parse(json)['ResultSet']['Result']
+  end
+
+  def set_default_published_on
+    self.published_on ||= Chronic.parse('monday 10am')
   end
 end
