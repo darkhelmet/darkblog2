@@ -18,20 +18,20 @@ gem 'coffee-script', '~> 2.2'
 gem 'jquery-rails', '~> 1.0.12'
 gem 'uglifier', '~> 1.1.0'
 gem 'pg', '~> 0.11.0'
-gem 'therubyracer', '0.9.9'
 gem 'ar_pg_array', '0.9.12'
 gem 'activeadmin', '~> 0.3.4'
 gem 'liquid', '~> 2.3.0'
 gem 'draper', '~> 0.9.5'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
+gem 'thin', '~> 1.3.1'
 
 group :development, :test do
   # gem 'rspec-rails', '~> 2.6.0'
   # gem 'factory_girl_rails', '~> 1.0'
   # gem 'faker', '~> 0.9.5'
-  gem 'mongrel', '1.2.0.pre2', :require => nil
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
   gem 'taps'
+  gem 'foreman'
 end
