@@ -23,6 +23,7 @@ gem 'ar_pg_array', '0.9.12'
 gem 'activeadmin', '~> 0.3.4'
 gem 'liquid', '~> 2.3.0'
 gem 'draper', '~> 0.9.5'
+gem 'fog', '~> 1.1.1' # Talk to S3 for backups
 
 group :development, :test do
   # gem 'rspec-rails', '~> 2.6.0'
