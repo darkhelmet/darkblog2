@@ -50,9 +50,17 @@ ActiveAdmin.register Post do
     redirect_to(action: :edit)
   end
 
+  collection_action :clear_cache, method: :post do
+    Rails.cache.clear
+    redirect_to(action: :index)
+  end
+
   form partial: 'form'
 
   sidebar :help do
-    link_to('Textile Reference', 'http://redcloth.org/hobix.com/textile/')
+    ul do
+      li link_to('Textile Reference', 'http://redcloth.org/hobix.com/textile/')
+      li link_to('Clear Cache', clear_cache_admin_posts_path, method: :post)
+    end
   end
 end
