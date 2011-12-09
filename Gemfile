@@ -33,6 +33,4 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
-  gem 'taps'
-  gem 'foreman'
 end
