@@ -3,6 +3,7 @@ Chronic.time_class = Time.zone
 class Post < ActiveRecord::Base
   Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
 
+  include Tags
   extend Searchable(:title, :description, :body)
 
   before_save :slug!
@@ -80,6 +81,8 @@ class Post < ActiveRecord::Base
   end
 
   class << self
+    extend ActiveSupport::Memoizable
+
     def published_in_range(start, stop)
       publish_order.
         where('published_on >= ?', start).
@@ -109,10 +112,6 @@ class Post < ActiveRecord::Base
 
     def categories
       connection.select_values(select('DISTINCT(category)').order(:category).to_sql)
-    end
-
-    def tags
-      connection.select_values(select('DISTINCT(UNNEST(tags)) AS tag').order(:tag).to_sql)
     end
 
     def group_by_category
