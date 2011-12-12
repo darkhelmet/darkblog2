@@ -1,1 +1,0 @@
-web: rails server thin --debugger
