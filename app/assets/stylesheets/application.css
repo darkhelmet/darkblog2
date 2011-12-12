@@ -6,7 +6,7 @@
  *= require reset
  *= require grid
  *= require general
- *= require facebox
+ *= require jquery.fancybox
  *= require boastful
  *= require darkblog
 */

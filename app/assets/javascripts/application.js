@@ -7,7 +7,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.darkblog
-//= require facebox
+//= require jquery.easing-1.3.pack
+//= require jquery.fancybox
 //= require jquery.embedly
 //= require jquery.boastful
 //= require darkblog
