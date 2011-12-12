@@ -11,14 +11,14 @@
     .meta
       = @post.updated_at_time
       = @post.meta_time
-      &raquo;
+      &middot;
       %span.byline.author.vcard
         By
         %span.fn= Darkblog2.config.author
-      &raquo;
+      &middot;
       Posted in
       %span.category= @post.category_link
-      &raquo;
+      &middot;
       Tagged with
       %span.tags
         - @post.tags.each do |tag|
