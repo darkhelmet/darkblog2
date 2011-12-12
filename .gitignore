@@ -8,3 +8,4 @@ config/database.yml
 config.sqlite
 mongrel2.conf
 .sass-cache/
+Procfile
