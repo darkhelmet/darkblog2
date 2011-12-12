@@ -94,7 +94,7 @@ module ApplicationHelper
         title: 'Follow me on Twitter'
       },
       gplus: {
-        link: 'http://gplus.to/darkhelmetlive',
+        link: 'https://plus.google.com/107826869818581440524?rel=author',
         title: 'Add me to a Circle on Google+'
       },
       linkedin: {
