@@ -2,9 +2,9 @@
 %html
   %head= render('layouts/head')
   %body
-    %header= render('layouts/header')
-    .clear
     .row
+      %header= render('layouts/header')
+      .clear
       %section#content.col.col_11= yield
       - cache('sidebar') do
         %aside#sidebar.col.col_5= render('layouts/sidebar')

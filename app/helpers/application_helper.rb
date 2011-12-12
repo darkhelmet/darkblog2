@@ -88,10 +88,14 @@ module ApplicationHelper
   end
 
   def render_social_links
-    header_icons = {
+    {
       twitter: {
         link: 'http://twitter.com/darkhelmetlive',
         title: 'Follow me on Twitter'
+      },
+      gplus: {
+        link: 'http://gplus.to/darkhelmetlive',
+        title: 'Add me to a Circle on Google+'
       },
       linkedin: {
         link: 'http://ca.linkedin.com/in/darkhelmetlive',
@@ -101,26 +105,20 @@ module ApplicationHelper
         link: 'skype:darkhelmetlive?call',
         title: 'Call on me! Call me! Call on me! Call me...on Skype'
       },
-      flickr: {
-        link: 'http://www.flickr.com/photos/darkhelmetlive/',
-        title: 'My pictures on Flickr'
-      },
       github: {
         link: 'https://github.com/darkhelmet',
         title: 'My codez on teh Githubz'
       },
-      gplus: {
-        link: 'http://gplus.to/darkhelmetlive',
-        title: 'Add me to a Circle on Google+'
+      flickr: {
+        link: 'http://www.flickr.com/photos/darkhelmetlive/',
+        title: 'My pictures on Flickr'
       },
       rss: {
         link: feed_path,
         title: 'Get new articles in your RSS reader'
       }
-    }
-    [:twitter, :gplus, :linkedin, :skype, :github, :flickr, :rss].each do |icon|
-      data = header_icons[icon]
-      concat(link_to(image_tag("icons/#{icon}.png", alt: "#{icon.to_s.capitalize} Icon", height: 28, width: 28, grayscale: image_path("icons/#{icon}_grayscale.png")), data[:link], title: data[:title], :class => icon))
+    }.each do |icon, data|
+      concat(link_to(image_tag("icons/#{icon}.png", alt: data[:title], height: 28, width: 28), data[:link], title: data[:title], :class => icon))
     end
   end
 

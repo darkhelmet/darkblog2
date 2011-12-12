@@ -32,7 +32,6 @@ html, body {
 }
 
 body {
-  margin-top: 65px;
   background: url(<%= image_path('handmadepaper.png') %>);
 }
 
@@ -160,10 +159,12 @@ blockquote {
 }
 
 header {
-  @include box-shadow(0px, 0px, 5px, black);
+  h1, nav, #tagline {
+    margin: 10px;
+  }
 
   h1 {
-    margin: 0px;
+    @include droid-mono;
   }
 
   nav {
@@ -176,69 +177,6 @@ header {
         display: inline;
       }
     }
-
-    margin-right: 10px;
-  }
-
-  a {
-    @include transition(color);
-
-    &:hover {
-      color: white;
-    }
-  }
-
-  /* This is fixed by noscript css later, or the Grayscale javascript */
-  #where {
-    img {
-      display: none;
-    }
-
-    a {
-      position: relative;
-      margin: 2px;
-      height: 28px;
-      width: 28px;
-
-      &:hover {
-        border: 0px
-      }
-
-      &.rss {
-        top: -1px;
-      }
-    }
-
-    position: absolute;
-    top: 21px;
-    right: 175px;
-    width: 225px;
-  }
-
-  #search {
-    input[type=text] {
-      @include transition(opacity);
-      @include round-corners(10px);
-
-      background: white;
-      opacity: 0.65;
-
-      &:hover, &:focus {
-        outline: none;
-        opacity: 1;
-      }
-    }
-
-    input[type=image] {
-      position: absolute;
-      top: 6px;
-      right: 8px;
-      opacity: 0.65;
-    }
-
-    position: absolute;
-    top: 20px;
-    right: 5px;
   }
 
   padding: {
@@ -247,13 +185,8 @@ header {
     left: 5px;
   }
 
-  background: url(<%= image_path('black_paper.png') %>);
-  color: white;
-  z-index: 1000;
-  position: fixed;
-  top: 0px;
+  text-align: center;
   width: 100%;
-  height: 40px;
 }
 
 #content {
@@ -346,6 +279,41 @@ header {
 }
 
 #sidebar {
+  #search {
+    input[type=text] {
+      @include round-corners(10px);
+
+      width: 100%;
+      background: white;
+
+      &:hover, &:focus {
+        outline: none;
+        opacity: 1;
+      }
+    }
+
+    input[type=image] {
+      position: absolute;
+      top: 16px;
+      right: 4px;
+      opacity: 0.65;
+    }
+
+    margin-top: 10px;
+  }
+
+  #where {
+    a {
+      margin: 6px;
+      height: 28px;
+      width: 28px;
+
+      &:hover {
+        border: 0px
+      }
+    }
+  }
+
   section {
     ul {
       list-style: {

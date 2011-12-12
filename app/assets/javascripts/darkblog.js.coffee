@@ -58,31 +58,3 @@ $(document).ready ->
 
   $('p.footnote:first').addClass('first')
   $('#boastful').boastful({ location: $('link[rel=canonical]').attr('href') })
-
-  # Fade in images so there isn't a color "pop" document load and then on window load
-  gImages = $('#where img')
-  gImages.fadeIn(250)
-  gImages.each ->
-    # Clone image
-    $this = $(this)
-    $this.css({
-      position: 'absolute'
-    }).wrap("<div class='img_wrapper' style='display: inline-block'>").clone().addClass('img_grayscale').css({
-      position: 'absolute',
-      'z-index': '998',
-      opacity: '0'
-    }).insertBefore($this).queue ->
-      el = $(this)
-      el.parent().css({
-        width: this.width,
-        height: this.height
-      })
-      el.dequeue()
-
-    this.src = $this.attr('grayscale')
-
-  $('#where img').mouseover ->
-    $(this).parent().find('img:first').stop().animate({ opacity: 1 }, 250)
-
-  $('.img_grayscale').mouseout ->
-    $(this).stop().animate({ opacity: 0 }, 250)

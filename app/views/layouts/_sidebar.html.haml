@@ -1,3 +1,9 @@
+%section#search
+  = form_tag('/search', method: :get) do
+    = text_field_tag('query', nil, placeholder: "Search #{Darkblog2.config.title}")
+    = image_submit_tag(image_path('magnifier.png'))
+%section#where
+  - render_social_links
 %section#author
   = gravatar(280)
   Daniel Huckstep is a software engineer (EIT) in

@@ -1,5 +1,7 @@
-%h1#title.left= link_to(Darkblog2.config.title, '/')
-%nav.right
+%h1#title= link_to(Darkblog2.config.title, '/')
+%p#tagline
+  %em= Darkblog2.config.tagline
+%nav
   %ul
     %li= link_to('Home', '/')
     %li= link_to('About', '/about')
@@ -7,24 +9,3 @@
     %li= link_to('Projects', '/projects')
     %li= link_to('Contact', '/contact')
     %li= link_to('Disclaimer', '/disclaimer')
-#where
-  - render_social_links
-%noscript
-  :css
-    #where img {
-      display: inline !important;
-      -webkit-transition: opacity 0.25s ease-in;
-      -moz-transition: opacity 0.25s ease-in;
-      -o-transition: opacity 0.25s ease-in;
-      opacity: 0.65;
-    }
-
-    #where img:hover {
-      opacity: 1;
-    }
-#search
-  = form_tag('/search', method: :get) do
-    = text_field_tag('query', nil, :class => 'width_3', placeholder: "Search #{Darkblog2.config.title}")
-    = image_submit_tag(image_path('magnifier.png'))
-.clear
-%em#tagline= Darkblog2.config.tagline
