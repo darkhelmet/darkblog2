@@ -69,7 +69,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def updated_at_time
-    h.content_tag(:time, published_on_post, :class => 'updated', datetime: published_on_schema, pubdate: '')
+    h.tag(:time, :class => 'updated', datetime: updated_at.xmlschema, style: 'display: none')
   end
 
   def image_for

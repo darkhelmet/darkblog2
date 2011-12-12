@@ -9,6 +9,7 @@
   - cache(@post.cache_key) do
     %h1.entry-title= @post.link
     .meta
+      = @post.updated_at_time
       = @post.meta_time
       &raquo;
       %span.byline.author.vcard
