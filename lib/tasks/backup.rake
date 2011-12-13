@@ -8,7 +8,8 @@ task backup: :environment do
       directory.files.create({
         key: "backups/#{Time.now.strftime('%Y-%m-%d-%H-%M')}.json",
         body: {
-          posts: Post.all
+          posts: Post.all,
+          pages: Page.all
         }.to_json,
         content_type: 'application/json',
         acl: 'private'
