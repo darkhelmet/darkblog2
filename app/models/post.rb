@@ -90,8 +90,10 @@ class Post < ActiveRecord::Base
     end
 
     def find_by_permalink_params(params)
+      slug = params[:slug]
+      return nil if slug.include?(/[\{\}]/) # PG on Heroku chokes on this
       time = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      slugs = Array(params[:slug]).search_any(:string)
+      slugs = Array(slug).search_any(:string)
       published_in_range(time.beginning_of_day, time.end_of_day).where(slugs: slugs).first
     end
 
