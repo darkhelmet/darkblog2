@@ -19,11 +19,11 @@ ActiveAdmin.register Post do
     column 'Actions' do |post|
       ul do
         li link_to('Edit', edit_admin_post_path(post))
-        li link_to('Delete', admin_post_path(post), :method => :delete, :confirm => 'Really delete?')
+        li link_to('Delete', admin_post_path(post), method: :delete, confirm: 'Really delete?')
         if post.published?
-          li link_to('Unpublish', unpublish_admin_post_path(post), :method => :put)
+          li link_to('Unpublish', unpublish_admin_post_path(post), method: :put)
         else
-          li link_to('Publish', publish_admin_post_path(post), :method => :put)
+          li link_to('Publish', publish_admin_post_path(post), method: :put)
         end
       end
     end
