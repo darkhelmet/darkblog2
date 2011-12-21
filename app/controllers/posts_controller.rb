@@ -2,7 +2,7 @@ class PostsController < CachedController
   respond_to :html, :json, :js
 
   def main
-    respond_with(@posts = PostDecorator.decorate(Post.publish_order.limit(6)))
+    respond_with(@posts = PostDecorator.decorate(Post.find_for_main_page))
   end
 
   def permalink
@@ -33,7 +33,7 @@ class PostsController < CachedController
   end
 
   def search
-    respond_with(@posts = PostDecorator.decorate(Post.search(params[:query])))
+    respond_with(@posts = PostDecorator.decorate(Post.search_by_keywords(params[:query])))
   end
 
   def feed

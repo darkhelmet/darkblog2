@@ -83,6 +83,10 @@ class Post < ActiveRecord::Base
   class << self
     extend ActiveSupport::Memoizable
 
+    def find_for_main_page(max = 6)
+      publish_order.limit(max)
+    end
+
     def published_in_range(start, stop)
       publish_order.
         where('published_on >= ?', start).
@@ -110,6 +114,10 @@ class Post < ActiveRecord::Base
 
     def find_by_category(category)
       publish_order.where(category: category)
+    end
+
+    def search_by_keywords(query)
+      publish_order.search(query)
     end
 
     def categories
