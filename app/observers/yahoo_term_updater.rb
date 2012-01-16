@@ -1,4 +1,4 @@
-class YahooTermUpdaterObserver < ActiveModel::Observer
+class YahooTermUpdater < ActiveModel::Observer
   observe :post
 
   def before_save(post)
