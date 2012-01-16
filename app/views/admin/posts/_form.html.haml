@@ -62,12 +62,13 @@
 
   = f.buttons
 
-= form_tag('http://api2.transloadit.com/assemblies', multipart: true, id: :uploader) do
-  = hidden_field_tag(:params, { auth: { key: ENV['TRANSLOADIT_AUTH_KEY'] }, template_id: '4728d6347d1d4025aaa914e87d764b7e', redirect_url: upload_admin_post_url(@post) }.to_json)
-  = tag(:input, type: :file, name: :image, multiple: :multiple)
-  = tag(:br)
-  = tag(:br)
-  = submit_tag('Upload')
+- unless @post.new_record?
+  = form_tag('http://api2.transloadit.com/assemblies', multipart: true, id: :uploader) do
+    = hidden_field_tag(:params, { auth: { key: ENV['TRANSLOADIT_AUTH_KEY'] }, template_id: '4728d6347d1d4025aaa914e87d764b7e', redirect_url: upload_admin_post_url(@post) }.to_json)
+    = tag(:input, type: :file, name: :image, multiple: :multiple)
+    = tag(:br)
+    = tag(:br)
+    = submit_tag('Upload')
 
 = javascript_include_tag('//assets.transloadit.com/js/jquery.transloadit2.js')
 :javascript
