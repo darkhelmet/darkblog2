@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
   end
 
   def tag_string
-    tags.join(', ')
+    Array(tags).join(', ')
   end
 
   def slug
