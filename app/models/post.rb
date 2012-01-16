@@ -7,9 +7,7 @@ class Post < ActiveRecord::Base
   extend Searchable(:title, :description, :body)
 
   before_save :slug!
-  before_save :update_terms!, :unless => -> { ENV['YAHOO_APPID'].blank? }
   after_initialize :set_default_published_on
-  after_save :clear_cache, :if => :published
 
   validates_presence_of :title, :category
 
@@ -170,19 +168,6 @@ class Post < ActiveRecord::Base
   end
 
 private
-
-  def clear_cache
-    Rails.cache.clear
-  end
-
-  def update_terms!
-    json = RestClient.post(Yahoo, {
-      appid: ENV['YAHOO_APPID'],
-      context: body,
-      output: 'json'
-    })
-    self.terms = JSON.parse(json)['ResultSet']['Result']
-  end
 
   def set_default_published_on
     self.published_on ||= Chronic.parse('monday 10am')
