@@ -1,5 +1,5 @@
 - content_for(:head) do
-  = render('open_graph', :post => @post)
+  = render('posts/open_graph', :post => @post)
 
 - unless inline?
   - content_for(:title, @post.main_title)

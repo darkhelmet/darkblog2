@@ -18,6 +18,7 @@ ActiveAdmin.register Post do
     column :published_on
     column 'Actions' do |post|
       ul do
+        li link_to('Preview', preview_admin_post_path(post))
         li link_to('Edit', edit_admin_post_path(post))
         li link_to('Delete', admin_post_path(post), method: :delete, confirm: 'Really delete?')
         if post.published?
@@ -48,6 +49,11 @@ ActiveAdmin.register Post do
     post = Post.find(params[:id])
     post.update_from_transloadit(JSON.parse(params[:transloadit]))
     redirect_to(action: :edit)
+  end
+
+  member_action :preview, method: :get do
+    @post = PostDecorator.decorate(Post.find(params[:id]))
+    render('posts/permalink', layout: 'application')
   end
 
   collection_action :clear_cache, method: :post do

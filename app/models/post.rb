@@ -66,7 +66,7 @@ class Post < ActiveRecord::Base
 
   def related(limit = 5)
     Post.publish_order.
-      where(terms: terms.search_any(:string)).
+      where(terms: Array(terms).search_any(:string)).
       where('id <> ?', id).
       sort_by { |post| -(post.terms & terms).length }.
       take(limit)
