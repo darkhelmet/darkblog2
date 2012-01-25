@@ -151,17 +151,6 @@ class Post < ActiveRecord::Base
       publish_order.where(tags: tag)
     end
 
-    def pull
-      # This auth token doesn't matter anymore, so who cares if it's in the code?
-      json = JSON.parse(RestClient.get('http://verboselogging.com/admin/posts.json?auth_token=xzakg1UypqDrzGafV6Ul'))
-      transaction do
-        json.reverse_each do |post|
-          attrs = post.except('_id', 'pics', 'announce_job_id')
-          Post.create!(attrs.merge('published_on' => Time.zone.parse(attrs.delete('published_on'))))
-        end
-      end
-    end
-
     def inform_google
       RestClient.get('http://feedburner.google.com/fb/a/pingSubmit?bloglink=http://verboselogging.com/')
     end
