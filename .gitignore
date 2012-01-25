@@ -4,6 +4,7 @@ log/*.log
 tmp/**/*
 tmp/restart.txt
 config/database.yml
+config/newrelic.yml
 .DS_Store
 config.sqlite
 mongrel2.conf
