@@ -54,7 +54,6 @@ module Darkblog2
       require 'rack/remove_slash'
 
       mw.insert_before(Rack::Lock, Rack::RemoveSlash)
-      mw.insert_before(Rack::Sendfile, Rack::ETag)
 
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
     end
