@@ -1,6 +1,12 @@
 class PostsController < CachedController
   respond_to :html, :json, :js
 
+  Archives = {
+    'full' => 'full',
+    'category' => 'category',
+    'month' => 'month'
+  }
+
   def main
     respond_with(@posts = PostDecorator.decorate(Post.find_for_main_page))
   end
@@ -19,7 +25,8 @@ class PostsController < CachedController
   end
 
   def archive
-    render(action: "archive_#{params[:archive].parameterize}")
+    archive = Archives.fetch(params[:archive], 'full')
+    render(action: "archive_#{archive}")
   end
 
   def monthly
