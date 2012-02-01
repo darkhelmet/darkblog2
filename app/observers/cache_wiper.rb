@@ -1,4 +1,4 @@
-class CacheWiper < ActiveModel::Observer
+class CacheWiper < ActiveRecord::Observer
   observe :post
 
   def after_save(post)

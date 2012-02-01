@@ -1,4 +1,4 @@
-class YahooTermUpdater < ActiveModel::Observer
+class YahooTermUpdater < ActiveRecord::Observer
   Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
 
   observe :post
