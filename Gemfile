@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.1'
 gem 'haml', '~> 3.1.3' # ERB sucks
 gem 'sass', '~> 3.1.10'
 gem 'sass-rails', '3.2.3'
@@ -20,7 +20,7 @@ gem 'jquery-rails', '~> 2.0'
 gem 'uglifier', '~> 1.1'
 gem 'pg', '~> 0.11'
 gem 'ar_pg_array', '0.9.12'
-gem 'activeadmin', '~> 0.3.4'
+gem 'activeadmin', '~> 0.4.0'
 gem 'liquid', '~> 2.3.0'
 gem 'draper', '~> 0.9'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
