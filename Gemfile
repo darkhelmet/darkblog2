@@ -25,6 +25,7 @@ gem 'liquid', '~> 2.3.0'
 gem 'draper', '~> 0.9'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
 gem 'thin', '~> 1.3.1'
+gem 'therubyracer', '0.9.9'
 gem 'newrelic_rpm'
 
 group :development, :test do
