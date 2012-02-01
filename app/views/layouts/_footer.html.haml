@@ -1,3 +1,7 @@
+%section#search
+  = form_tag('/search', method: :get) do
+    = text_field_tag('query', nil, placeholder: "Search #{Darkblog2.config.title}")
+    = image_submit_tag(image_path('magnifier.png'))
 %p
   = license_image
   %br
@@ -19,3 +23,6 @@
   = link_to('Sitemap', sitemap_path(:format => :xml))
   %br
   Design by Daniel Huckstep
+
+= render('layouts/extras')
+= yield(:footer)

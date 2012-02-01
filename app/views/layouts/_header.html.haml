@@ -1,11 +1,13 @@
 %h1#title= link_to(Darkblog2.config.title, '/')
 %p#tagline
   %em= Darkblog2.config.tagline
+%section#where
+  - render_social_links
 %nav
   %ul
-    %li= link_to('Home', '/')
-    %li= link_to('About', '/about')
-    %li= link_to('Talks', '/talks')
-    %li= link_to('Projects', '/projects')
-    %li= link_to('Contact', '/contact')
-    %li= link_to('Disclaimer', '/disclaimer')
+    %li= link_to('Home', '/', :class => 'icon-b', icon: 'H')
+    %li= link_to('About', '/about', :class => 'icon-b', icon: 'A')
+    %li= link_to('Talks', '/talks', :class => 'icon-b', icon: 'E')
+    %li= link_to('Projects', '/projects', :class => 'icon-b', icon: 'P')
+    %li= link_to('Contact', '/contact', :class => 'icon-b', icon: 'C')
+    %li= link_to('Disclaimer', '/disclaimer', :class => 'icon-b', icon: 'D')

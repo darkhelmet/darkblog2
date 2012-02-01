@@ -31,7 +31,7 @@ html, body {
   color: $grey;
 }
 
-body {
+html {
   background: url(<%= image_path('handmadepaper.png') %>);
 }
 
@@ -158,6 +158,19 @@ blockquote {
   top: -3px;
 }
 
+.icon {
+  font-family: 'IcoMoonRegular';
+  margin: 10px;
+  font-size: 250%;
+}
+
+.icon-b:before {
+  font-family: 'IcoMoonRegular';
+  content: attr(icon);
+  font-size: 150%;
+  margin-right: 5px;
+}
+
 header {
   h1, nav, #tagline {
     margin: 10px;
@@ -175,6 +188,7 @@ header {
 
       li {
         display: inline;
+        margin: 0px 10px;
       }
     }
   }
@@ -276,44 +290,12 @@ header {
     font-weight: bold;
     text-align: center;
   }
+
+  width: 640px;
+  margin: 0px auto;
 }
 
 #sidebar {
-  #search {
-    input[type=text] {
-      @include round-corners(10px);
-
-      width: 100%;
-      background: white;
-
-      &:hover, &:focus {
-        outline: none;
-        opacity: 1;
-      }
-    }
-
-    input[type=image] {
-      position: absolute;
-      top: 16px;
-      right: 4px;
-      opacity: 0.65;
-    }
-
-    margin-top: 10px;
-  }
-
-  #where {
-    a {
-      margin: 6px;
-      height: 28px;
-      width: 28px;
-
-      &:hover {
-        border: 0px
-      }
-    }
-  }
-
   section {
     ul {
       list-style: {
@@ -339,6 +321,29 @@ header {
 }
 
 footer {
+  #search {
+    input[type=text] {
+      @include round-corners(10px);
+
+      width: 250px;
+      background: white;
+
+      &:hover, &:focus {
+        outline: none;
+        opacity: 1;
+      }
+    }
+
+    input[type=image] {
+      position: relative;
+      top: -2px;
+      right: 25px;
+      opacity: 0.65;
+    }
+
+    margin-top: 10px;
+  }
+
   text-align: center;
 
   padding: {

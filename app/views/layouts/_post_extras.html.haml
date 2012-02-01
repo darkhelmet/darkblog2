@@ -1,16 +1,3 @@
-%a.a2a_dd.no-hover{ :href => 'http://www.addtoany.com/share_save' }
-  = image_tag('http://static.addtoany.com/buttons/share_save_171_16.png', border: 0, height: 16, width: 171, alt: 'Share/Bookmark')
-:javascript
-  a2a_onclick = 1;
-  a2a_show_title = 1;
-  a2a_custom_services = [
-    [
-      "Hacker News",
-      "http://news.ycombinator.com/submitlink?u=A2A_LINKURL_ENC&t=A2A_LINKNAME_ENC",
-      "#{image_path('icons/ycombinator.png')}"
-    ]
-  ];
-= javascript_include_tag('http://static.addtoany.com/menu/page.js')
 - related = PostDecorator.decorate(@post.related)
 - unless related.empty?
   %hr

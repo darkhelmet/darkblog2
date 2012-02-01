@@ -91,34 +91,48 @@ module ApplicationHelper
     {
       twitter: {
         link: 'http://twitter.com/darkhelmetlive',
-        title: 'Follow me on Twitter'
+        title: 'Follow me on Twitter',
+        text: 'Twitter',
+        icon: 'T'
       },
       gplus: {
         link: 'https://plus.google.com/107826869818581440524?rel=author',
-        title: 'Add me to a Circle on Google+'
+        title: 'Add me to a Circle on Google+',
+        text: 'Google+',
+        icon: '+'
       },
       linkedin: {
         link: 'http://ca.linkedin.com/in/darkhelmetlive',
-        title: 'Connect with me on Linkedin'
+        title: 'Connect with me on Linkedin',
+        text: 'LinkedIn',
+        icon: 'I'
       },
       skype: {
         link: 'skype:darkhelmetlive?call',
-        title: 'Call on me! Call me! Call on me! Call me...on Skype'
+        title: 'Call on me! Call me! Call on me! Call me...on Skype',
+        text: 'Skype',
+        icon: 'S'
       },
       github: {
         link: 'https://github.com/darkhelmet',
-        title: 'My codez on teh Githubz'
+        title: 'My codez on teh Githubz',
+        text: 'GitHub',
+        icon: 'G'
       },
       flickr: {
         link: 'http://www.flickr.com/photos/darkhelmetlive/',
-        title: 'My pictures on Flickr'
+        title: 'My pictures on Flickr',
+        text: 'Flickr',
+        icon: 'F'
       },
       rss: {
         link: feed_path,
-        title: 'Get new articles in your RSS reader'
+        title: 'Get new articles in your RSS reader',
+        text: 'RSS',
+        icon: 'R'
       }
     }.each do |icon, data|
-      concat(link_to(image_tag("icons/#{icon}.png", alt: data[:title], height: 28, width: 28), data[:link], title: data[:title], :class => icon))
+      concat(link_to(data[:icon], data[:link], title: data[:title], icon: data[:icon], :class => 'icon'))
     end
   end
 

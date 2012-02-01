@@ -57,4 +57,3 @@ $(document).ready ->
     false
 
   $('p.footnote:first').addClass('first')
-  $('#boastful').boastful({ location: $('link[rel=canonical]').attr('href') })

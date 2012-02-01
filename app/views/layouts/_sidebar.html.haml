@@ -14,25 +14,6 @@
       = image_tag('http://feeds.feedburner.com/~fc/VerboseLogging?bg=FF9900&fg=000000&anim=0', size: '88x26', style: 'border: 0', alt: 'Feedburner Chicklet')
     %a.twitter-follow-button{ :href => 'http://twitter.com/darkhelmetlive', 'data-show-count' => 'false' } Follow @darkhelmetlive
     = javascript_include_tag('http://platform.twitter.com/widgets.js')
-%section#vote
-  %h3= link_to('Vote for the next post!', 'https://trello.com/board/blog-posts/4e72480d171d7c0000108db0')
-%section#postrank
-  .postrank-widget.theDarkSide
-    = javascript_include_tag('http://api.postrank.com/static/widget-v2.js')
-    :javascript
-      new PostRankWidget({
-        feed_hash: 'd97657ed1ad63565e413c2797a675064',
-        num: 6, theme: 'theDarkSide', hasLink: true
-      });
-    .powered-by-postrank-wrapper
-      .powered-by-postrank
-        %p.poweredByPostRank
-          %a{ :href => 'http://www.postrank.com/?utm_source=topposts&utm_medium=widget&utm_content=topposts&utm_campaign=pr-1' }
-            %span Powered by Postrank
-      .pr_bottomCornerSet
-        .pr_clearBottomLeft
-        .pr_solidSpecialMiddle
-        .pr_clearBottomRight
 %section#boastful
 - if show_ads?
   %section#hypela

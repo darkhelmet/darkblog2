@@ -3,16 +3,9 @@
   %head= render('layouts/head')
   %body
     .row
-      %header= render('layouts/header')
-      .clear
-      %section#content.col.col_11= yield
-      - cache('sidebar') do
-        %aside#sidebar.col.col_5= render('layouts/sidebar')
-      - cache('footer') do # Footer might end up with extra stuff
-        .clear
-        %footer.col.col_16= render('layouts/footer')
-        #extras= render('layouts/extras')
-      #extra_footer= yield(:footer)
+      %header.clear= render('layouts/header')
+      %section#content.clear= yield
+      %footer= render('layouts/footer')
     :javascript
       (function() {
         var t   = document.createElement('script');
