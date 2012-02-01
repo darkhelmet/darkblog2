@@ -1,4 +1,6 @@
 class YahooTermUpdater < ActiveModel::Observer
+  Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
+
   observe :post
 
   def before_save(post)

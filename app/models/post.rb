@@ -1,8 +1,6 @@
 Chronic.time_class = Time.zone
 
 class Post < ActiveRecord::Base
-  Yahoo = 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction'
-
   include Tags
   extend Searchable(:title, :description, :body)
 
