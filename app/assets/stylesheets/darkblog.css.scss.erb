@@ -208,9 +208,6 @@ header {
 
 #content {
   article.main {
-    @include transition(background);
-    @include round-corners;
-
     .snippet {
       margin-bottom: 10px;
     }
@@ -233,11 +230,6 @@ header {
 
     padding: 5px;
     margin: 5px 0px;
-
-    &:hover {
-      $back: transparentize(black, 0.9);
-      background: $back;
-    }
 
     &.preview {
       .meta, .extra_links {
