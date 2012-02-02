@@ -16,6 +16,10 @@
 = font_tag('Droid+Sans+Mono')
 = stylesheet_link_tag('application')
 
+= tag(:meta, name: 'HandheldFriendly', content: 'True')
+= tag(:meta, name: 'MobileOptimized', content: '320')
+= tag(:meta, name: 'viewport', content: 'width=device-width, target-densitydpi=160, initial-scale=1.0')
+
 :javascript
   if (top.location != self.location) { top.location = self.location.href; }
 
