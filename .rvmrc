@@ -1,1 +1,1 @@
-rvm use 1.9.2@darkblog2 --install --create
+rvm use 1.9.2-p180@darkblog2 --install --create

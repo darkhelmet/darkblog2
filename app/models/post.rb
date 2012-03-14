@@ -1,5 +1,3 @@
-Chronic.time_class = Time.zone
-
 class Post < ActiveRecord::Base
   include Tags
   extend Searchable(:title, :description, :body)
@@ -71,7 +69,10 @@ class Post < ActiveRecord::Base
   end
 
   def update_from_transloadit(transloadit)
-    urls = transloadit['results'].values.flatten.map { |result| result['url'] }
+    urls = transloadit.fetch('results', {}).
+      values.flatten.
+      map { |result| result.fetch('url', nil) }.
+      compact
     paths = urls.map { |url| URI.parse(url).path }
     update_attributes(images: images | paths)
   end

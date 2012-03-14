@@ -1,15 +1,31 @@
 class PostDecorator < ApplicationDecorator
   decorates :post
-  ImageHost = ENV['IMAGE_HOST']
 
-  def body_html
-    RedCloth.new(Liquid::Template.parse(body).render(image_hash)).to_html
+  class ImageCloth < RedCloth::TextileDoc
+    ImageRegex = /\{\{\s*(\w+)\.(\w+)\s*\}\}/
+    DefaultRules = [:parse_images]
+
+    attr_reader :image_hash
+
+    def initialize(template, image_hash)
+      super(template)
+      @image_hash = image_hash
+    end
+
+    def parse_images(text)
+      text.gsub!(ImageRegex) do |match|
+        image_hash.fetch($1, {}).fetch($2, nil)
+      end
+    end
+
+    def to_html(*rules)
+      rules |= DefaultRules
+      super(*rules)
+    end
   end
 
-  def hashmap(hash)
-    hash.reduce({}) do |hash, (key, value)|
-      hash.merge!(key => yield(key, value))
-    end
+  def body_html
+    ImageCloth.new(body, image_hash).to_html
   end
 
   def image_hash
@@ -73,11 +89,22 @@ class PostDecorator < ApplicationDecorator
   end
 
   def image_for
-    body_image = Nokogiri(body_html).search('img').first
-    body_image.nil? ? h.gravatar_url : body_image[:src]
+    body_image and body_image[:src] or h.gravatar_url
   end
 
   def truncated_body_html(length = 450)
     h.truncate(h.strip_tags(body_html), :length => length)
+  end
+
+private
+
+  def body_image
+    Nokogiri(body_html).search('img').first
+  end
+
+  def hashmap(hash)
+    hash.reduce({}) do |hash, (key, value)|
+      hash.merge!(key => yield(key, value))
+    end
   end
 end
