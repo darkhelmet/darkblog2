@@ -4,3 +4,8 @@
 
 // To customize the Active Admin interfaces, add your
 // styles here:
+
+.active_admin_comment_author {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

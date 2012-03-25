@@ -5,7 +5,7 @@ ActiveAdmin.register Post do
 
   index do |post|
     column :title do |post|
-      link_to(post.title, edit_admin_post_path(post))
+      link_to(post.title, admin_post_path(post))
     end
     column :category do |post|
       post.category.humanize
