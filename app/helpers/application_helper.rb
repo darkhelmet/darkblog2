@@ -101,12 +101,6 @@ module ApplicationHelper
         text: 'Google+',
         icon: '+'
       },
-      linkedin: {
-        link: 'http://ca.linkedin.com/in/darkhelmetlive',
-        title: 'Connect with me on Linkedin',
-        text: 'LinkedIn',
-        icon: 'I'
-      },
       skype: {
         link: 'skype:darkhelmetlive?call',
         title: 'Call on me! Call me! Call on me! Call me...on Skype',

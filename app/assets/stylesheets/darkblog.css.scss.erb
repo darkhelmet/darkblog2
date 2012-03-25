@@ -288,6 +288,30 @@ header {
   margin: 0px auto;
 }
 
+.touch {
+  article.preview {
+    .meta, .extra_links {
+      opacity: 1 !important;
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  #content {
+    margin: 0px 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #content {
+    article.preview {
+      .snippet, .extra_links {
+        display: none;
+      }
+    }
+  }
+}
+
 #sidebar {
   section {
     ul {

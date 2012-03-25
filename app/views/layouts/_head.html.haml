@@ -1,6 +1,5 @@
-/[if lt IE 9]
-  = javascript_include_tag('http://html5shim.googlecode.com/svn/trunk/html5.js')
 = content_type_tag
+= javascript_include_tag('modernizr.custom.js')
 = csrf_meta_tag
 = title_tag
 = description_tag
@@ -21,6 +20,7 @@
 = tag(:meta, name: 'viewport', content: 'width=device-width, target-densitydpi=160, initial-scale=1.0')
 
 :javascript
+  Modernizr.load()
   if (top.location != self.location) { top.location = self.location.href; }
 
 - if Rails.env.development?
