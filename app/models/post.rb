@@ -78,9 +78,11 @@ class Post < ActiveRecord::Base
   end
 
   class << self
-    extend ActiveSupport::Memoizable
-
     def find_for_main_page(max = 6)
+      publish_order.limit(max)
+    end
+
+    def find_for_feed(max = 10)
       publish_order.limit(max)
     end
 

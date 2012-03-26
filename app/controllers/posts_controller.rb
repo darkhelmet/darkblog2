@@ -19,7 +19,6 @@ class PostsController < CachedController
   end
 
   def category
-    # TODO: Find latest updated in category for `stale?` check
     posts = Post.find_by_category(params[:category])
     render_404 and return if posts.empty?
     respond_with(@posts = decorate(posts))
@@ -31,7 +30,6 @@ class PostsController < CachedController
   end
 
   def monthly
-    # TODO: Find latest updated in month for `stale?` check
     posts = Post.find_by_month(params)
     render_404 and return if posts.empty?
     respond_with(@posts = decorate(posts))
@@ -51,13 +49,13 @@ class PostsController < CachedController
       redirect_to(feedburner_url, status: :moved_permanently) and return
     end
     request.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
-    @posts = decorate(Post.publish_order.limit(10))
+    @posts = decorate(Post.find_for_feed)
   end
 
   def tag
-    # TODO: Find latest updated in tag for `stale?` check
-    tag = params[:tag].strip.parameterize
-    respond_with(@posts = decorate(Post.find_by_tag(tag)))
+    tag = params.fetch(:tag, '').strip.parameterize
+    posts = Post.find_by_tag(tag)
+    respond_with(@posts = decorate(posts))
   end
 
 private

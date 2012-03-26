@@ -21,7 +21,7 @@ gem 'uglifier', '~> 1.1'
 gem 'pg', '~> 0.11'
 gem 'ar_pg_array', '~> 0.9.12'
 gem 'activeadmin', '0.4.0'
-gem 'draper', '~> 0.9'
+gem 'draper', '~> 0.11'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
 gem 'thin', '~> 1.3.1'
 gem 'therubyracer', '0.9.10'
