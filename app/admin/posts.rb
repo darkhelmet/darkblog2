@@ -56,6 +56,17 @@ ActiveAdmin.register Post do
     render('posts/permalink', layout: 'application')
   end
 
+  member_action :announce, method: :post do
+    Post.find(params[:id]).announce!
+    render(text: 'ok')
+  end
+
+  controller do
+    cache_sweeper :post_sweeper
+
+    skip_before_filter :verify_authenticity_token, only: [:announce]
+  end
+
   collection_action :clear_cache, method: :post do
     Rails.cache.clear
     redirect_to(action: :index)

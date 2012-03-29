@@ -3,8 +3,12 @@ namespace :posts do
   task announce: :environment do
     Post.transaction do
       unless Post.unannounced.empty?
-        Post.unannounced.update_all(announced: true)
-        Post.inform_google
+        token = AdminUser.first.authentication_token
+        host = ENV.fetch('ANNOUNCE_HOST', 'localhost:3000')
+        Post.unannounced.each do |post|
+          RestClient.post("http://#{host}/admin/posts/#{post.id}/announce", auth_token: token)
+        end
+        Post.inform_google if Rails.env.production?
       end
     end
   end
