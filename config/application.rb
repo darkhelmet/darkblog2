@@ -57,7 +57,7 @@ module Darkblog2
 
       mw.insert_before(Rack::Lock, Rack::RemoveSlash)
 
-      mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
+      mw.use(Rack::Gist, cache: ActiveSupport::Cache::RedisStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
     end
   end
 end
