@@ -1,11 +1,10 @@
 - content_for(:description, 'Archives by category')
 - content_for(:title, title_text('Category archives'))
 - content_for(:canonical, archive_url('category'))
-- cache('category-archive') do
-  - Post.group_by_category.each do |category, posts|
-    %section
-      %h1= category_link(category)
-      - PostDecorator.decorate(posts).each do |post|
-        %article.main
-          %h4.archive_title= post.link
-  = render('layouts/archive_links')
+- Post.group_by_category.each do |category, posts|
+  %section
+    %h1= category_link(category)
+    - PostDecorator.decorate(posts).each do |post|
+      %article.main
+        %h4.archive_title= post.link
+= render('layouts/archive_links')

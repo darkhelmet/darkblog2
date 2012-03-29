@@ -1,4 +1,3 @@
 - content_for(:canonical, root_url)
-- cache(@posts.hash) do
-  = render(partial: 'post_preview', collection: @posts)
-  = render('layouts/archive_links')
+= render(partial: 'post_preview', collection: @posts)
+= render('layouts/archive_links')
