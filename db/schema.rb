@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213022514) do
+ActiveRecord::Schema.define(:version => 20120329042958) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20111213022514) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "authentication_token"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20111213022514) do
     t.string       "description",                     :null => false
     t.text         "body",                            :null => false
     t.boolean      "published",    :default => false, :null => false
-    t.boolean      "announced"
+    t.boolean      "announced",    :default => false, :null => false
     t.string_array "slugs"
     t.string_array "terms"
     t.string_array "tags"
@@ -73,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20111213022514) do
     t.datetime     "updated_at"
   end
 
-  add_index "posts", ["category", "published_on"], :name => "category"
-  add_index "posts", ["published_on"], :name => "basic_search"
+  add_index "posts", ["category", "published_on"], :name => "category", :order => {"published_on"=>:desc}
+  add_index "posts", ["published_on"], :name => "basic_search", :order => {"published_on"=>:desc}
   add_index "posts", ["slugs"], :name => "slugs"
   add_index "posts", ["tags"], :name => "tags"
   add_index "posts", ["terms"], :name => "terms"
