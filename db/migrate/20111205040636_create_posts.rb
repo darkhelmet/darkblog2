@@ -1,17 +1,17 @@
 class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
-      t.string :title, :null => false
-      t.string :category, :null => false
-      t.string :description, :null => false
-      t.text :body, :null => false
-      t.boolean :published, :null => false, :default => false
+      t.string :title, null: false
+      t.string :category, null: false
+      t.string :description, null: false
+      t.text :body, null: false
+      t.boolean :published, null: false, default: false
       t.boolean :announced
       t.string_array :slugs
       t.string_array :terms
       t.string_array :tags
       t.string_array :images
-      t.datetime :published_on, :null => false
+      t.datetime :published_on, null: false
 
       t.timestamps
     end
