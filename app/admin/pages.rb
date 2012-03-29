@@ -15,6 +15,10 @@ ActiveAdmin.register Page do
 
   form partial: 'form'
 
+  controller do
+    cache_sweeper :page_sweeper
+  end
+
   sidebar :help do
     ul do
       li link_to('Textile Reference', 'http://redcloth.org/hobix.com/textile/')
