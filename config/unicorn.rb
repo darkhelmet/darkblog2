@@ -5,5 +5,5 @@ timeout 30
 
 after_fork do |server, worker|
   ActiveRecord::Base.establish_connection
-  Rails.cache.reconnect if Rails.cache.respond_to?(:reconnect)
+  Rails.cache.reset if Rails.cache.respond_to?(:reconnect)
 end
