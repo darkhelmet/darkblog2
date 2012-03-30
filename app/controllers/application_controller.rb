@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   def opensearch
     response.headers['Content-Type'] = 'application/opensearchdescription+xml; charset=utf-8'
   end
+  caches_action :opensearch, cache_path: 'opensearch'
 
   def render_404
     respond_to do |format|
