@@ -57,6 +57,7 @@ module Darkblog2
 
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
 
+      require 'active_support/cache/dalli_store'
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
     end
   end
