@@ -19,5 +19,5 @@ Darkblog2::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
-  # config.cache_store = :redis_store
+  # config.cache_store = :dalli_store
 end
