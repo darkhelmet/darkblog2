@@ -133,7 +133,7 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
-    newrelic_rpm (3.3.2)
+    newrelic_rpm (3.3.3)
     nokogiri (1.5.2)
     orm_adapter (0.0.6)
     pg (0.13.2)
