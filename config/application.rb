@@ -55,7 +55,7 @@ module Darkblog2
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
 
-      mw.insert_before(Rack::Lock, Rack::RemoveSlash)
+      mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
 
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::RedisStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
     end

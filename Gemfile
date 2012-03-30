@@ -25,12 +25,12 @@ gem 'ar_pg_array', '~> 0.9.12'
 gem 'activeadmin', '0.4.0'
 gem 'draper', '~> 0.11'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
-gem 'thin', '~> 1.3.1'
-gem 'therubyracer', '0.9.10'
+gem 'unicorn', '~> 4.2.1'
 gem 'newrelic_rpm'
 
 group :development, :test do
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  # gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'thin'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
   gem 'foreman'
