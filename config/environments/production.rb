@@ -58,4 +58,11 @@ Darkblog2::Application.configure do
   config.cache_store = :dalli_store
 
   config.action_controller.logger = Logger.new(STDOUT)
+
+  require 'dalli'
+  config.action_dispatch.rack_cache = {
+    metastore: Dalli::Client.new,
+    entitystore: 'file:tmp/cache/rack/body',
+    allow_reload: true
+  }
 end
