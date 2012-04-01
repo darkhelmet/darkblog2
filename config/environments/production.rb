@@ -63,6 +63,7 @@ Darkblog2::Application.configure do
   config.action_dispatch.rack_cache = {
     metastore: Dalli::Client.new,
     entitystore: 'file:tmp/cache/rack/body',
-    allow_reload: true
+    allow_reload: true,
+    allow_revalidate: true
   }
 end
