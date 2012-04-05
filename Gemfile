@@ -27,7 +27,7 @@ gem 'unicorn', '~> 4.2.1'
 gem 'newrelic_rpm'
 
 group :development, :test do
-  # gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'debugger'
   gem 'thin'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'

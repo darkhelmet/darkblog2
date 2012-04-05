@@ -60,8 +60,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    columnize (0.3.6)
     daemons (1.1.8)
     dalli (2.0.1)
+    debugger (1.0.0)
+      columnize (>= 0.3.1)
+      debugger-linecache
+      debugger-ruby_core_source
+    debugger-linecache (1.0.1)
+      debugger-ruby_core_source
+    debugger-ruby_core_source (1.0.1)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -216,6 +224,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   coffee-script (~> 2.2)
   dalli (~> 2.0.1)
+  debugger
   draper (~> 0.11)
   fog (~> 1.1.1)
   foreman
