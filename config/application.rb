@@ -54,8 +54,12 @@ module Darkblog2
 
     config.middleware.tap do |mw|
       require 'rack/remove_slash'
-
       mw.insert_after(ActionDispatch::Static, Rack::RemoveSlash)
+
+      require 'rack/contrib/response_headers'
+      mw.insert_before(ActionDispatch::Static, Rack::ResponseHeaders) do |headers|
+        headers['Access-Control-Allow-Origin'] = '*'
+      end
 
       require 'active_support/cache/dalli_store'
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
