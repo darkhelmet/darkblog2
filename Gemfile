@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.3'
 gem 'haml', '~> 3.1.3' # ERB sucks
 gem 'sass', '~> 3.1.10'
 gem 'sass-rails', '~> 3.2.3'
