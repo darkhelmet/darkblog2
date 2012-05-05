@@ -1,5 +1,4 @@
 = content_type_tag
-= javascript_include_tag('modernizr.custom.js')
 = csrf_meta_tag
 = title_tag
 = description_tag
@@ -19,7 +18,6 @@
 = tag(:meta, name: 'viewport', content: 'width=device-width, target-densitydpi=160, initial-scale=1.0')
 
 :javascript
-  Modernizr.load()
   if (top.location != self.location) { top.location = self.location.href; }
 
 - if Rails.env.development?
@@ -27,6 +25,10 @@
     var disqus_developer = 1;
 
 = content_for(:head)
+
+= javascript_include_tag('modernizr.custom.js')
+:javascript
+  Modernizr.load()
 
 - if Rails.env.production?
   :javascript
