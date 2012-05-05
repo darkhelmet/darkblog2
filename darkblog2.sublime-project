@@ -1,0 +1,14 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [
+                ".sass-cache",
+                "tmp", "log",
+                ".bundle"
+            ],
+            "file_exclude_patterns": [
+            ]
+        }
+    ]
+}
