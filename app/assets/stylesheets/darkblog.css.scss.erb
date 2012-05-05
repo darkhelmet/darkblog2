@@ -1,30 +1,6 @@
 $grey: #525252;
 
-@mixin box-shadow($h, $v, $blur, $color) {
-  box-shadow: $h $v $blur $color;
-  -webkit-box-shadow: $h $v $blur $color;
-  -moz-box-shadow: $h $v $blur $color;
-}
-
-@mixin round-corners($size: 5px) {
-  -moz-border-radius: $size;
-  -webkit-border-radius: $size;
-  border-radius: $size;
-}
-
-@mixin droid {
-  font-family: 'Droid Sans', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
-}
-
-@mixin droid-mono {
-  font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
-}
-
-@mixin transition($value, $time: 0.25s, $method: ease-in) {
-  -webkit-transition: $value $time $method;
-  -moz-transition: $value $time $method;
-  -o-transition: $value $time $method;
-}
+@import "mixins";
 
 html, body {
   @include droid;
@@ -280,6 +256,10 @@ header {
 
     img.round {
       @include round-corners;
+    }
+
+    div.embedly {
+      max-width: 600px;
     }
 
     font-size: 115%;
