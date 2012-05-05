@@ -131,7 +131,7 @@ module ApplicationHelper
   end
 
   def license_image
-    link_to(image_tag('http://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png', alt: 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', no_escape: true, rel: 'license')
+    link_to(image_tag('license.png', alt: 'Creative Commons License'), 'http://creativecommons.org/licenses/by-sa/2.5/ca/', no_escape: true, rel: 'license')
   end
 
   def license_link
