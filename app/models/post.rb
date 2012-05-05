@@ -88,8 +88,8 @@ class Post < ActiveRecord::Base
 
     def published_in_range(start, stop)
       publish_order.
-        where('published_on >= ?', start).
-        where('published_on <= ?', stop)
+        where('posts.published_on >= ?', start).
+        where('posts.published_on <= ?', stop)
     end
 
     def find_by_permalink_params(params)
@@ -102,8 +102,8 @@ class Post < ActiveRecord::Base
 
     def publish_order
       where(published: true).
-        where('published_on <= ?', Time.zone.now).
-        order('published_on DESC')
+        where('posts.published_on <= ?', Time.zone.now).
+        order('posts.published_on DESC')
     end
 
     def find_by_month(params)
@@ -120,7 +120,7 @@ class Post < ActiveRecord::Base
     end
 
     def categories
-      connection.select_values(select('DISTINCT(category)').order(:category).to_sql)
+      connection.select_values(select('DISTINCT(posts.category)').order(:category).to_sql)
     end
 
     def group_by_category
@@ -136,7 +136,7 @@ class Post < ActiveRecord::Base
     end
 
     def with_images
-      where(%q(body ~ '\{\{[^{]+\.[^{]+\}\}'))
+      where(%q(posts.body ~ '\{\{[^{]+\.[^{]+\}\}'))
     end
 
     def unpublished
