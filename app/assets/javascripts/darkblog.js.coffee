@@ -1,6 +1,14 @@
+$.getScriptLite = (src) ->
+  script = $('<script/>',
+    src: src,
+    type: 'text/javascript',
+    async: 'async',
+    defer: 'defer'
+  ).get(0)
+  $('head').get(0).appendChild(script)
+
 $ ->
-  $('plusone').replaceWith('<g:plusone size="medium"></g:plusone>')
-  $.getScript('https://apis.google.com/js/plusone.js')
+  CFInstall.check(mode: 'overlay')
 
   $('.content a:regex(href, png|jpe?g|gif)').fancybox({
     openEffect: 'elastic',
@@ -8,11 +16,6 @@ $ ->
     closeEffect: 'elastic',
     closeEasing: 'easeInBack'
   })
-
-  query = $.map($('a[href$=#disqus_thread]'), (a, index) ->
-    "url#{index}=#{encodeURIComponent(a.href)}"
-  ).join('&')
-  $.getScript('http://disqus.com/forums/verboselogging/get_num_replies.js?' + query)
 
   $('.content a').embedly
     urlRe: /http:\/\/(.*youtube\.com\/.*)/i,
@@ -34,3 +37,26 @@ $ ->
     maxWidth: 640
 
   $('p.footnote:first').addClass('first')
+
+  threads = $('a[href$=#disqus_thread]')
+  if threads.length > 0
+    query = threads.map((a, index) ->
+      "url#{index}=#{encodeURIComponent(a.href)}"
+    ).join('&')
+    $.getScriptLite('//disqus.com/forums/verboselogging/get_num_replies.js?' + query)
+
+  $('.rack-gist').each ->
+    $.ajax(url: $(this).attr('rack-gist-url'), dataType: 'script', cache: true)
+
+  if document.getElementsByTagName('plusone').length > 0
+    $('plusone').replaceWith('<g:plusone size="medium"></g:plusone>')
+    $.getScriptLite('//apis.google.com/js/plusone.js')
+
+  if document.getElementById('fb-root')
+    $.getScriptLite('//connect.facebook.net/en_US/all.js#appId=286712658022064&xfbml=1')
+
+  if document.getElementById('rdbWrapper')
+    $.getScriptLite('//www.readability.com/embed.js')
+
+  if document.getElementsByClassName('twitter-share-button').length > 0
+    $.getScriptLite('//platform.twitter.com/widgets.js')

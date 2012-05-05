@@ -1,0 +1,5 @@
+- related = PostDecorator.decorate(post.related)
+- unless related.empty?
+  %hr
+  %h5 If you liked this post, you might like these:
+  %ul= content_tag_for(:li, related, &:link)

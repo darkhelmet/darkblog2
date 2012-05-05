@@ -67,6 +67,10 @@ class PostDecorator < ApplicationDecorator
     h.link_to(title, permalink, rel: 'bookmark')
   end
 
+  def author
+    Darkblog2.config.author
+  end
+
   def main_title
     h.title_text(title)
   end

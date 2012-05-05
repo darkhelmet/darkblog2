@@ -6,48 +6,9 @@
 - content_for(:canonical, @post.permalink)
 %article.post.hentry
   %h1.entry-title= @post.link
-  .meta
-    = @post.updated_at_time
-    = @post.meta_time
-    &middot;
-    %span.byline.author.vcard
-      By
-      %span.fn= Darkblog2.config.author
-    &middot;
-    Posted in
-    %span.category= @post.category_link
-    &middot;
-    Tagged with
-    %span.tags
-      - @post.tags.each do |tag|
-        = tag_link(tag)
-  #rdbWrapper
-  :javascript
-    (function() {
-        var s     = document.getElementsByTagName('script')[0],
-            rdb   = document.createElement('script');
-        rdb.type  = 'text/javascript';
-        rdb.async = true;
-        rdb.src   = document.location.protocol + '//www.readability.com/embed.js';
-        s.parentNode.insertBefore(rdb, s);
-    })();
-  = link_to('Tweet', 'http://twitter.com/share', :class => 'twitter-share-button', 'data-count' => 'horizontal', 'data-via' => 'darkhelmetlive')
-  %plusone
-  #fb-root
-  :javascript
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#appId=286712658022064&xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  .fb-like{ 'data-send' => 'true', 'data-layout' => 'button_count', 'data-width' => '150', 'data-show-faces' => 'true' }
+  .meta= render('meta', post: @post)
   %hr
   .content.entry-content!= @post.body_html
   .clear
-  = render('layouts/post_extras')
-  = render('posts/disqus_single')
-
-- content_for(:footer) do
-  = javascript_include_tag('http://platform.twitter.com/widgets.js')
+  = render('sharing', post: @post)
+  = render('related', post: @post)

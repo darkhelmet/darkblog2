@@ -1,0 +1,14 @@
+= post.updated_at_time
+= post.meta_time
+&middot;
+%span.byline.author.vcard
+  By
+  %span.fn= post.author
+&middot;
+Posted in
+%span.category= post.category_link
+&middot;
+Tagged with
+%span.tags
+  - post.tags.each do |tag|
+    = tag_link(tag)
