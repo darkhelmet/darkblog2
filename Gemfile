@@ -23,9 +23,12 @@ gem 'ar_pg_array', '~> 0.9.12'
 gem 'activeadmin', '0.4.0'
 gem 'draper', '~> 0.11'
 gem 'fog', '~> 1.1.1' # Talk to S3 for backups
-gem 'unicorn', '~> 4.2.1'
 gem 'rack-contrib', '~> 1.1.0'
 gem 'newrelic_rpm'
+
+group :production do
+  gem 'unicorn', '~> 4.2.1'
+end
 
 group :development, :test do
   gem 'debugger'
