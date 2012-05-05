@@ -61,6 +61,12 @@ module Darkblog2
         headers['Access-Control-Allow-Origin'] = '*'
       end
 
+      require 'rack/gc'
+      mw.insert_before(ActionDispatch::Static, Rack::GC)
+
+      require 'rack/deflater'
+      mw.insert_before(ActionDispatch::Static, Rack::Deflater)
+
       require 'active_support/cache/dalli_store'
       mw.use(Rack::Gist, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
     end
