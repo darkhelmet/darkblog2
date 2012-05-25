@@ -30,7 +30,8 @@ Darkblog2::Application.configure do
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
   config.serve_static_assets = true # Heroku needs this to be true
-
+  config.static_cache_control = "public, max-age=#{1.year.to_i}"
+  config.assets.version = 'v2'
   config.assets.digest = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
