@@ -6,9 +6,9 @@
 - content_for(:canonical, @post.permalink)
 %article.post.hentry
   %h1.entry-title= @post.link
-  .meta= render('meta', post: @post)
+  .meta= render('posts/meta', post: @post)
   %hr
   .content.entry-content!= @post.body_html
   .clear
-  = render('sharing', post: @post)
-  = render('related', post: @post)
+  = render('posts/sharing', post: @post)
+  = render('posts/related', post: @post)
