@@ -38,13 +38,6 @@ $ ->
 
   $('p.footnote:first').addClass('first')
 
-  threads = $('a[href$=#disqus_thread]')
-  if threads.length > 0
-    query = threads.map((a, index) ->
-      "url#{index}=#{encodeURIComponent(a.href)}"
-    ).join('&')
-    $.getScriptLite('//disqus.com/forums/verboselogging/get_num_replies.js?' + query)
-
   $('.rack-gist').each ->
     $.ajax(url: $(this).attr('rack-gist-url'), dataType: 'script', cache: true)
 
