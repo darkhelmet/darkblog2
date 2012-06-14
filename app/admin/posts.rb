@@ -1,6 +1,7 @@
 ActiveAdmin.register Post do
   scope :all, :default => true
   scope :unpublished
+  scope :published
   scope :with_images
 
   index do |post|

@@ -143,6 +143,10 @@ class Post < ActiveRecord::Base
       where(published: false)
     end
 
+    def published
+      where(published: true)
+    end
+
     def unannounced
       publish_order.where(announced: false)
     end
