@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'jquery-rails', '~> 2.0'
 gem 'uglifier', '~> 1.1'
 gem 'pg', '~> 0.11'
-gem 'ar_pg_array', '~> 0.11.0'
+gem 'ar_pg_array', '~> 0.9.12'
 gem 'activeadmin', '0.4.4'
 gem 'draper', '~> 0.11'
 gem 'fog', '~> 1.3.0' # Talk to S3 for backups
