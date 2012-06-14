@@ -21,7 +21,7 @@ ActiveAdmin.register Post do
       ul do
         li link_to('Preview', preview_admin_post_path(post))
         li link_to('Edit', edit_admin_post_path(post))
-        li link_to('Delete', admin_post_path(post), method: :delete, confirm: 'Really delete?')
+        li link_to('Delete', admin_post_path(post), method: :delete, data: { confirm: 'Really delete?' })
         if post.published?
           li link_to('Unpublish', unpublish_admin_post_path(post), method: :put)
         else
