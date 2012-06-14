@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   before_save :slug!
   after_initialize :set_default_published_on
 
-  validates_presence_of :title, :category
+  validates_presence_of :title, :category, :description, :body
 
   def tags=(t)
     write_attribute(:tags, t.uniq)
