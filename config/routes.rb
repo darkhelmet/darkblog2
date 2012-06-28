@@ -25,5 +25,8 @@ Darkblog2::Application.routes.draw do
   }
   get '/tag/:tag(.:format)' => 'posts#tag', as: :tag
   get '/:page' => 'pages#show', as: :page
+
+  mount_sextant if Rails.env.development?
+
   get '/*not_found' => 'application#render_404'
 end
