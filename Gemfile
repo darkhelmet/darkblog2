@@ -39,4 +39,5 @@ group :development, :test do
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
   gem 'foreman'
+  gem 'rack-mini-profiler'
 end
