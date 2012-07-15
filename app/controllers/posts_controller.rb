@@ -7,7 +7,6 @@ class PostsController < CachedController
 
   respond_to :html
 
-
   delegate :path, to: :request, prefix: true
 
   def main

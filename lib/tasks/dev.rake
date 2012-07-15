@@ -1,6 +1,6 @@
 namespace :pg do
   desc 'start postgres'
   task :start do
-    exec('postgres -D $HOME/opt/homebrew/var/postgres')
+    exec('postgres -D /usr/local/var/postgres')
   end
 end

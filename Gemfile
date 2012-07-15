@@ -35,6 +35,7 @@ end
 group :development, :test do
   gem 'debugger'
   gem 'thin'
+  gem 'passenger'
   gem 'heroku'
   gem 'awesome_print', :require => 'ap'
   gem 'foreman'
