@@ -4,8 +4,9 @@ function start() {
     dep=$1
     case $dep in
         pg) pg_ctl start --pgdata /usr/local/var/postgres --log log/postgres.log ;;
+        mc) memcached -d ;;
         *)
-            echo "start {pg}"
+            echo "start {pg|mc}"
             return 1
             ;;
     esac
@@ -15,8 +16,9 @@ function stop() {
     dep=$1
     case $dep in
         pg) pg_ctl stop -m fast --pgdata /usr/local/var/postgres --log log/postgres.log ;;
+        mc) pkill memcached ;;
         *)
-            echo "stop {pg}"
+            echo "stop {pg|mc}"
             return 1
             ;;
     esac
