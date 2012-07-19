@@ -1,0 +1,23 @@
+alias rake='bundle exec rake'
+
+function start() {
+    dep=$1
+    case $dep in
+        pg) pg_ctl start --pgdata /usr/local/var/postgres --log log/postgres.log ;;
+        *)
+            echo "start {pg}"
+            return 1
+            ;;
+    esac
+}
+
+function stop() {
+    dep=$1
+    case $dep in
+        pg) pg_ctl stop -m fast --pgdata /usr/local/var/postgres --log log/postgres.log ;;
+        *)
+            echo "stop {pg}"
+            return 1
+            ;;
+    esac
+}
