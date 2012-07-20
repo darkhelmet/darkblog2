@@ -16,16 +16,13 @@
 = tag(:meta, name: 'HandheldFriendly', content: 'True')
 = tag(:meta, name: 'MobileOptimized', content: '320')
 = tag(:meta, name: 'viewport', content: 'width=device-width, target-densitydpi=160, initial-scale=1.0')
+= javascript_include_tag('head')
 
 - if Rails.env.development?
   :javascript
     var disqus_developer = 1;
 
 = content_for(:head)
-
-= javascript_include_tag('modernizr.custom.js')
-:javascript
-  Modernizr.load()
 
 - if Rails.env.production?
   :javascript

@@ -1,0 +1,2 @@
+//= require modernizr
+Modernizr.load();

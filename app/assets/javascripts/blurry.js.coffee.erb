@@ -1,0 +1,18 @@
+imageId = 'blur-source'
+canvasId = 'blur'
+radius = 50
+
+if Modernizr.canvas
+    body = document.getElementsByTagName('body')[0]
+    img = document.createElement('img')
+    img.src = "<%= image_path('headshot.jpg') %>"
+    img.id = imageId
+    img.onload = ->
+        canvas = document.createElement('canvas')
+        canvas.id = canvasId
+        body.appendChild(canvas)
+        try
+            stackBlurImage(imageId, canvasId, radius, false)
+        catch e
+
+    body.appendChild(img)
