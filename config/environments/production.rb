@@ -13,7 +13,7 @@ Darkblog2::Application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
   # For nginx:
-  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
   # If you have no front-end server that supports something like X-Sendfile,
   # just comment this out and Rails will serve the files
@@ -33,9 +33,6 @@ Darkblog2::Application.configure do
   config.static_cache_control = "public, max-age=#{1.year.to_i}"
   config.assets.version = 'v2'
   config.assets.digest = true
-
-  # Enable serving of images, stylesheets, and javascripts from an asset server
-  config.action_controller.asset_host = AssetHost.new(ENV['LOCAL_ASSET_HOST'])
 
   # Compress both stylesheets and JavaScripts
   config.assets.compress = true

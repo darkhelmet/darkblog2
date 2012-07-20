@@ -36,8 +36,9 @@ module Darkblog2
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    # Enable serving of images, stylesheets, and javascripts from an asset server
     require 'asset_host'
-    config.action_controller.asset_host = AssetHost.new
+    config.action_controller.asset_host = AssetHost.new(ENV['LOCAL_ASSET_HOST'])
 
     # Enable the asset pipeline
     config.assets.enabled = true
