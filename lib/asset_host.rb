@@ -1,5 +1,5 @@
 class AssetHost
-  DefaultImageHost = 'cdn.verboselogging.com'
+  DefaultImageHost = 'http://cdn.verboselogging.com'
   DefaultLocalHost = nil
 
   attr_accessor :images, :local
