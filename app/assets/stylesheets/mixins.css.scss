@@ -6,10 +6,10 @@
   font-family: 'Droid Sans Mono', 'Andale Mono', 'Courier New', monospace;
 }
 
-@mixin box-shadow($h, $v, $blur, $color) {
-  box-shadow: $h $v $blur $color;
-  -webkit-box-shadow: $h $v $blur $color;
-  -moz-box-shadow: $h $v $blur $color;
+@mixin box-shadow($h, $v, $blur, $spread, $color) {
+  box-shadow: $h $v $blur $spread $color;
+  -webkit-box-shadow: $h $v $blur $spread $color;
+  -moz-box-shadow: $h $v $blur $spread $color;
 }
 
 @mixin round-corners($size: 5px) {
