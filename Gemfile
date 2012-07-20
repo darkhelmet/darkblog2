@@ -26,7 +26,6 @@ gem 'draper', '~> 0.11'
 gem 'fog', '~> 1.3.0' # Talk to S3 for backups
 gem 'rack-contrib', '~> 1.1.0'
 gem 'newrelic_rpm'
-gem 'sextant'
 
 group :production do
   gem 'unicorn', '~> 4.3.0'
