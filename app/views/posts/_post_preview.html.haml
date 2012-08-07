@@ -7,6 +7,4 @@
     Posted in
     %span.category= post.category_link
   .snippet!= post.truncated_body_html
-  .extra_links
-    = link_to('Keep Reading', post.permalink, :class => 'read_more fleft')
-    = link_to('Comments', post.permalink(anchor: 'disqus_thread'), :class => 'fright')
+  .extra_links= link_to('Keep Reading', post.permalink, :class => 'read_more fleft')
