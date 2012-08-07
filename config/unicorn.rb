@@ -1,5 +1,5 @@
 listen ENV.fetch('PORT', 3000).to_i
-worker_processes 4
+worker_processes ENV.fetch('WORKER_PROCESSES', 3).to_i
 preload_app true
 timeout 30
 
