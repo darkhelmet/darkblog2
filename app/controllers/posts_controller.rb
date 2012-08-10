@@ -43,11 +43,11 @@ class PostsController < CachedController
   caches_action :monthly, cache_path: :request_path.to_proc
 
   def sitemap
-    @posts = decorate(Post.publish_order.all)
+    @posts = decorate(Post.find_for_sitemap)
   end
 
   def search
-    respond_with(@posts = decorate(Post.search_by_keywords(params[:query])))
+    respond_with(@posts = decorate(Post.find_by_keywords(params[:query])))
   end
   caches_action :search, cache_path: ->(c) { c.search_path(:query => params[:query]) }, expires_in: 30.minutes
 

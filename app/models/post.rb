@@ -1,26 +1,19 @@
 class Post < ActiveRecord::Base
   include Tags
-  extend Searchable(:title, :description, :body)
+  include PgSearch
+  pg_search_scope :search_by_keywords, against: { title: 'A', description: 'B', body: 'C' }
 
   before_save :slug!
   after_initialize :set_default_published_on
 
   validates_presence_of :title, :category, :description, :body
 
-  def tags=(t)
-    write_attribute(:tags, t.uniq)
-  end
-
-  def tag_string=(tags)
-    self.tags = tags.split(',').map(&:strip).reject(&:empty?).map(&:parameterize)
-  end
-
-  def tag_string
-    Array(tags).join(', ')
-  end
-
   def slug
     slugs.first
+  end
+
+  def slugs
+    Array(read_attribute(:slugs))
   end
 
   def slug!
@@ -86,6 +79,10 @@ class Post < ActiveRecord::Base
       publish_order.limit(max)
     end
 
+    def find_for_sitemap
+      publish_order.all
+    end
+
     def published_in_range(start, stop)
       publish_order.
         where('posts.published_on >= ?', start).
@@ -115,8 +112,8 @@ class Post < ActiveRecord::Base
       publish_order.where(category: category)
     end
 
-    def search_by_keywords(query)
-      publish_order.search(query)
+    def find_by_keywords(query)
+      publish_order.search_by_keywords(query)
     end
 
     def categories
