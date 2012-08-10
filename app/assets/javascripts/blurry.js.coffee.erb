@@ -1,10 +1,11 @@
+Retina = if window.devicePixelRatio > 1 then true else false
 Firefox = window.navigator.userAgent.match(/firefox/i)?
 Chrome = window.navigator.userAgent.match(/chrome/i)?
 ImageId = 'blur-source'
 CanvasId = 'blur'
 Radius = 50
 
-if Modernizr.canvas and (Firefox or Chrome)
+if Modernizr.canvas and (Firefox or Chrome) and not Retina
     body = document.getElementsByTagName('body')[0]
     img = document.createElement('img')
     img.crossOrigin = ''
