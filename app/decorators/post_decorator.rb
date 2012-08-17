@@ -1,46 +1,15 @@
 class PostDecorator < ApplicationDecorator
   decorates :post
 
-  class ImageCloth < RedCloth::TextileDoc
-    ImageRegex = /\{\{\s*(\w+)\.(\w+)\s*\}\}/
-    DefaultRules = [:parse_images]
-
-    module HTMLRenderer
-      SizeRegex = /transloadit\/(?<size>:small|medium|large|original)/
-
-      include RedCloth::Formatters::HTML
-
-      def image(opts)
-        cls = opts[:class].to_s
-        if match = opts[:src].match(SizeRegex)
-          cls += " #{match[:size]}"
-        end
-        super(opts.merge(:class => cls))
-      end
-    end
-
-    attr_reader :image_hash
-
-    def initialize(template, image_hash)
-      super(template)
-      @image_hash = image_hash
-    end
-
-    def parse_images(text)
-      text.gsub!(ImageRegex) do |match|
-        image_hash.fetch($1, {}).fetch($2, nil)
-      end
-    end
-
-    def to_html(*rules)
-      rules |= DefaultRules
-      apply_rules(rules)
-      to(HTMLRenderer)
-    end
-  end
-
   def body_html
-    ImageCloth.new(body, image_hash).to_html
+    case renderer
+    when 'textile'
+      Renderer::Textile.new(body, image_hash).to_html
+    when 'markdown'
+      Renderer::Markdown.new(body, image_hash).to_html
+    else
+      fail "Invalid renderer: #{renderer}"
+    end
   end
 
   def image_hash

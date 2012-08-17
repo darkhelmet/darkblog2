@@ -49,6 +49,7 @@
     = f.input(:tag_string)
 
   = f.inputs 'Content' do
+    = f.input(:renderer, as: :select, collection: %w(textile markdown))
     = f.input(:body)
 
   = f.inputs 'Images', id: :images do
