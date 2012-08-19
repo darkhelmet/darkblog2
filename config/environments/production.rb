@@ -42,7 +42,7 @@ Darkblog2::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   config.active_record.observers = :yahoo_term_updater
 
