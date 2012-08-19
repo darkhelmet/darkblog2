@@ -69,7 +69,7 @@ module Darkblog2
       mw.insert_before(ActionDispatch::Static, Rack::Deflater)
 
       require 'active_support/cache/dalli_store'
-      mw.use(Rack::Gist, helper: false, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
+      mw.insert_before(Rack::Lock, Rack::Gist, helper: false, cache: ActiveSupport::Cache::DalliStore.new(compress: true, compress_threshold: 64.kilobytes), jquery: false)
 
       require 'rack/block'
       mw.insert_before(Rack::Lock, Rack::Block::Middleware)

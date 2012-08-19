@@ -12,6 +12,10 @@ module Rack
       end
     end
 
+    get '/opensearch.xml' do
+      halt 404 # This one is fine
+    end
+
     get %r{\.(php|xml|exe|asp)$} do
       halt 403, 'No, Mr. Superman no here...'
     end
