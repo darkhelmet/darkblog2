@@ -1,3 +1,6 @@
+require 'renderer/textile'
+require 'renderer/markdown'
+
 class PostDecorator < ApplicationDecorator
   decorates :post
 

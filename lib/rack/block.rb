@@ -12,8 +12,8 @@ module Rack
       end
     end
 
-    get '/opensearch.xml' do
-      halt 404 # This one is fine
+    get %r{(sitemap|opensearch)\.xml$} do
+      halt 404 # Fine
     end
 
     get %r{\.(php|xml|exe|asp)$} do
