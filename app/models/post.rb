@@ -1,3 +1,7 @@
+require 'renderer/textile'
+require 'renderer/markdown'
+require 'posts_controller'
+
 class Post < ActiveRecord::Base
   include Tags
   include PgSearch
@@ -7,6 +11,8 @@ class Post < ActiveRecord::Base
   after_initialize :set_default_published_on
 
   validates_presence_of :title, :category, :description, :body
+
+  before_validation :render
 
   def slug
     slugs.first
@@ -162,5 +168,34 @@ private
 
   def set_default_published_on
     self.published_on ||= Chronic.parse('monday 10am')
+  end
+
+  def render
+    case renderer
+    when 'textile'
+      self.body_html = Renderer::Textile.new(body, image_hash).to_html
+    when 'markdown'
+      self.body_html = Renderer::Markdown.new(body, image_hash).to_html
+    else
+      fail "Invalid renderer: #{renderer}"
+    end
+  end
+
+  def image_hash
+    image_path = PostsController.new.view_context.method(:image_path)
+    images.group_by do |image|
+      File.basename(image, File.extname(image)).parameterize.to_s.gsub('-', '_')
+    end.reduce({}) do |hash, (key, sizes)|
+      urls = hashmap(sizes.index_by { |size| size.split('/')[2] }) do |size, path|
+        image_path.call(path)
+      end
+      hash.merge!(key => urls)
+    end
+  end
+
+  def hashmap(hash)
+    hash.reduce({}) do |memo, (key, value)|
+      memo.merge!(key => yield(key, value))
+    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825010136) do
+ActiveRecord::Schema.define(:version => 20120826043446) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120825010136) do
     t.datetime     "created_at"
     t.datetime     "updated_at"
     t.string       "renderer",     :default => "textile", :null => false
+    t.text         "body_html",                           :null => false
   end
 
   add_index "posts", ["category", "published_on"], :name => "category", :order => {"published_on"=>:desc}

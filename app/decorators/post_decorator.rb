@@ -4,28 +4,6 @@ require 'renderer/markdown'
 class PostDecorator < ApplicationDecorator
   decorates :post
 
-  def body_html
-    case renderer
-    when 'textile'
-      Renderer::Textile.new(body, image_hash).to_html
-    when 'markdown'
-      Renderer::Markdown.new(body, image_hash).to_html
-    else
-      fail "Invalid renderer: #{renderer}"
-    end
-  end
-
-  def image_hash
-    images.group_by do |image|
-      File.basename(image, File.extname(image)).parameterize.to_s.gsub('-', '_')
-    end.reduce({}) do |hash, (key, sizes)|
-      urls = hashmap(sizes.index_by { |size| size.split('/')[2] }) do |size, path|
-        h.image_path(path)
-      end
-      hash.merge!(key => urls)
-    end
-  end
-
   def category_link
     h.link_to(category.humanize, h.category_path(category))
   end
@@ -91,11 +69,5 @@ private
 
   def body_image
     Nokogiri(body_html).search('img').first
-  end
-
-  def hashmap(hash)
-    hash.reduce({}) do |hash, (key, value)|
-      hash.merge!(key => yield(key, value))
-    end
   end
 end
