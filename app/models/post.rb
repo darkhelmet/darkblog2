@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   before_save :slug!
   after_initialize :set_default_published_on
 
-  validates_presence_of :title, :category, :description, :body
+  validates_presence_of :title, :category, :description, :body, :body_html
 
   before_validation :render
 

@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  validates_presence_of :title, :slug
+  validates_presence_of :title, :slug, :body, :body_html
   validates_uniqueness_of :title, :slug
 
   before_validation :slug!
