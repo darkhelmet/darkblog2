@@ -3,6 +3,8 @@ require 'renderer/markdown'
 require 'posts_controller'
 
 class Post < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::SanitizeHelper
   include Tags
   include PgSearch
   pg_search_scope :search_by_keywords, against: { title: 'A', description: 'B', body: 'C' }
@@ -10,9 +12,9 @@ class Post < ActiveRecord::Base
   before_save :slug!
   after_initialize :set_default_published_on
 
-  validates_presence_of :title, :category, :description, :body, :body_html
+  validates_presence_of :title, :category, :description, :body, :body_html, :body_truncated
 
-  before_validation :render
+  before_validation :render, :truncate_body
 
   def slug
     slugs.first
@@ -197,5 +199,9 @@ private
     hash.reduce({}) do |memo, (key, value)|
       memo.merge!(key => yield(key, value))
     end
+  end
+
+  def truncate_body
+    self.body_truncated = truncate(strip_tags(body_html), length: 450)
   end
 end

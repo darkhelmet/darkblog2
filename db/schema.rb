@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827013400) do
+ActiveRecord::Schema.define(:version => 20120828031148) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -68,21 +68,22 @@ ActiveRecord::Schema.define(:version => 20120827013400) do
   end
 
   create_table "posts", :force => true do |t|
-    t.string       "title",                               :null => false
-    t.string       "category",                            :null => false
-    t.string       "description",                         :null => false
-    t.text         "body",                                :null => false
-    t.boolean      "published",    :default => false,     :null => false
-    t.boolean      "announced",    :default => false,     :null => false
+    t.string       "title",                                 :null => false
+    t.string       "category",                              :null => false
+    t.string       "description",                           :null => false
+    t.text         "body",                                  :null => false
+    t.boolean      "published",      :default => false,     :null => false
+    t.boolean      "announced",      :default => false,     :null => false
     t.string_array "slugs"
     t.string_array "terms"
     t.string_array "tags"
     t.string_array "images"
-    t.datetime     "published_on",                        :null => false
+    t.datetime     "published_on",                          :null => false
     t.datetime     "created_at"
     t.datetime     "updated_at"
-    t.string       "renderer",     :default => "textile", :null => false
-    t.text         "body_html",                           :null => false
+    t.string       "renderer",       :default => "textile", :null => false
+    t.text         "body_html",                             :null => false
+    t.text         "body_truncated",                        :null => false
   end
 
   add_index "posts", ["category", "published_on"], :name => "category", :order => {"published_on"=>:desc}

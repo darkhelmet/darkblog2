@@ -23,3 +23,7 @@ function stop() {
             ;;
     esac
 }
+
+function restore() {
+    pg_restore --verbose --clean --no-acl --no-owner -d darkblog2_development $1
+}
