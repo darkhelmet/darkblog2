@@ -6,5 +6,5 @@
     &raquo;
     Posted in
     %span.category= post.category_link
-  .snippet!= post.truncated_body_html
+  .snippet!= post.body_truncated
   .extra_links= link_to('Keep Reading', post.permalink, :class => 'read_more fleft')

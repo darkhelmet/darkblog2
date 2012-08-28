@@ -72,10 +72,6 @@ class PostDecorator < ApplicationDecorator
     body_image and body_image[:src] or h.gravatar_url
   end
 
-  def truncated_body_html(length = 450)
-    h.truncate(h.strip_tags(body_html), :length => length)
-  end
-
 private
 
   def body_image
