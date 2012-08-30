@@ -64,8 +64,14 @@ ActiveAdmin.register Post do
 
   controller do
     cache_sweeper :post_sweeper
-
     skip_before_filter :verify_authenticity_token, only: [:announce]
+    before_filter :die_cache
+
+    def die_cache
+      response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate, pre-check=0, post-check=0'
+      response.headers['Pragma'] = 'no-cache'
+      response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+    end
   end
 
   collection_action :clear_cache, method: :post do
