@@ -56,19 +56,20 @@ private
 end
 
 
-pandoc = Pandoc.new(:from => 'textile', :to => 'markdown', :arguments => %w(--normalize --parse-raw --atx-headers))
+pandoc = Pandoc.new(:from => 'textile', :to => 'markdown', :arguments => %w(--normalize --parse-raw --atx-headers --no-tex-ligatures))
 ih = ImageHasher.new
 
 Post.all.each do |post|
   h = {
     'id' => post.id,
+    'author' => 'Daniel Huckstep',
     'title' => post.title,
     'category' => post.category,
     'description' => post.description,
     'published' => post.published,
+    'publishedon' => post.published_on.strftime('%d %b %Y %H:%M %Z'),
     'slugs' => post.slugs,
-    'tags' => post.tags,
-    'publishedon' => post.published_on.strftime('%d %b %Y %H:%M %Z')
+    'tags' => post.tags
   }
 
   unless post.images.count.zero?
@@ -88,7 +89,32 @@ Post.all.each do |post|
     fail 'what even happened!?'
   end
 
-  File.open("fs/#{post.slug}.md", 'w') do |f|
+  File.open("posts/#{post.slug}.md", 'w') do |f|
+    f.write(YAML.dump(h))
+    f.write("---\n")
+    f.write(body)
+  end
+end
+
+Page.all.each do |page|
+  h = {
+    'id' => page.id,
+    'title' => page.title,
+    'author' => 'Daniel Huckstep',
+    'description' => page.description,
+    'published' => true,
+    'publishedon' => Time.now.strftime('%d %b %Y %H:%M %Z'),
+    'slugs' => [page.slug]
+  }
+
+  body = case page.id
+  when 1,2
+    page.body_html
+  else
+    pandoc.call(page.body)
+  end
+
+  File.open("pages/#{page.slug}.md", 'w') do |f|
     f.write(YAML.dump(h))
     f.write("---\n")
     f.write(body)
